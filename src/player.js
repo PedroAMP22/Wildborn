@@ -63,6 +63,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
         else {
             this.body.setVelocityX(0);
+            
         }
     }
 
