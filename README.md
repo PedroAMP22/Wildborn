@@ -36,7 +36,7 @@ El objetivo es superar las pruebas del bosque, adquiriendo poderes y habilidades
 
 ## Interfaz
 - **Cámara**: 
-- **HUD (Head-Up Display)**:
+- **HUD**:
 - **Menús**: 
 
 ## Mundo de Juego
