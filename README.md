@@ -30,9 +30,9 @@ El objetivo es superar las pruebas del bosque, adquiriendo poderes y habilidades
 
 ### Core Loops
 
--**Saltar**
--**Transformarse**
--**Terminar nivel**
+- **Saltar**: 
+- **Transformarse**:
+- **Pasarse el nivel**: 
 
 ## Interfaz
 - **Cámara**: 
