@@ -1,7 +1,7 @@
-# Druid's Journey - README
+# WildBorn - README
 
 ## Descripción
-En **Druid's Journey**, encarnarás a un joven druida que alcanza la edad de 14 años y llega su momento de convertirse en un maestro del bosque, para ello debe superar unas pruebas en las que adquirirá nuevas habilidades y poderes.
+En **WildBorn**, encarnarás a un joven druida que alcanza la edad de 14 años y llega su momento de convertirse en un maestro del bosque, para ello debe superar unas pruebas en las que adquirirá nuevas habilidades y poderes.
 
 ## Género
 - Videojuego de plataformas
