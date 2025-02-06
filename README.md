@@ -20,8 +20,13 @@ En **WildBorn**, encarnarás a un joven druida que alcanza la edad de 14 años y
   
 ## Gameplay
 ### Controles
-- **Moverse a izquierda y derecha**:
-- **Saltar**: 
+- **Moverse a izquierda y derecha**: a y s
+- **Saltar**: barra espaciadora
+- **Transformaciones**
+  - **Ardilla voladora**: Mantener barra espaciadora para planear
+  - **Pez Globo**: Pulsar barra espaciadora para inflarse o desinflarse
+  - **Topo**: w a s ó d para meterse en la superficie deseada 
+  - **Gallina**: Espacio para aletear y mover piedras
 
 ### Mecánicas
 - **Transformaciones**: 
@@ -40,8 +45,11 @@ El objetivo es superar las pruebas del bosque, adquiriendo poderes y habilidades
 - **Menús**: 
 
 ## Mundo de Juego
-- **Niveles**: Cada nivel está lleno de obstáculos, enemigos y zonas secretas. Los niveles están diseñados para desafiar tus habilidades de plataforma y tus capacidades de transformación.
-- **Coleccionables**: A medida que avanzas en el juego, podrás encontrar coleccionables
+- **Niveles**: Cada nivel está lleno de obstáculos y zonas secretas. Los niveles están diseñados para desafiar tus habilidades de plataforma y tus capacidades de transformación.
+  - **Nivel 1**: h       sssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaa                                                                                       ADADAD        WXS                                                                                         
+  - **Nivel 2**: 
+  - **Nivel 3**: 
+- **Coleccionables**: A medida que avanzas en el juego, podrás encontrar coleccionables que van contando la historia del druida
 
 ## Personajes
 - **Druida**: El protagonista, un joven druida que busca completar las pruebas del bosque.
