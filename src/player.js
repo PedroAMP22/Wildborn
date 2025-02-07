@@ -130,7 +130,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
             }
         }
         //Derecha
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.right) && !this.cursors.left.isDown){
+        else if (Phaser.Input.Keyboard.JustDown(this.cursors.right) && !this.cursors.left.isDown){
             this.body.setVelocityX(this.initialSpeed)
             this.setFlipX(false)
         }
