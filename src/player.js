@@ -15,7 +15,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} y Coordenada Y
      */
     constructor(scene, x, y) {
-        super(scene, x, y,"playerRun");	
+        super(scene, x, y,"playerIdle");	
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         // Queremos que el jugador no se salga de los límites del mundo
@@ -27,21 +27,42 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.topFallingSpeed = 100;
        
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+        this.lastSpeed = 0;
     }
 
     /**
      * Métodos preUpdate de Phaser. En este caso solo se encarga del movimiento del jugador.
-     * Como se puede ver, no se tratan las colisiones con las estrellas, ya que estas colisiones 
-     * ya son gestionadas por la estrella (no gestionar las colisiones dos veces)
      * @override
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
        
+        //Animations
+        if (this.body.velocity.x !== 0) {
+            this.anims.play("druidRun", true);
+        }
+        if(this.lastSpeed > 0 && this.body.velocity.y === 0){
+            this.anims.play("druidLand", true);
+        }
+        this.lastSpeed = this.body.velocity.y;
+
+        let canPlayIdle = true;
+
+        if(this.anims.currentAnim !== null && this.anims.currentAnim.key === "druidLand" && this.anims.isPlaying){
+           canPlayIdle = false;
+        }
+    
+        if(this.body.velocity.x === 0 && this.body.velocity.y === 0 && canPlayIdle){
+            this.anims.play("druidIdle", true);
+        }
+        if(this.body.velocity.y !== 0){
+            this.anims.play("druidFall", true);
+        }
         
         //Salto 
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.body.onFloor()) {
             this.body.setVelocityY(this.jumpSpeed);
+            this.anims.play("druidJump",true);
         }
 
         //Caer mas rapido
@@ -57,26 +78,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
 
         //Izquierda
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.left)){
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.left) && !this.cursors.right.isDown){
             this.body.setVelocityX(-this.initialSpeed)
             this.setFlipX(true)
-            this.anims.play("playerRun")
         }
         else if (this.cursors.left.isDown && this.body.velocity.x > -this.topSpeed) {
-            
+            this.setFlipX(true)
             this.body.setVelocityX(this.body.velocity.x - this.walkAcceleration * dt);
             if(this.body.velocity.x < -this.topSpeed){
                 this.body.setVelocityX(-this.topSpeed);
             }
         }
         //Derecha
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.right)){
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.right) && !this.cursors.left.isDown){
             this.body.setVelocityX(this.initialSpeed)
             this.setFlipX(false)
-            this.anims.play("playerRun")
         }
         else if (this.cursors.right.isDown && this.body.velocity.x < this.topSpeed) {
-           
+            this.setFlipX(false)
             this.body.setVelocityX(this.body.velocity.x + this.walkAcceleration * dt);
             if(this.body.velocity.x > this.topSpeed){
                 this.body.setVelocityX(this.topSpeed);
@@ -85,7 +104,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //Pararse
         if(!this.cursors.left.isDown && !this.cursors.right.isDown ){
             this.body.setVelocityX(0);
-            this.anims.stop();
         }
     }
 

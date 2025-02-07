@@ -24,14 +24,35 @@ export default class Level extends Phaser.Scene {
     create() {
 
         this.bases = this.add.group();
-        this.player = new Player(this, 400, 300);
+        this.player = new Player(this, 20, 20);
         
         this.anims.create({
-            key:"run",
+            key:"druidRun",
             frames: this.anims.generateFrameNumbers('playerRun', { start: 0, end: 7 }),
-            frameRate: 2,
+            frameRate: 10,
             repeat:-1
-        })
+        });
+        this.anims.create({
+            key:"druidIdle",
+            frames: this.anims.generateFrameNumbers('playerIdle', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.anims.create({
+            key:"druidFall",
+            frames: this.anims.generateFrameNumbers('playerFall', { start: 0, end: 5 }),
+            frameRate: 10
+        });
+        this.anims.create({
+            key:"druidJump",
+            frames: this.anims.generateFrameNumbers('playerJump', { start: 0, end: 4 }),
+            frameRate: 10
+        });
+        this.anims.create({
+            key:"druidLand",
+            frames: this.anims.generateFrameNumbers('playerLand', { start: 0, end: 3 }),
+            frameRate: 10
+        });
 
         this.physics.world.setBounds(0,0,540,360);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.1);

@@ -1,7 +1,10 @@
 import Phaser from 'phaser'
 
-import player from '../assets/sprites/player.png'
 import playerRun from '../assets/sprites/run.png'
+import playerIdle from '../assets/sprites/idle.png'
+import playerFall from '../assets/sprites/fall.png'
+import playerJump from '../assets/sprites/jump.png'
+import playerLand from '../assets/sprites/landing.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -23,13 +26,30 @@ export default class Boot extends Phaser.Scene {
    */
   preload() {
 
-    // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
-    this.load.image('player',player);
     this.load.spritesheet('playerRun', playerRun, {
       frameWidth: 32,
       frameHeight: 32
-  });
-
+    });
+    this.load.spritesheet('playerIdle', playerIdle, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('playerFall', playerFall, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('playerFall', playerFall, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('playerJump', playerJump, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('playerLand', playerLand, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
   }
 
   /**
