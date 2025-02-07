@@ -34,6 +34,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
         this.lastSpeed = 0;
         this.wasGrounded = this.body.onFloor();
+        this.maxInputBuffer = 6;
+        this.inputBuffer = 0;
     }
 
     /**
@@ -67,22 +69,34 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         if(this.wasGrounded && !this.body.onFloor() && !this.justJumped){
             this.coyoteTime = 1;
-            console.log("tamadre")
         }
         if(this.coyoteTime > 0)
             this.coyoteTime += 1
         
         this.justJumped = Phaser.Input.Keyboard.JustDown(this.cursors.space);
         //Salto 
+        if(this.justJumped){
+            this.inputBuffer = 1;
+        }
+        if(this.inputBuffer > 0){
+            this.inputBuffer += 1
+        }
         if ((this.justJumped && this.body.onFloor())) {
-            console.log(this.coyoteTime)
-            this.coyoteTime = 0
+            this.coyoteTime = 0;
+            this.inputBuffer = 0;
             this.body.setVelocityY(this.jumpSpeed);
             this.anims.play("druidJump",true);
         }
         if(this.justJumped && this.coyoteTime < this.maxCoyoteTime && this.coyoteTime !== 0){
-            console.log(this.coyoteTime)
-            this.coyoteTime = 0
+            this.coyoteTime = 0;
+            this.inputBuffer = 0;
+            this.body.setVelocityY(this.jumpSpeed);
+            this.anims.play("druidJump",true);
+        }
+
+        if(this.body.onFloor() && this.inputBuffer < this.maxInputBuffer && this.inputBuffer !== 0){
+            this.coyoteTime = 0;
+            this.inputBuffer = 0;
             this.body.setVelocityY(this.jumpSpeed);
             this.anims.play("druidJump",true);
         }
