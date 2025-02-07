@@ -24,7 +24,7 @@ export default class Level extends Phaser.Scene {
     create() {
 
         this.bases = this.add.group();
-        this.player = new Player(this, 20, 20);
+        this.player = new Player(this, 30, 20);
         
         this.anims.create({
             key:"druidRun",
@@ -54,9 +54,17 @@ export default class Level extends Phaser.Scene {
             frameRate: 10
         });
 
-        this.physics.world.setBounds(0,0,540,360);
+        this.map = this.make.tilemap({key: "level1"});
+        this.tileset = this.map.addTilesetImage("ground","tilemapImage",32,32);
+
+        this.platformLayer = this.map.createLayer("platform", this.tileset);
+
+        this.platformLayer.setCollisionByExclusion([-1]);
+
+        this.physics.add.collider(this.player, this.platformLayer);
+        this.physics.world.setBounds(0,0,2560,1024);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.1);
-        this.cameras.main.setBounds(0,0,540,360)
+        this.cameras.main.setBounds(0,0,2560,1024)
     }
    
 }

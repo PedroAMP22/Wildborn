@@ -15,19 +15,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} y Coordenada Y
      */
     constructor(scene, x, y) {
-        super(scene, x, y,"playerIdle");	
+        super(scene, x, y,"playerIdle");
+        //Adding to physics engine
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         // Queremos que el jugador no se salga de los límites del mundo
+
+        this.body.setCircle(5.5);
+        this.body.setOffset(10.5,14.5)
         this.body.setCollideWorldBounds();
         this.jumpSpeed = -400;
         this.topSpeed = 150;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
         this.topFallingSpeed = 100;
-       
+        this.maxCoyoteTime = 5;
+        this.coyoteTime = 0;
         this.cursors = this.scene.input.keyboard.createCursorKeys();
         this.lastSpeed = 0;
+        this.wasGrounded = this.body.onFloor();
     }
 
     /**
@@ -36,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-       
+        
         //Animations
         if (this.body.velocity.x !== 0) {
             this.anims.play("druidRun", true);
@@ -58,20 +64,37 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if(this.body.velocity.y !== 0){
             this.anims.play("druidFall", true);
         }
+
+        if(this.wasGrounded && !this.body.onFloor() && !this.justJumped){
+            this.coyoteTime = 1;
+            console.log("tamadre")
+        }
+        if(this.coyoteTime > 0)
+            this.coyoteTime += 1
         
+        this.justJumped = Phaser.Input.Keyboard.JustDown(this.cursors.space);
         //Salto 
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.body.onFloor()) {
+        if ((this.justJumped && this.body.onFloor())) {
+            console.log(this.coyoteTime)
+            this.coyoteTime = 0
+            this.body.setVelocityY(this.jumpSpeed);
+            this.anims.play("druidJump",true);
+        }
+        if(this.justJumped && this.coyoteTime < this.maxCoyoteTime && this.coyoteTime !== 0){
+            console.log(this.coyoteTime)
+            this.coyoteTime = 0
             this.body.setVelocityY(this.jumpSpeed);
             this.anims.play("druidJump",true);
         }
 
         //Caer mas rapido
         if(this.body.velocity.y > 0 && this.body.velocity.y < this.topFallingSpeed){
-            this.body.setVelocityY(this.body.velocity.y + 0.5 * dt)
+            this.body.setVelocityY(this.body.velocity.y + 0.01 * dt)
             if(this.body.velocity.y > this.topFallingSpeed){
                 this.body.setVelocityY(this.topFallingSpeed);
             }
         }
+
         //Saltar menos segun cuanto pulses
         else if(this.body.velocity.y < -0 && !this.cursors.space.isDown){
             this.body.setVelocityY(this.body.velocity.y + 4 * dt)
@@ -111,6 +134,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if(!this.cursors.left.isDown && !this.cursors.right.isDown ){
             this.body.setVelocityX(0);
         }
+        this.wasGrounded = this.body.onFloor();
     }
 
 }

@@ -1,10 +1,12 @@
 import Phaser from 'phaser'
 
-import playerRun from '../assets/sprites/run.png'
-import playerIdle from '../assets/sprites/idle.png'
-import playerFall from '../assets/sprites/fall.png'
-import playerJump from '../assets/sprites/jump.png'
-import playerLand from '../assets/sprites/landing.png'
+import playerRun from '../assets/sprites/druid/run.png'
+import playerIdle from '../assets/sprites/druid/idle.png'
+import playerFall from '../assets/sprites/druid/fall.png'
+import playerJump from '../assets/sprites/druid/jump.png'
+import playerLand from '../assets/sprites/druid/landing.png'
+import level1 from '../assets/tilemaps/prueba.json'
+import tileSet from '../assets/tilemaps/tileSet.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -50,6 +52,9 @@ export default class Boot extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
+
+    this.load.tilemapTiledJSON('level1',level1);
+    this.load.image("tilemapImage", tileSet);
   }
 
   /**
