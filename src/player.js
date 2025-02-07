@@ -6,6 +6,8 @@ import Phaser from 'phaser';
  */
 export default class Player extends Phaser.GameObjects.Sprite {
 
+    
+
     /**
      * Constructor del jugador
      * @param {Phaser.Scene} scene Escena a la que pertenece el jugador
@@ -13,35 +15,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} y Coordenada Y
      */
     constructor(scene, x, y) {
-        super(scene, x, y, 'player');	
-        this.score = 0;
-	
+        super(scene, x, y,"playerRun");	
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         // Queremos que el jugador no se salga de los límites del mundo
         this.body.setCollideWorldBounds();
-        this.speed = 300;
         this.jumpSpeed = -400;
-        // Esta label es la UI en la que pondremos la puntuación del jugador
-        this.label = this.scene.add.text(10, 10, "", {fontSize: 20});
+        this.topSpeed = 150;
+        this.initialSpeed = 50;
+        this.walkAcceleration = 0.5;
+        this.topFallingSpeed = 100;
+       
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-        this.updateScore();
-    }
-
-    /**
-     * El jugador ha recogido una estrella por lo que este método añade un punto y
-     * actualiza la UI con la puntuación actual.
-     */
-    point() {
-        this.score++;
-        this.updateScore();
-    }
-
-    /**
-     * Actualiza la UI con la puntuación actual
-     */
-    updateScore() {
-        this.label.text = 'Score: ' + this.score;
     }
 
     /**
@@ -52,18 +37,55 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-        if (this.cursors.up.isDown && this.body.onFloor()) {
+       
+        
+        //Salto 
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.body.onFloor()) {
             this.body.setVelocityY(this.jumpSpeed);
         }
-        if (this.cursors.left.isDown) {
-            this.body.setVelocityX(-this.speed);
+
+        //Caer mas rapido
+        if(this.body.velocity.y > 0 && this.body.velocity.y < this.topFallingSpeed){
+            this.body.setVelocityY(this.body.velocity.y + 0.5 * dt)
+            if(this.body.velocity.y > this.topFallingSpeed){
+                this.body.setVelocityY(this.topFallingSpeed);
+            }
         }
-        else if (this.cursors.right.isDown) {
-            this.body.setVelocityX(this.speed);
+        //Saltar menos segun cuanto pulses
+        else if(this.body.velocity.y < -0 && !this.cursors.space.isDown){
+            this.body.setVelocityY(this.body.velocity.y + 4 * dt)
         }
-        else {
-            this.body.setVelocityX(0);
+
+        //Izquierda
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.left)){
+            this.body.setVelocityX(-this.initialSpeed)
+            this.setFlipX(true)
+            this.anims.play("playerRun")
+        }
+        else if (this.cursors.left.isDown && this.body.velocity.x > -this.topSpeed) {
             
+            this.body.setVelocityX(this.body.velocity.x - this.walkAcceleration * dt);
+            if(this.body.velocity.x < -this.topSpeed){
+                this.body.setVelocityX(-this.topSpeed);
+            }
+        }
+        //Derecha
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.right)){
+            this.body.setVelocityX(this.initialSpeed)
+            this.setFlipX(false)
+            this.anims.play("playerRun")
+        }
+        else if (this.cursors.right.isDown && this.body.velocity.x < this.topSpeed) {
+           
+            this.body.setVelocityX(this.body.velocity.x + this.walkAcceleration * dt);
+            if(this.body.velocity.x > this.topSpeed){
+                this.body.setVelocityX(this.topSpeed);
+            }
+        }
+        //Pararse
+        if(!this.cursors.left.isDown && !this.cursors.right.isDown ){
+            this.body.setVelocityX(0);
+            this.anims.stop();
         }
     }
 
