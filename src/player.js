@@ -82,8 +82,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(-this.initialSpeed)
             this.setFlipX(true)
         }
-        else if (this.cursors.left.isDown && this.body.velocity.x > -this.topSpeed) {
+        else if (this.cursors.left.isDown && this.body.velocity.x > -this.topSpeed && !this.cursors.right.isDown) {
             this.setFlipX(true)
+            if(this.body.velocity.x > -this.initialSpeed){
+                this.body.setVelocityX(-this.initialSpeed);
+            }
             this.body.setVelocityX(this.body.velocity.x - this.walkAcceleration * dt);
             if(this.body.velocity.x < -this.topSpeed){
                 this.body.setVelocityX(-this.topSpeed);
@@ -94,8 +97,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(this.initialSpeed)
             this.setFlipX(false)
         }
-        else if (this.cursors.right.isDown && this.body.velocity.x < this.topSpeed) {
+        else if (this.cursors.right.isDown && this.body.velocity.x < this.topSpeed && !this.cursors.left.isDown) {
             this.setFlipX(false)
+            if(this.body.velocity.x < this.initialSpeed){
+                this.body.setVelocityX(this.initialSpeed);
+            }
             this.body.setVelocityX(this.body.velocity.x + this.walkAcceleration * dt);
             if(this.body.velocity.x > this.topSpeed){
                 this.body.setVelocityX(this.topSpeed);
