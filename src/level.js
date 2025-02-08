@@ -1,6 +1,6 @@
 import Player from './player.js';
 import Phaser from 'phaser';
-
+import { DruidState } from './StateMachine/druidState.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -25,7 +25,7 @@ export default class Level extends Phaser.Scene {
 
         this.bases = this.add.group();
         this.player = new Player(this, 30, 20);
-        
+        this.player.stateMachine.transform(DruidState.NAME);
         this.anims.create({
             key:"druidRun",
             frames: this.anims.generateFrameNumbers('playerRun', { start: 0, end: 7 }),

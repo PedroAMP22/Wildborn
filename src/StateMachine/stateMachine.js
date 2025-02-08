@@ -1,24 +1,23 @@
 import './state'
-import './druidState'
-import DruidState from './druidState,js'
+import { DruidState } from './druidState';
 
-class StateMachine {
+
+export class StateMachine {
     /**
      * @param {Phaser.Scene} scene - The player instance
      */
     constructor(scene){
         this.scene = scene;
-        this.state = new DruidState(scene);
     }
 
     transform(transformation){
         switch(transformation){
             case DruidState.NAME:
-                this.state = new DruidState(player);
+                this.state = new DruidState(this.scene);
         }
     }
 
     update(t,dt){
-        this.state.update();
+        this.state.update(t,dt);
     }
 }

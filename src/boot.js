@@ -40,10 +40,6 @@ export default class Boot extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerFall', playerFall, {
-      frameWidth: 32,
-      frameHeight: 32
-    });
     this.load.spritesheet('playerJump', playerJump, {
       frameWidth: 32,
       frameHeight: 32
