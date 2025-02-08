@@ -1,6 +1,6 @@
 import {State} from './state'
 
-export class snailState extends State{
+export class SnailState extends State{
     static NAME = "snail";
     /**
      * @param {Phaser.Scene} scene 
@@ -10,40 +10,62 @@ export class snailState extends State{
         this.scene = scene;
         this.player = scene.player;
 
-        //dimension caracol
-        this.player.body.setSize(12, 12);
-        this.player.body.setOffset(10, 18);
+        this.keyU = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
-        this.player.body.setVelocity(0, 0);
-        this.player.body.setAllowGravity(false);
-
-        //fija a la superficie
-        this.stickToSurface();
-        
-        this.player.anims.play("snailIdle", true);
     }
 
     stickToSurface() {
-        if (this.player.body.onFloor()) {
-            //suelo
-            this.player.body.setVelocity(0, 0);
-        } else if (this.player.body.touching.left) {
+
+        this.left = false;
+        this.right = false;
+        this.top = false;
+
+        this.left = this.left || this.player.body.blocked.left;
+        this.right = this.right || this.player.body.blocked.right;
+        this.top = this.top || this.player.body.blocked.up;
+
+        console.log(this.left, this.right, this.top);
+
+        if (this.left) {
             //izquierda
             this.player.setFlipX(false);
-        } else if (this.player.body.touching.right) {
+            this.player.body.setAllowGravity(false);
+            console.log("IZQUIERDAAA");
+            this.player.setAngle(90);
+        } else if (this.right) {
             //derecha
             this.player.setFlipX(true);
-        } else if (this.player.body.touching.up) {
+            this.player.body.setAllowGravity(false);
+            console.log("DERECHAAAA");
+            this.player.setAngle(-90);
+        } else if (this.top){
             //techo
             this.player.body.setGravityY(0);
+            this.player.body.setAllowGravity(false);
+            console.log("TECHOOO");
+            this.player.setAngle(180);
+            //this.player.body.setOffset(this.player.body.offset.x, this.player.height - this.player.body. height);
         }
+       
+        this.player.body.setVelocityX(0);
+        this.player.body.setVelocityY(0);
     }
 
     transform() {
-        
+        this.player.anims.play("snailTrans", true);
     }
 
     update(t, dt) {
         this.stickToSurface();
+        
+        //meter rotacion con booleanos
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyU)) {
+            this.transform();
+        }
+
+        if (this.player.anims.getName() !== "snailTrans" && !this.player.anims.isPlaying) {
+            this.player.anims.play("snailIdle", true);
+        }
     }
 }

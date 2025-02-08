@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import {StateMachine} from './StateMachine/stateMachine'
+import { DruidState } from './StateMachine/druidState';
+import { SnailState } from './StateMachine/snailState';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -16,6 +18,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     constructor(scene, x, y) {
         super(scene, x, y,"playerIdle");
+
+        this.uKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
+
+        this.iKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
         //Adding to physics engine
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -33,6 +40,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
+
+        if (Phaser.Input.Keyboard.JustDown(this.uKey)) {
+            this.stateMachine.transform(SnailState.NAME);
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.iKey)){
+            this.stateMachine.transform(DruidState.NAME);
+        }
+
         this.stateMachine.update(t,dt);
         
     }

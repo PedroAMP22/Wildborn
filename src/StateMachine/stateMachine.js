@@ -1,5 +1,6 @@
 import './state'
 import { DruidState } from './druidState';
+import { SnailState } from './snailState';
 
 
 export class StateMachine {
@@ -14,7 +15,13 @@ export class StateMachine {
         switch(transformation){
             case DruidState.NAME:
                 this.state = new DruidState(this.scene);
+                break;
+            case SnailState.NAME:
+                this.state = new SnailState(this.scene);
+                break;
         }
+
+        this.state.transform();
     }
 
     update(t,dt){

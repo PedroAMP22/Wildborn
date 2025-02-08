@@ -1,6 +1,7 @@
 import Player from './player.js';
 import Phaser from 'phaser';
 import { DruidState } from './StateMachine/druidState.js';
+import { SnailState } from './StateMachine/snailState.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -52,6 +53,18 @@ export default class Level extends Phaser.Scene {
             key:"druidLand",
             frames: this.anims.generateFrameNumbers('playerLand', { start: 0, end: 3 }),
             frameRate: 10
+        });
+        this.anims.create({
+            key: "snailIdle",
+            frames: this.anims.generateFrameNumbers('snailIdle', { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "snailTrans",
+            frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat: 0
         });
 
         this.map = this.make.tilemap({key: "level1"});

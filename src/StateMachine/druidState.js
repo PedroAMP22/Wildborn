@@ -26,13 +26,16 @@ export class DruidState extends State {
         this.wasGrounded = this.player.body.onFloor();
         this.maxInputBuffer = 6;
         this.inputBuffer = 0;
-        
+        this.player.body.setAllowGravity(true);
+        this.player.setAngle(0);
     }
 
     transform(){
 
     }
+
     update(t,dt){
+
 
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("druidRun", true);
@@ -73,7 +76,7 @@ export class DruidState extends State {
             this.coyoteTime = 0;
             this.inputBuffer = 0;
             this.player.body.setVelocityY(this.jumpSpeed);
-            console.log("tumadre");
+            console.log("tumadre"); //BUENA PABLO
             this.player.anims.play("druidJump",true);
         }
         if(this.justJumped && this.coyoteTime < this.maxCoyoteTime && this.coyoteTime !== 0){
