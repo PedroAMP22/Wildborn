@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 
+import playerTrans from '../assets/sprites/druid/transDruid.png'
 import playerRun from '../assets/sprites/druid/run.png'
 import playerIdle from '../assets/sprites/druid/idle.png'
 import playerFall from '../assets/sprites/druid/fall.png'
@@ -32,6 +33,8 @@ export default class Boot extends Phaser.Scene {
    */
   preload() {
 
+    //Druid
+
     this.load.spritesheet('playerRun', playerRun, {
       frameWidth: 32,
       frameHeight: 32
@@ -52,12 +55,15 @@ export default class Boot extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
-
+    this.load.spritesheet('playerTrans', playerTrans,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+    //Snail
     this.load.spritesheet('snailIdle', snailIdle,{
       frameWidth : 32,
       frameHeight : 32
     });
-
     this.load.spritesheet('snailTrans', snailTrans,{
       frameWidth : 32,
       frameHeight: 32

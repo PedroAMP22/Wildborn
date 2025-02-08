@@ -55,6 +55,11 @@ export default class Level extends Phaser.Scene {
             frameRate: 10
         });
         this.anims.create({
+            key:"playerTrans",
+            frames: this.anims.generateFrameNumbers('playerTrans', { start: 0, end: 4 }),
+            frameRate: 20
+        });
+        this.anims.create({
             key: "snailIdle",
             frames: this.anims.generateFrameNumbers('snailIdle', { start: 0, end: 3 }),
             frameRate: 5,
@@ -63,7 +68,7 @@ export default class Level extends Phaser.Scene {
         this.anims.create({
             key: "snailTrans",
             frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 5 }),
-            frameRate: 10,
+            frameRate: 20,
             repeat: 0
         });
 

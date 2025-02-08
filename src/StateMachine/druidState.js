@@ -28,14 +28,19 @@ export class DruidState extends State {
         this.inputBuffer = 0;
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
+
+        this.iKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     }
 
     transform(){
-
+        this.player.anims.play("playerTrans", true);
     }
 
     update(t,dt){
 
+        if (Phaser.Input.Keyboard.JustDown(this.iKey)) {
+            this.transform();
+        }
 
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("druidRun", true);
@@ -50,6 +55,9 @@ export class DruidState extends State {
         if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "druidLand" && this.player.anims.isPlaying){
            canPlayIdle = false;
         }
+        if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "playerTrans" && this.player.anims.isPlaying){
+            canPlayIdle = false;
+         }
     
         if(this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0 && canPlayIdle){
             this.player.anims.play("druidIdle", true);
@@ -107,11 +115,11 @@ export class DruidState extends State {
         }
 
         //Izquierda
-        if (Phaser.Input.Keyboard.JustDown(this.player.cursors.left) && !this.player.cursors.right.isDown){
+        if (Phaser.Input.Keyboard.JustDown(this.player.keys.left) && !this.player.keys.right.isDown){
             this.player.body.setVelocityX(-this.initialSpeed)
             this.player.setFlipX(true)
         }
-        else if (this.player.cursors.left.isDown && this.player.body.velocity.x > -this.topSpeed && !this.player.cursors.right.isDown) {
+        else if (this.player.keys.left.isDown && this.player.body.velocity.x > -this.topSpeed && !this.player.keys.right.isDown) {
             this.player.setFlipX(true)
             if(this.player.body.velocity.x > -this.initialSpeed){
                 this.player.body.setVelocityX(-this.initialSpeed);
@@ -122,11 +130,11 @@ export class DruidState extends State {
             }
         }
         //Derecha
-        else if (Phaser.Input.Keyboard.JustDown(this.player.cursors.right) && !this.player.cursors.left.isDown){
+        else if (Phaser.Input.Keyboard.JustDown(this.player.keys.right) && !this.player.keys.left.isDown){
             this.player.body.setVelocityX(this.initialSpeed)
             this.player.setFlipX(false)
         }
-        else if (this.player.cursors.right.isDown && this.player.body.velocity.x < this.topSpeed && !this.player.cursors.left.isDown) {
+        else if (this.player.keys.right.isDown && this.player.body.velocity.x < this.topSpeed && !this.player.keys.left.isDown) {
             this.player.setFlipX(false)
             if(this.player.body.velocity.x < this.initialSpeed){
                 this.player.body.setVelocityX(this.initialSpeed);
@@ -137,7 +145,7 @@ export class DruidState extends State {
             }
         }
         //Pararse
-        if(!this.player.cursors.left.isDown && !this.player.cursors.right.isDown ){
+        if(!this.player.keys.left.isDown && !this.player.keys.right.isDown ){
             this.player.body.setVelocityX(0);
         }
         this.wasGrounded = this.player.body.onFloor();

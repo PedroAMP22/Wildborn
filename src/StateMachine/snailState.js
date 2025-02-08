@@ -12,6 +12,9 @@ export class SnailState extends State{
 
         this.keyU = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
+        this.player.body.setCircle(4);
+        this.player.body.setOffset(11.5,14.5)
+
     }
 
     stickToSurface() {
@@ -64,7 +67,7 @@ export class SnailState extends State{
             this.transform();
         }
 
-        if (this.player.anims.getName() !== "snailTrans" && !this.player.anims.isPlaying) {
+        if (!this.player.anims.isPlaying) {
             this.player.anims.play("snailIdle", true);
         }
     }
