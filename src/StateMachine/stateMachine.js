@@ -1,6 +1,7 @@
 import './state'
 import { DruidState } from './druidState';
 import { SnailState } from './snailState';
+import { MoleState } from './moleState';
 
 
 export class StateMachine {
@@ -12,16 +13,22 @@ export class StateMachine {
     }
 
     transform(transformation){
-        switch(transformation){
-            case DruidState.NAME:
-                this.state = new DruidState(this.scene);
-                break;
-            case SnailState.NAME:
-                this.state = new SnailState(this.scene);
-                break;
+        console.log(transformation)
+        if (!this.state || !this.state.checkSate(transformation)){
+            switch(transformation){
+                case DruidState.NAME:
+                    this.state = new DruidState(this.scene);
+                    break;
+                case SnailState.NAME:
+                    this.state = new SnailState(this.scene);
+                    break;
+                case MoleState.NAME:
+                    this.state = new MoleState(this.scene);
+                    break;
+            }
+            this.state.transform();
         }
 
-        this.state.transform();
     }
 
     update(t,dt){

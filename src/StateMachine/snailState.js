@@ -9,16 +9,14 @@ export class SnailState extends State{
         super();
         this.scene = scene;
         this.player = scene.player;
-
-        this.keyU = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
-
         this.player.body.setCircle(4);
-        this.player.body.setOffset(11.5,14.5)
+        this.player.body.setOffset(11.5,14.5);
         this.left = false;
         this.right = false;
         this.top = false;
         this.down = false;
-        
+        this.topFallingSpeed = 200;
+
     }
 
     stickToSurface() {
@@ -73,19 +71,22 @@ export class SnailState extends State{
 
         if(this.left || this.right || this.top || this.player.body.onFloor())
             this.stickToSurface();
-        else
-            this.player.body.setVelocityY(this.player.body.velocity.y + 1 * dt)
+        else if (this.topFallingSpeed > this.player.body.velocity.y){
+            this.player.body.setVelocityY(this.player.body.velocity.y + 1 * dt);
+            if (this.topFallingSpeed < this.player.body.velocity.y)
+                this.player.body.setVelocityY(this.topFallingSpeed);
+        }
+            
             
 
         
         //meter rotacion con booleanos
 
-        if (Phaser.Input.Keyboard.JustDown(this.keyU)) {
-            this.transform();
-        }
-
         if (!this.player.anims.isPlaying) {
             this.player.anims.play("snailIdle", true);
         }
+    }
+    checkSate(stateString){
+        return stateString === SnailState.NAME;
     }
 }

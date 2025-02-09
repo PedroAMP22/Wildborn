@@ -12,7 +12,7 @@ export class DruidState extends State {
         this.player = scene.player;
 
         this.player.body.setCircle(5.5);
-        this.player.body.setOffset(10.5,14.5)
+        this.player.body.setOffset(10.5,14.5);
         
         this.jumpSpeed = -400;
         this.topSpeed = 150;
@@ -84,7 +84,6 @@ export class DruidState extends State {
             this.coyoteTime = 0;
             this.inputBuffer = 0;
             this.player.body.setVelocityY(this.jumpSpeed);
-            console.log("tumadre"); //BUENA PABLO
             this.player.anims.play("druidJump",true);
         }
         if(this.justJumped && this.coyoteTime < this.maxCoyoteTime && this.coyoteTime !== 0){
@@ -114,41 +113,12 @@ export class DruidState extends State {
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
         }
 
-        //Izquierda
-        if (Phaser.Input.Keyboard.JustDown(this.player.keys.left) && !this.player.keys.right.isDown){
-            this.player.body.setVelocityX(-this.initialSpeed)
-            this.player.setFlipX(true)
-        }
-        else if (this.player.keys.left.isDown && this.player.body.velocity.x > -this.topSpeed && !this.player.keys.right.isDown) {
-            this.player.setFlipX(true)
-            if(this.player.body.velocity.x > -this.initialSpeed){
-                this.player.body.setVelocityX(-this.initialSpeed);
-            }
-            this.player.body.setVelocityX(this.player.body.velocity.x - this.walkAcceleration * dt);
-            if(this.player.body.velocity.x < -this.topSpeed){
-                this.player.body.setVelocityX(-this.topSpeed);
-            }
-        }
-        //Derecha
-        else if (Phaser.Input.Keyboard.JustDown(this.player.keys.right) && !this.player.keys.left.isDown){
-            this.player.body.setVelocityX(this.initialSpeed)
-            this.player.setFlipX(false)
-        }
-        else if (this.player.keys.right.isDown && this.player.body.velocity.x < this.topSpeed && !this.player.keys.left.isDown) {
-            this.player.setFlipX(false)
-            if(this.player.body.velocity.x < this.initialSpeed){
-                this.player.body.setVelocityX(this.initialSpeed);
-            }
-            this.player.body.setVelocityX(this.player.body.velocity.x + this.walkAcceleration * dt);
-            if(this.player.body.velocity.x > this.topSpeed){
-                this.player.body.setVelocityX(this.topSpeed);
-            }
-        }
-        //Pararse
-        if(!this.player.keys.left.isDown && !this.player.keys.right.isDown ){
-            this.player.body.setVelocityX(0);
-        }
+        this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+        
         this.wasGrounded = this.player.body.onFloor();
         
     }   
+    checkSate(stateString){
+        return stateString === DruidState.NAME;
+    }
 }

@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import {StateMachine} from './StateMachine/stateMachine'
 import { DruidState } from './StateMachine/druidState';
 import { SnailState } from './StateMachine/snailState';
+import { MoleState } from './StateMachine/moleState';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -22,6 +23,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.uKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
         this.iKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
+        this.jKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+        console.log(this.jKey)
 
         //Adding to physics engine
         this.scene.add.existing(this);
@@ -48,17 +52,55 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-
         if (Phaser.Input.Keyboard.JustDown(this.uKey)) {
             this.stateMachine.transform(SnailState.NAME);
         }
-
-        if (Phaser.Input.Keyboard.JustDown(this.iKey)){
+        else if (Phaser.Input.Keyboard.JustDown(this.iKey)){
             this.stateMachine.transform(DruidState.NAME);
+        }
+        else if (Phaser.Input.Keyboard.JustDown(this.jKey)){
+            this.stateMachine.transform(MoleState.NAME);
         }
 
         this.stateMachine.update(t,dt);
         
+    }
+
+    moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){
+        //Izquierda
+        if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown){
+            this.body.setVelocityX(-initialSpeed)
+            this.setFlipX(true)
+        }
+        else if (this.keys.left.isDown && this.body.velocity.x > -topSpeed && !this.keys.right.isDown) {
+            this.setFlipX(true)
+            if(this.body.velocity.x > -initialSpeed){
+                this.body.setVelocityX(-initialSpeed);
+            }
+            this.body.setVelocityX(this.body.velocity.x - walkAcceleration * dt);
+            if(this.body.velocity.x < -topSpeed){
+                this.body.setVelocityX(-topSpeed);
+            }
+        }
+        //Derecha
+        else if (Phaser.Input.Keyboard.JustDown(this.keys.right) && !this.keys.left.isDown){
+            this.body.setVelocityX(initialSpeed)
+            this.setFlipX(false)
+        }
+        else if (this.keys.right.isDown && this.body.velocity.x < topSpeed && !this.keys.left.isDown) {
+            this.setFlipX(false)
+            if(this.body.velocity.x < initialSpeed){
+                this.body.setVelocityX(initialSpeed);
+            }
+            this.body.setVelocityX(this.body.velocity.x + walkAcceleration * dt);
+        }
+        if(this.body.velocity.x > topSpeed){
+            this.body.setVelocityX(topSpeed);
+        }
+        //Pararse
+        if(!this.keys.left.isDown && !this.keys.right.isDown ){
+            this.body.setVelocityX(0);
+        }
     }
 
 }
