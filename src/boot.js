@@ -10,6 +10,10 @@ import playerLand from '../assets/sprites/druid/landing.png'
 import snailIdle from '../assets/sprites/snail/idleSnail.png'
 import snailTrans from '../assets/sprites/snail/transSnail.png'
 
+import moleIdle from '../assets/sprites/mole/idleMole.png'
+import moleRun from '../assets/sprites/mole/runMole.png'
+import moleTrans from '../assets/sprites/mole/transMole.png'
+
 import level1 from '../assets/tilemaps/prueba.json'
 import tileSet from '../assets/tilemaps/tileSet.png'
 
@@ -66,6 +70,20 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     });
     this.load.spritesheet('snailTrans', snailTrans,{
+      frameWidth : 32,
+      frameHeight: 32
+    });
+
+    //Mole
+    this.load.spritesheet('moleIdle', moleIdle,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+    this.load.spritesheet('moleTrans', moleTrans,{
+      frameWidth : 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('moleRun', moleRun,{
       frameWidth : 32,
       frameHeight: 32
     });

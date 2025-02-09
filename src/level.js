@@ -78,6 +78,26 @@ export default class Level extends Phaser.Scene {
             repeat: 0
         });
 
+        //MOLE
+        this.anims.create({
+            key: "moleIdle",
+            frames: this.anims.generateFrameNumbers('moleIdle', { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "moleTrans",
+            frames: this.anims.generateFrameNumbers('moleTrans', { start: 0, end: 5 }),
+            frameRate: 20,
+            repeat: 0
+        });
+        this.anims.create({
+            key: "moleRun",
+            frames: this.anims.generateFrameNumbers('moleRun', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
         this.map = this.make.tilemap({key: "level1"});
         this.tileset = this.map.addTilesetImage("ground","tilemapImage",32,32);
 
