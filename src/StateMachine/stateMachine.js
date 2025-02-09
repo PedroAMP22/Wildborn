@@ -2,6 +2,7 @@ import './state'
 import { DruidState } from './druidState';
 import { SnailState } from './snailState';
 import { MoleState } from './moleState';
+import { SquirrelState } from './squirrelState';
 
 
 export class StateMachine {
@@ -25,6 +26,9 @@ export class StateMachine {
                 case MoleState.NAME:
                     this.state = new MoleState(this.scene);
                     break;
+                case SquirrelState.NAME:
+                this.state = new SquirrelState(this.scene);
+                break;
             }
             this.state.transform();
         }

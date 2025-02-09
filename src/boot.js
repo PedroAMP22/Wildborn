@@ -10,6 +10,13 @@ import playerLand from '../assets/sprites/druid/landing.png'
 import snailIdle from '../assets/sprites/snail/idleSnail.png'
 import snailTrans from '../assets/sprites/snail/transSnail.png'
 
+import squirrelTrans from '../assets/sprites/squirrel/transSquirrel.png'
+import squirrelRun from '../assets/sprites/squirrel/runSquirrel.png'
+import squirrelIdle from '../assets/sprites/squirrel/idleSquirrel.png'
+import squirrelAir from '../assets/sprites/squirrel/airSquirrel.png'
+import squirrelJump from '../assets/sprites/squirrel/jumpSquirrel.png'
+import squirrelFly from '../assets/sprites/squirrel/flySquirrel.png'
+
 import level1 from '../assets/tilemaps/prueba.json'
 import tileSet from '../assets/tilemaps/tileSet.png'
 
@@ -33,8 +40,7 @@ export default class Boot extends Phaser.Scene {
    */
   preload() {
 
-    //Druid
-
+    //DRUID
     this.load.spritesheet('playerRun', playerRun, {
       frameWidth: 32,
       frameHeight: 32
@@ -60,7 +66,33 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     });
 
-    //Snail
+    //SQUIRREL
+    this.load.spritesheet('squirrelTrans', squirrelTrans, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('squirrelRun', squirrelRun, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('squirrelIdle', squirrelIdle, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('squirrelAir', squirrelAir, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('squirrelJump', squirrelJump, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('squirrelFly', squirrelFly,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+
+    //SNAIL
     this.load.spritesheet('snailIdle', snailIdle,{
       frameWidth : 32,
       frameHeight : 32
@@ -69,6 +101,8 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight: 32
     });
+
+    
 
     //Tile maps
     this.load.tilemapTiledJSON('level1',level1);

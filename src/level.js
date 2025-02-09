@@ -46,7 +46,8 @@ export default class Level extends Phaser.Scene {
         this.anims.create({
             key:"druidFall",
             frames: this.anims.generateFrameNumbers('playerFall', { start: 0, end: 5 }),
-            frameRate: 10
+            frameRate: 10,
+            repeat:-1
         });
         this.anims.create({
             key:"druidJump",
@@ -76,6 +77,43 @@ export default class Level extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 5 }),
             frameRate: 20,
             repeat: 0
+        });
+
+        //SQUIRREL
+        this.anims.create({
+            key:"squirrelRun",
+            frames: this.anims.generateFrameNumbers('squirrelRun', { start: 0, end: 4 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.anims.create({
+            key:"squirrelIdle",
+            frames: this.anims.generateFrameNumbers('squirrelIdle', { start: 0, end: 3 }),
+            frameRate: 4,
+            repeat:-1
+        });
+        this.anims.create({
+            key:"squirrelAir",
+            frames: this.anims.generateFrameNumbers('squirrelAir', { start: 0, end: 0 }),
+            frameRate: 1,
+            repeat:-1
+        });
+        this.anims.create({
+            key:"squirrelJump",
+            frames: this.anims.generateFrameNumbers('squirrelJump', { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat:0
+        });
+        this.anims.create({
+            key:"squirrelFly",
+            frames: this.anims.generateFrameNumbers('squirrelFly', { start: 0, end: 1 }),
+            frameRate: 2,
+            repeat:-1
+        });
+        this.anims.create({
+            key:"squirrelTrans",
+            frames: this.anims.generateFrameNumbers('squirrelTrans', { start: 0, end: 6 }),
+            frameRate: 20
         });
 
         this.map = this.make.tilemap({key: "level1"});

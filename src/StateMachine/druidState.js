@@ -29,7 +29,7 @@ export class DruidState extends State {
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
 
-        this.iKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.transKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     }
 
     transform(){
@@ -37,10 +37,6 @@ export class DruidState extends State {
     }
 
     update(t,dt){
-
-        if (Phaser.Input.Keyboard.JustDown(this.iKey)) {
-            this.transform();
-        }
 
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("druidRun", true);
@@ -62,6 +58,7 @@ export class DruidState extends State {
         if(this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0 && canPlayIdle){
             this.player.anims.play("druidIdle", true);
         }
+        
         if(this.player.body.velocity.y !== 0){
             this.player.anims.play("druidFall", true);
         }

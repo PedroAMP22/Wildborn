@@ -3,6 +3,7 @@ import {StateMachine} from './StateMachine/stateMachine'
 import { DruidState } from './StateMachine/druidState';
 import { SnailState } from './StateMachine/snailState';
 import { MoleState } from './StateMachine/moleState';
+import { SquirrelState } from './StateMachine/squirrelState';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -20,12 +21,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y,"playerIdle");
 
-        this.uKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
+        this.snailKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
-        this.iKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.druidKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
-        this.jKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
-        console.log(this.jKey)
+        this.squirrelKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+
+        this.moleKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
         //Adding to physics engine
         this.scene.add.existing(this);
@@ -52,14 +54,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-        if (Phaser.Input.Keyboard.JustDown(this.uKey)) {
+        if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
             this.stateMachine.transform(SnailState.NAME);
         }
-        else if (Phaser.Input.Keyboard.JustDown(this.iKey)){
+        else if (Phaser.Input.Keyboard.JustDown(this.druidKey)){
             this.stateMachine.transform(DruidState.NAME);
         }
-        else if (Phaser.Input.Keyboard.JustDown(this.jKey)){
+        else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
             this.stateMachine.transform(MoleState.NAME);
+        }
+        else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
+            this.stateMachine.transform(SquirrelState.NAME);
         }
 
         this.stateMachine.update(t,dt);
