@@ -16,6 +16,7 @@ export class SnailState extends State{
         this.top = false;
         this.down = false;
         this.topFallingSpeed = 200;
+        this.player.body.setAccelerationY(0)
 
         this.isStuck = false;
         this.shouldFall = true;

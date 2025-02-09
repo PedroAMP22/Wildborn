@@ -17,7 +17,7 @@ export class MoleState extends State {
         this.player.body.setOffset(8,19);
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
-        this.propulsionSpeed = -1000;
+        this.propulsionSpeed = -1800;
     }
 
     transform(){
@@ -33,9 +33,10 @@ export class MoleState extends State {
         this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
 
         if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor()) {
-            this.player.body.setAcelerationY(this.propulsionSpeed);
-            
+            this.player.body.setVelocityY(this.propulsionSpeed);
+
         }
+       
     }
     checkSate(stateString){
         return stateString === MoleState.name;
