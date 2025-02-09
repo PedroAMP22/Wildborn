@@ -27,7 +27,7 @@ export default class Level extends Phaser.Scene {
         this.bases = this.add.group();
         this.player = new Player(this, 30, 20);
         this.player.stateMachine.transform(DruidState.NAME);
-
+        this.player.setDepth(3);
         //ANIMATIONS
 
         //DRUID
@@ -138,16 +138,19 @@ export default class Level extends Phaser.Scene {
         });
 
         this.map = this.make.tilemap({key: "level1"});
-        this.tileset = this.map.addTilesetImage("ground","tilemapImage",32,32);
+        this.tileset = this.map.addTilesetImage("SheetA","tileSet1",16,16);
+        this.tileset = this.map.addTilesetImage("SheetB","tileSet2",16,16);
 
-        this.platformLayer = this.map.createLayer("platform", this.tileset);
-
+        this.decoLayer = this.map.createLayer("deco", this.tileset);
+        this.backgroundLayer = this.map.createLayer("background", this.tileset);
+        this.platformLayer = this.map.createLayer("platforms", this.tileset);
+        
         this.platformLayer.setCollisionByExclusion([-1]);
 
         this.physics.add.collider(this.player, this.platformLayer);
-        this.physics.world.setBounds(0,0,2560,1024);
+        this.physics.world.setBounds(0,0,32 * 16,16 * 16);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
-        this.cameras.main.setBounds(0,0,2560,1024)
+        this.cameras.main.setBounds(0,0,32 * 16,16 * 16)
     }
    
 }

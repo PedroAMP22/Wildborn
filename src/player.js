@@ -83,9 +83,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityX(-initialSpeed);
             }
             this.body.setVelocityX(this.body.velocity.x - walkAcceleration * dt);
-            if(this.body.velocity.x < -topSpeed){
-                this.body.setVelocityX(-topSpeed);
-            }
+        }
+        if(this.body.velocity.x < -topSpeed){
+            this.body.setVelocityX(-topSpeed);
         }
         //Derecha
         else if (Phaser.Input.Keyboard.JustDown(this.keys.right) && !this.keys.left.isDown){
