@@ -27,6 +27,10 @@ export default class Level extends Phaser.Scene {
         this.bases = this.add.group();
         this.player = new Player(this, 30, 20);
         this.player.stateMachine.transform(DruidState.NAME);
+
+        //ANIMATIONS
+
+        //DRUID
         this.anims.create({
             key:"druidRun",
             frames: this.anims.generateFrameNumbers('playerRun', { start: 0, end: 7 }),
@@ -59,6 +63,8 @@ export default class Level extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('playerTrans', { start: 0, end: 4 }),
             frameRate: 20
         });
+
+        //SNAIL
         this.anims.create({
             key: "snailIdle",
             frames: this.anims.generateFrameNumbers('snailIdle', { start: 0, end: 3 }),
@@ -81,7 +87,7 @@ export default class Level extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.world.setBounds(0,0,2560,1024);
-        this.cameras.main.startFollow(this.player,true, 0.1, 0.1);
+        this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
         this.cameras.main.setBounds(0,0,2560,1024)
     }
    

@@ -59,6 +59,7 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     });
+
     //Snail
     this.load.spritesheet('snailIdle', snailIdle,{
       frameWidth : 32,
@@ -69,6 +70,7 @@ export default class Boot extends Phaser.Scene {
       frameHeight: 32
     });
 
+    //Tile maps
     this.load.tilemapTiledJSON('level1',level1);
     this.load.image("tilemapImage", tileSet);
   }

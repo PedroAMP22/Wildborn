@@ -14,18 +14,14 @@ export class SnailState extends State{
 
         this.player.body.setCircle(4);
         this.player.body.setOffset(11.5,14.5)
-
-    }
-
-    stickToSurface() {
-
         this.left = false;
         this.right = false;
         this.top = false;
+        this.down = false;
+        
+    }
 
-        this.left = this.left || this.player.body.blocked.left;
-        this.right = this.right || this.player.body.blocked.right;
-        this.top = this.top || this.player.body.blocked.up;
+    stickToSurface() {
 
         console.log(this.left, this.right, this.top);
 
@@ -35,12 +31,16 @@ export class SnailState extends State{
             this.player.body.setAllowGravity(false);
             console.log("IZQUIERDAAA");
             this.player.setAngle(90);
+            this.player.body.setVelocityX(0);
+            this.player.body.setVelocityY(0);
         } else if (this.right) {
             //derecha
             this.player.setFlipX(true);
             this.player.body.setAllowGravity(false);
             console.log("DERECHAAAA");
             this.player.setAngle(-90);
+            this.player.body.setVelocityX(0);
+            this.player.body.setVelocityY(0);
         } else if (this.top){
             //techo
             this.player.body.setGravityY(0);
@@ -48,10 +48,16 @@ export class SnailState extends State{
             console.log("TECHOOO");
             this.player.setAngle(180);
             //this.player.body.setOffset(this.player.body.offset.x, this.player.height - this.player.body. height);
+            this.player.body.setVelocityX(0);
+            this.player.body.setVelocityY(0);
+        }
+        else{
+            this.player.body.setVelocityX(0);
+            this.player.body.setVelocityY(0);
+            this.player.body.setAllowGravity(false);
         }
        
-        this.player.body.setVelocityX(0);
-        this.player.body.setVelocityY(0);
+        
     }
 
     transform() {
@@ -59,7 +65,18 @@ export class SnailState extends State{
     }
 
     update(t, dt) {
-        this.stickToSurface();
+
+
+        this.left = this.left || this.player.body.blocked.left;
+        this.right = this.right || this.player.body.blocked.right;
+        this.top = this.top || this.player.body.blocked.up;
+
+        if(this.left || this.right || this.top || this.player.body.onFloor())
+            this.stickToSurface();
+        else
+            this.player.body.setVelocityY(this.player.body.velocity.y + 1 * dt)
+            
+
         
         //meter rotacion con booleanos
 
