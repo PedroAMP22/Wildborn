@@ -24,8 +24,14 @@ export default class Level extends Phaser.Scene {
      */
     create() {
 
+        this.map = this.make.tilemap({key: "level1"});
+
+        //spawnpoint
+        this.spawnPoint = this.map.findObject("objects", obj=>obj.name==="playerSpawn");
+
+
         this.bases = this.add.group();
-        this.player = new Player(this, 30, 20);
+        this.player = new Player(this, this.spawnPoint.x, this.spawnPoint.y);
         this.player.stateMachine.transform(DruidState.NAME);
         this.player.setDepth(3);
         //ANIMATIONS
@@ -137,18 +143,20 @@ export default class Level extends Phaser.Scene {
             repeat: -1
         });
 
-        this.map = this.make.tilemap({key: "level1"});
-        this.tileset = this.map.addTilesetImage("SheetA","tileSet1",16,16);
-        this.tileset = this.map.addTilesetImage("SheetB","tileSet2",16,16);
+        
+       
+        this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
+        this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
 
-        this.decoLayer = this.map.createLayer("deco", this.tileset);
-        this.backgroundLayer = this.map.createLayer("background", this.tileset);
-        this.platformLayer = this.map.createLayer("platforms", this.tileset);
+        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1]);
+        this.backgroundLayer = this.map.createLayer("background");
+        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1]);
+    
         
         this.platformLayer.setCollisionByExclusion([-1]);
 
         this.physics.add.collider(this.player, this.platformLayer);
-        this.physics.world.setBounds(0,0,32 * 16,16 * 16);
+        this.physics.world.setBounds(0,0, 64 * 16, 16 * 16);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
         this.cameras.main.setBounds(0,0,32 * 16,16 * 16)
     }
