@@ -118,14 +118,23 @@ export class SquirrelState extends State {
         if(this.isGliding){
             this.player.body.setAllowGravity(false);
             this.player.body.setVelocityY(50);
+            if(this.glideDirection === -1){
+                this.player.setFlipX(true);
+            }
+            else{
+                this.player.setFlipX(false);
+            }
             this.player.body.setVelocityX(this.glideDirection * this.topSpeed);
             if(!this.player.cursors.space.isDown || this.player.body.onFloor()){
                 this.isGliding = false;
                 this.player.body.setAllowGravity(true);
             }
         }
-
-        this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
+        else{
+            this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
+        }
+        
+        
 
     }
 
