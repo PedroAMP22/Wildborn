@@ -26,10 +26,26 @@ export default class Level extends Phaser.Scene {
 
         this.map = this.make.tilemap({key: "level1"});
 
-        //spawnpoint
-        this.spawnPoint = this.map.findObject("objects", obj=>obj.name==="playerSpawn");
+        //spawnpoint and killing zones
+        this.objectsLayer = this.map.getObjectLayer("objects");
 
+        this.killingObjects = this.physics.add.staticGroup();
 
+        this.spawnPoint = { x: 100, y: 100 };
+        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
+                if (name === "playerSpawn") {
+                    this.spawnPoint = { x, y };
+                } else {
+                    //creates a "invisible sprite" so it can collide
+                    let killZone = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
+                    killZone.setSize(width, height);
+                    killZone.setOrigin(0.5);
+                    killZone.setAlpha(0);  //to make it invisible
+                    this.killingObjects.add(killZone);
+                }
+        });
+
+        //Player creator
         this.bases = this.add.group();
         this.player = new Player(this, this.spawnPoint.x, this.spawnPoint.y);
         this.player.stateMachine.transform(DruidState.NAME);
@@ -144,21 +160,39 @@ export default class Level extends Phaser.Scene {
         });
 
         
-       
+        //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
+        this.thonsTileSet = this.map.addTilesetImage("thorns", "thorns", 16,16);
         
-        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1]);
+        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1, this.thonsTileSet]);
         this.backgroundLayer = this.map.createLayer("background");
-        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1]);
-    
+        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet]);  
+        
         
         this.platformLayer.setCollisionByExclusion([-1]);
 
+        //backgrounf image
+        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
+        this.backgroundImage.setDepth(-10);
+        this.backgroundImage.setScrollFactor(0);
+
+        //if player collides with a "killing zone" respawn
+        this.physics.add.collider(this.player, this.platformLayer);
+    
+        this.physics.add.overlap(this.player, this.killingObjects, () => {
+            this.respawn();
+        });
+
+        //camera config
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.world.setBounds(0,0, 64 * 16, 16 * 16);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
         this.cameras.main.setBounds(0,0,32 * 16,16 * 16)
+    }
+
+    respawn(){
+        this.player.setPosition(this.spawnPoint.x, this.spawnPoint.y);
     }
    
 }
