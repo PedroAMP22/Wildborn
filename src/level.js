@@ -147,7 +147,7 @@ export default class Level extends Phaser.Scene {
        
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
-
+        
         this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1]);
         this.backgroundLayer = this.map.createLayer("background");
         this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1]);

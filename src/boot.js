@@ -23,6 +23,7 @@ import moleTrans from '../assets/sprites/mole/transMole.png'
 import level1 from '../assets/tilemaps/level1_1.json'
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
+import background from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -124,6 +125,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('level1',level1);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
+    this.load.image("backgroundImage", background);
   }
 
   /**
