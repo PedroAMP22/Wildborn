@@ -108,7 +108,7 @@ export default class Level extends Phaser.Scene {
         this.anims.create({
             key:"squirrelJump",
             frames: this.anims.generateFrameNumbers('squirrelJump', { start: 0, end: 1 }),
-            frameRate: 5,
+            frameRate: 20,
             repeat:0
         });
         this.anims.create({
