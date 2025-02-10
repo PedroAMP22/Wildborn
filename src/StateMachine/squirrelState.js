@@ -12,7 +12,7 @@ export class SquirrelState extends State {
         this.player.body.setCircle(5.5);
         this.player.body.setOffset(10.5,14.5);
 
-        this.jumpSpeed = -400;
+        this.jumpSpeed = -300;
         this.topSpeed = 150;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
