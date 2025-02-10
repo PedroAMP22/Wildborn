@@ -36,7 +36,7 @@ export class SquirrelState extends State {
     }
 
     update(t,dt){
-        if (this.player.body.velocity.x !== 0) {
+        if (this.player.body.velocity.x !== 0 && !this.isGliding) {
             this.player.anims.play("squirrelRun", true);
         }
 
@@ -52,8 +52,9 @@ export class SquirrelState extends State {
 
         if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "squirrelJump" && this.player.anims.isPlaying){
             canPlayIdle = false;
-         }
-        if(this.player.body.velocity.y !== 0 && canPlayIdle ){
+        }
+
+        if(this.player.body.velocity.y !== 0 && canPlayIdle && !this.isGliding){
             this.player.anims.play("squirrelAir", true);
         }
         
@@ -111,12 +112,14 @@ export class SquirrelState extends State {
             this.player.anims.play("squirrelFly", true);
         }
 
+        
+
         //Está planeando
         if(this.isGliding){
             this.player.body.setAllowGravity(false);
             this.player.body.setVelocityY(50);
             this.player.body.setVelocityX(this.glideDirection * this.topSpeed);
-            if(!this.player.cursors.space.isDown){
+            if(!this.player.cursors.space.isDown || this.player.body.onFloor()){
                 this.isGliding = false;
                 this.player.body.setAllowGravity(true);
             }
