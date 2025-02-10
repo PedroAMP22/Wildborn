@@ -27,8 +27,8 @@ export class StateMachine {
                     this.state = new MoleState(this.scene);
                     break;
                 case SquirrelState.NAME:
-                this.state = new SquirrelState(this.scene);
-                break;
+                    this.state = new SquirrelState(this.scene);
+                    break;
             }
             this.state.transform();
         }

@@ -40,7 +40,7 @@ export class SnailState extends State{
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
         } else if (this.right) {
-            //derecha
+            //derechad 
             this.player.setPosition(this.player.x - 2, this.player.y);
             this.player.body.setOffset(15,12);
             this.player.setFlipX(true);

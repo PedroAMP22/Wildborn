@@ -105,7 +105,24 @@ export class SquirrelState extends State {
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
         }
 
-        this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+        if(!this.player.body.onFloor() && this.justJumped && !this.isGliding){
+            this.isGliding = true;
+            this.glideDirection = this.player.body.velocity.x > 0 ? 1: -1;
+            this.player.anims.play("squirrelFly", true);
+        }
+
+        //Está planeando
+        if(this.isGliding){
+            this.player.body.setAllowGravity(false);
+            this.player.body.setVelocityY(50);
+            this.player.body.setVelocityX(this.glideDirection * this.topSpeed);
+            if(!this.player.cursors.space.isDown){
+                this.isGliding = false;
+                this.player.body.setAllowGravity(true);
+            }
+        }
+
+        this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
 
     }
 
