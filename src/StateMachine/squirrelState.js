@@ -108,7 +108,16 @@ export class SquirrelState extends State {
 
         if(!this.player.body.onFloor() && this.justJumped && !this.isGliding){
             this.isGliding = true;
-            this.glideDirection = this.player.body.velocity.x > 0 ? 1: -1;
+            if(this.player.keys.left.isDown)
+                this.glideDirection = -1;
+            else if(this.player.keys.right.isDown)
+                this.glideDirection = 1;
+            else{
+                if(this.player.angle === 0)
+                    this.glideDirection = 1;
+                else
+                    this.glideDirection = -1;
+            }
             this.player.anims.play("squirrelFly", true);
         }
 
