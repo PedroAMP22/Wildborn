@@ -28,6 +28,7 @@ export class SquirrelState extends State {
         this.inputBuffer = 0;
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
+        this.player.setFlipY(false);
 
         this.hasGlided = false;
     }
@@ -71,10 +72,7 @@ export class SquirrelState extends State {
             this.inputBuffer = 0;
         }
 
-        //Saltar menos segun cuanto pulses
-        else if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown){
-            this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
-        }
+        
 
         
         if(!this.player.body.onFloor() && this.justJumped && !this.isGliding && !this.hasGlided){
@@ -99,6 +97,7 @@ export class SquirrelState extends State {
         if(this.isGliding){
             this.player.body.setAllowGravity(false);
             this.player.body.setVelocityY(50);
+           
             if(this.glideDirection === -1){
                 this.player.setFlipX(true);
             }
