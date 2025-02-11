@@ -24,7 +24,6 @@
     "homepage": "https://github.com/cleongh/plantillaphaser#readme",
     "type": "module",
     "devDependencies": {
-        "@rollup/rollup-win32-x64-msvc": "^4.32.1",
         "electron": "^34.0.1",
         "electron-builder": "^25.1.8",
         "electron-vite": "^2.3.0",
@@ -33,5 +32,9 @@
     "dependencies": {
         "phaser": "3.85.2",
         "plantillaphaser": "file:"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-win32-x64-msvc": "^4.32.1"
     }
+
 }
