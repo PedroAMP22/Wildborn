@@ -3,7 +3,7 @@ import { DruidState } from './druidState';
 import { SnailState } from './snailState';
 import { MoleState } from './moleState';
 import { SquirrelState } from './squirrelState';
-import { PufferfishState } from './pufferFishState';
+import { PufferFishState } from './pufferFishState';
 
 
 export class StateMachine {
