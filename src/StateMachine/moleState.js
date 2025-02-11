@@ -20,7 +20,7 @@ export class MoleState extends State {
         this.propulsionSpeed = -1000;
         this.hidden = false;
         this.canJump = false;
-        this.topFallingSpeed = 150;
+        this.topFallingSpeed = 200;
     }
 
     transform(){
@@ -50,8 +50,8 @@ export class MoleState extends State {
         if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor() && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
-            this.player.body.setSize(0.1,0.1);
-            this.player.body.setOffset(0,23);
+            this.player.body.setSize(10,0.1);
+            this.player.body.setOffset(10,23);
         }
 
 
