@@ -28,7 +28,13 @@ export class MoleState extends State {
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("moleRun", true);
         }
-        if(this.player.body.velocity.y === 0 && this.player.body.velocity.x === 0)
+
+        let canPlayIdle = true;
+        if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "moleTrans" && this.player.anims.isPlaying){
+            canPlayIdle = false;
+        }
+
+        if(this.player.body.velocity.y === 0 && this.player.body.velocity.x === 0 && canPlayIdle)
             this.player.anims.play("moleIdle",true);
         this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
 
@@ -39,6 +45,6 @@ export class MoleState extends State {
        
     }
     checkSate(stateString){
-        return stateString === MoleState.name;
+        return stateString === MoleState.NAME;
     }
 }

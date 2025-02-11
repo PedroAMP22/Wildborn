@@ -29,6 +29,7 @@ export class SquirrelState extends State {
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
 
+        this.hasGlided = false;
     }
 
     transform(){
@@ -36,6 +37,10 @@ export class SquirrelState extends State {
     }
 
     update(t,dt){
+        if(this.player.body.onFloor()){
+            this.hasGlided = false;
+        }
+
         if (this.player.body.velocity.x !== 0 && !this.isGliding && this.player.body.onFloor()) {
             this.player.anims.play("squirrelRun", true);
         }
@@ -106,8 +111,10 @@ export class SquirrelState extends State {
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
         }
 
-        if(!this.player.body.onFloor() && this.justJumped && !this.isGliding){
+        
+        if(!this.player.body.onFloor() && this.justJumped && !this.isGliding && !this.hasGlided){
             this.isGliding = true;
+            this.hasGlided = true;
             if(this.player.keys.left.isDown)
                 this.glideDirection = -1;
             else if(this.player.keys.right.isDown)
@@ -141,6 +148,7 @@ export class SquirrelState extends State {
         }
         else{
             this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
+            this.wasGrounded = this.player.body.onFloor();
         }
         
         

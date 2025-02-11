@@ -150,7 +150,6 @@ export default class Level extends Phaser.Scene {
             key: "moleTrans",
             frames: this.anims.generateFrameNumbers('moleTrans', { start: 0, end: 5 }),
             frameRate: 20,
-            repeat: 0
         });
         this.anims.create({
             key: "moleRun",
