@@ -56,6 +56,7 @@ export class MoleState extends State {
             this.player.body.setOffset(10,23);
         }
         console.log(this.lastSpeed)
+        //HIDE DOWN
         if (this.player.body.blocked.down && !this.hidden && this.lastSpeed > 0) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
@@ -64,7 +65,10 @@ export class MoleState extends State {
             this.player.setFlipY(false);
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
+            this.player.body.setSize(10,0.1);
+            this.player.body.setOffset(10,23);
         }
+        //HIDE LEFT
         if (this.player.body.blocked.left && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
@@ -74,7 +78,10 @@ export class MoleState extends State {
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
             this.left = true;
+            this.player.body.setSize(0.1,10);
+            this.player.body.setOffset(7,10);
         }
+        //HIDE RIGHT
         if (this.player.body.blocked.right && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
@@ -84,7 +91,10 @@ export class MoleState extends State {
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
             this.right = true;
+            this.player.body.setSize(0.1,10);
+            this.player.body.setOffset(20,10);
         } 
+        //HIDE UP
         if (this.player.body.blocked.up && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
@@ -108,7 +118,7 @@ export class MoleState extends State {
             this.player.anims.play("moleFly",true);
             //WALL
             if(this.left || this.right){
-                this.player.body.setSize(18,5);
+                this.player.body.setSize(13,5);
                 this.player.body.setOffset(13,7);
                 this.left ?  this.player.body.setVelocityX(-this.propulsionSpeed) : this.player.body.setVelocityX(this.propulsionSpeed);
                 this.left = false;
