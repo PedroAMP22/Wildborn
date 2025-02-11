@@ -3,6 +3,7 @@ import { DruidState } from './druidState';
 import { SnailState } from './snailState';
 import { MoleState } from './moleState';
 import { SquirrelState } from './squirrelState';
+import { PufferfishState } from './pufferFishState';
 
 
 export class StateMachine {
@@ -29,6 +30,9 @@ export class StateMachine {
                 case SquirrelState.NAME:
                     this.state = new SquirrelState(this.scene);
                     break;
+                case PufferfishState.NAME:
+                    this.state = new PufferfishState(this.scene);
+                    break
             }
             this.state.transform();
         }

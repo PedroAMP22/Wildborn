@@ -197,7 +197,23 @@ export default class Level extends Phaser.Scene {
             frameRate: 20,
         });
 
-        
+        //PUFFERFISH
+        this.anims.create({
+            key: "fishBig",
+            frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 9 }),
+            frameRate: 20,
+        });
+        this.anims.create({
+            key: "fishSmall",
+            frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 9 }),
+            frameRate: 20,
+        });
+        this.anims.create({
+            key: "fishTrans",
+            frames: this.anims.generateFrameNumbers('fishTrans', { start: 0, end: 5 }),
+            frameRate: 20,
+        });
+
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);

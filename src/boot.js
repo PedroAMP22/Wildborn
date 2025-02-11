@@ -27,6 +27,11 @@ import moleHide from '../assets/sprites/mole/hideMole.png'
 import moleIdleHidden from '../assets/sprites/mole/idleHiddenMole.png'
 import moleJump from '../assets/sprites/mole/jumpMole.png'
 
+
+import fishBig from '../assets/sprites/pufferfish/idleFishBig.png'
+import fishSmall from '../assets/sprites/pufferfish/idleFishSmall.png'
+import fishTrans from '../assets/sprites/pufferfish/transfish.png'
+
 import level1 from '../assets/tilemaps/level1_1.json'
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
@@ -152,6 +157,22 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     });
+
+    //Pufferfish
+    this.load.spritesheet('fishBig', fishBig, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
+
+    this.load.spritesheet('fishSmall', fishSmall, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
+
+    this.load.spritesheet('fishTrans', fishTrans, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
 
     //Tile maps
     this.load.tilemapTiledJSON('level1',level1);
