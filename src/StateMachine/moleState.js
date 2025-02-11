@@ -20,6 +20,7 @@ export class MoleState extends State {
         this.propulsionSpeed = -1000;
         this.hidden = false;
         this.canJump = false;
+        this.topFallingSpeed = 150;
     }
 
     transform(){
@@ -43,8 +44,7 @@ export class MoleState extends State {
         }
            
         if(this.player.playIdleIfPossible(canPlayIdle, "moleIdle")){
-            this.player.body.setSize(13,5);
-            this.player.body.setOffset(8,19);
+           
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor() && !this.hidden) {
@@ -53,6 +53,7 @@ export class MoleState extends State {
             this.player.body.setSize(0.1,0.1);
             this.player.body.setOffset(0,23);
         }
+
 
         if(!this.player.checkPlaying("moleHide") && this.hidden){
             this.player.anims.play("moleHiddenIdle",true);
@@ -72,11 +73,11 @@ export class MoleState extends State {
             this.canJump = false
         }
 
+        this.player.fall(this.topFallingSpeed);
         if(this.player.body.velocity.y > 0 && !this.player.checkPlaying("moleHide") && !this.player.body.onFloor()){
             this.player.anims.play("moleFall", true);
-            this.player.body.setVelocityY(50);
-            this.player.body.setSize(10,10);
-            this.player.body.setOffset(13,7);
+            this.player.body.setSize(13,5);
+            this.player.body.setOffset(8,19);
         }
        
 

@@ -16,7 +16,7 @@ export class SquirrelState extends State {
         this.topSpeed = 150;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
-        this.topFallingSpeed = 100;
+        this.topFallingSpeed = 200;
         this.maxCoyoteTime = 5;
         this.coyoteTime = 0;
         this.player.body.setAllowGravity(true);
@@ -71,14 +71,6 @@ export class SquirrelState extends State {
             this.inputBuffer = 0;
         }
 
-        //Caer mas rapido
-        if(this.player.body.velocity.y > 0 && this.player.body.velocity.y < this.topFallingSpeed){
-            this.player.body.setVelocityY(this.player.body.velocity.y + 0.01 * dt)
-            if(this.player.body.velocity.y > this.topFallingSpeed){
-                this.player.body.setVelocityY(this.topFallingSpeed);
-            }
-        }
-
         //Saltar menos segun cuanto pulses
         else if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown){
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
@@ -120,6 +112,7 @@ export class SquirrelState extends State {
             }
         }
         else{
+            this.player.fall(this.topFallingSpeed);
             this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
             this.wasGrounded = this.player.body.onFloor();
         }

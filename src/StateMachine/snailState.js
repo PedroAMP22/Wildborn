@@ -15,7 +15,7 @@ export class SnailState extends State{
         this.right = false;
         this.top = false;
         this.down = false;
-        this.topFallingSpeed = 200;
+        this.topFallingSpeed = 250;
         this.player.body.setAccelerationY(0)
 
         this.isStuck = false;
@@ -82,10 +82,8 @@ export class SnailState extends State{
 
         if((this.left || this.right || this.top || this.player.body.onFloor()) && !this.isStuck)
             this.stickToSurface();
-        else if (this.topFallingSpeed > this.player.body.velocity.y && this.shouldFall){
-            this.player.body.setVelocityY(this.player.body.velocity.y + 1 * dt);
-            if (this.topFallingSpeed < this.player.body.velocity.y)
-                this.player.body.setVelocityY(this.topFallingSpeed);
+        else{
+            this.player.fall(this.topFallingSpeed);
         }
         
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");

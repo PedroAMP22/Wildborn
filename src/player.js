@@ -137,4 +137,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
     }
 
+    fall(topFallingSpeed){
+        if(this.body.velocity.y > 0){
+            if(this.body.velocity.y > topFallingSpeed){
+                this.body.setVelocityY(topFallingSpeed);
+            }
+        }
+    }
+
 }

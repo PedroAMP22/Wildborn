@@ -70,14 +70,10 @@ export class DruidState extends State {
         }
 
         //Caer mas rapido
-        if(this.player.body.velocity.y > 0){
-            if(this.player.body.velocity.y > this.topFallingSpeed){
-                this.player.body.setVelocityY(this.topFallingSpeed);
-            }
-        }
+        this.player.fall(this.topFallingSpeed);
 
         //Saltar menos segun cuanto pulses
-        else if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown){
+        if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown){
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
         }
 
