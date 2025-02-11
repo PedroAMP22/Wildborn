@@ -57,21 +57,13 @@ export class DruidState extends State {
         }
 
 
-        if(this.wasGrounded && !this.player.body.onFloor() && !this.justJumped){
-            this.coyoteTime = 1;
-        }
-        if(this.coyoteTime > 0)
-            this.coyoteTime += 1
-        
+         //Salto 
+        if(this.wasGrounded && !this.player.body.onFloor() && !this.justJumped) this.coyoteTime = 1;
+        if(this.coyoteTime > 0) this.coyoteTime += 1;
+
+        if(this.justJumped)this.inputBuffer = 1;
+        if(this.inputBuffer > 0)this.inputBuffer += 1;
        
-        //Salto 
-        if(this.justJumped){
-            this.inputBuffer = 1;
-        }
-        if(this.inputBuffer > 0){
-            this.inputBuffer += 1
-        }
-        
         if (this.player.jump(this.justJumped, "druidJump", this.jumpSpeed, this.coyoteTime, this.inputBuffer)){
             this.coyoteTime = 0;
             this.inputBuffer = 0;

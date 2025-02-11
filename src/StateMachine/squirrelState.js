@@ -39,6 +39,7 @@ export class SquirrelState extends State {
     update(t,dt){
 
         let canPlayIdle = true;
+        this.justJumped = Phaser.Input.Keyboard.JustDown(this.player.cursors.space);
 
         if(this.player.checkPlaying("squirrelTrans")) canPlayIdle = false;
         if(this.player.checkPlaying("squirrelJump")) canPlayIdle = false;
@@ -58,24 +59,17 @@ export class SquirrelState extends State {
         }
         
 
-        if(this.wasGrounded && !this.player.body.onFloor() && !this.justJumped){
-            this.coyoteTime = 1;
-        }
-        if(this.coyoteTime > 0)
-            this.coyoteTime += 1
-        
-        this.justJumped = Phaser.Input.Keyboard.JustDown(this.player.cursors.space);
-
         //Salto 
-        if(this.justJumped){
-            this.inputBuffer = 1;
-        }
-        if(this.inputBuffer > 0){
-            this.inputBuffer += 1
-        }
+        if(this.wasGrounded && !this.player.body.onFloor() && !this.justJumped) this.coyoteTime = 1;
+        if(this.coyoteTime > 0) this.coyoteTime += 1;
 
-        coyoteTime = 0;
-            inputBuffer = 0;
+        if(this.justJumped)this.inputBuffer = 1;
+        if(this.inputBuffer > 0)this.inputBuffer += 1;
+       
+        if (this.player.jump(this.justJumped, "squirrelJump", this.jumpSpeed, this.coyoteTime, this.inputBuffer)){
+            this.coyoteTime = 0;
+            this.inputBuffer = 0;
+        }
 
         //Caer mas rapido
         if(this.player.body.velocity.y > 0 && this.player.body.velocity.y < this.topFallingSpeed){
