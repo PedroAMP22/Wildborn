@@ -55,35 +55,40 @@ export default class Level extends Phaser.Scene {
         //DRUID
         this.anims.create({
             key:"druidRun",
-            frames: this.anims.generateFrameNumbers('playerRun', { start: 0, end: 7 }),
+            frames: this.anims.generateFrameNumbers('druidRun', { start: 0, end: 7 }),
             frameRate: 10,
             repeat:-1
         });
         this.anims.create({
             key:"druidIdle",
-            frames: this.anims.generateFrameNumbers('playerIdle', { start: 0, end: 5 }),
+            frames: this.anims.generateFrameNumbers('druidIdle', { start: 0, end: 5 }),
             frameRate: 10,
             repeat:-1
         });
         this.anims.create({
             key:"druidFall",
-            frames: this.anims.generateFrameNumbers('playerFall', { start: 0, end: 5 }),
+            frames: this.anims.generateFrameNumbers('druidFall', { start: 0, end: 5 }),
             frameRate: 10,
             repeat:-1
         });
         this.anims.create({
             key:"druidJump",
-            frames: this.anims.generateFrameNumbers('playerJump', { start: 0, end: 4 }),
+            frames: this.anims.generateFrameNumbers('druidJump', { start: 0, end: 4 }),
             frameRate: 10
         });
         this.anims.create({
             key:"druidLand",
-            frames: this.anims.generateFrameNumbers('playerLand', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('druidLand', { start: 0, end: 3 }),
             frameRate: 10
         });
         this.anims.create({
-            key:"playerTrans",
-            frames: this.anims.generateFrameNumbers('playerTrans', { start: 0, end: 4 }),
+            key:"druidDeath",
+            frames: this.anims.generateFrameNumbers('druidDeath', { start: 0, end: 7 }),
+            frameRate: 10
+        });
+        this.anims.create({
+            key:"druidTrans",
+            frames: this.anims.generateFrameNumbers('druidTrans', { start: 0, end: 4 }),
             frameRate: 20
         });
 

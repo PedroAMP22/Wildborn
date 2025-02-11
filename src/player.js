@@ -42,7 +42,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
             right: Phaser.Input.Keyboard.KeyCodes.D
         });
 
-        // Queremos que el jugador no se salga de los límites del mundo
+        this.maxCoyoteTime = 5;
+        this.maxInputBuffer = 6;
 
         this.stateMachine = new StateMachine(this.scene);
         
@@ -68,8 +69,34 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
 
         this.stateMachine.update(t,dt);
-        
     }
+
+    playIdleIfPossible(canPlayIdle, idleName){
+        if(this.body.velocity.x === 0 && this.body.velocity.y === 0 && canPlayIdle){
+            this.anims.play(idleName, true);
+        }
+    }
+
+    checkPlaying(animationName){
+        return (this.anims.currentAnim !== null && this.anims.currentAnim.key === animationName && this.anims.isPlaying);
+    }
+
+    jump(justJumped, jumpAnimation, jumpSpeed, coyoteTime, inputBuffer){
+        if ((justJumped && this.body.onFloor()) ||
+            (justJumped && coyoteTime < this.maxCoyoteTime && coyoteTime !== 0) ||
+            (this.body.onFloor() && inputBuffer < this.maxInputBuffer && inputBuffer !== 0)
+            ){
+
+            this.body.setVelocityY(jumpSpeed);
+            this.anims.play(jumpAnimation,true);
+
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){
         //Izquierda

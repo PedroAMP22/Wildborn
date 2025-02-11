@@ -35,17 +35,15 @@ export class SnailState extends State{
             this.player.body.setOffset(9,12);
             this.player.setFlipX(false);
             this.player.body.setAllowGravity(false);
-            console.log("IZQUIERDAAA");
             this.player.setAngle(90);
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
         } else if (this.right) {
-            //derechad 
+            //derecha
             this.player.setPosition(this.player.x - 2, this.player.y);
             this.player.body.setOffset(15,12);
             this.player.setFlipX(true);
             this.player.body.setAllowGravity(false);
-            console.log("DERECHAAAA");
             this.player.setAngle(-90);
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
@@ -55,9 +53,7 @@ export class SnailState extends State{
             this.player.body.setOffset(11.5,8);
             this.player.body.setGravityY(0);
             this.player.body.setAllowGravity(false);
-            console.log("TECHOOO");
             this.player.setAngle(180);
-            //this.player.body.setOffset(this.player.body.offset.x, this.player.height - this.player.body. height);
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
         }
@@ -75,7 +71,9 @@ export class SnailState extends State{
     }
 
     update(t, dt) {
+        let canPlayIdle = true;
 
+        if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
 
         this.left = this.left || this.player.body.blocked.left;
         this.right = this.right || this.player.body.blocked.right;
@@ -89,15 +87,8 @@ export class SnailState extends State{
             if (this.topFallingSpeed < this.player.body.velocity.y)
                 this.player.body.setVelocityY(this.topFallingSpeed);
         }
-            
-            
-
         
-        //meter rotacion con booleanos
-
-        if (!this.player.anims.isPlaying) {
-            this.player.anims.play("snailIdle", true);
-        }
+        this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
     }
     checkSate(stateString){
         return stateString === SnailState.NAME;

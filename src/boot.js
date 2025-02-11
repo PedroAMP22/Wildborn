@@ -1,11 +1,12 @@
 import Phaser from 'phaser'
 
-import playerTrans from '../assets/sprites/druid/transDruid.png'
-import playerRun from '../assets/sprites/druid/run.png'
-import playerIdle from '../assets/sprites/druid/idle.png'
-import playerFall from '../assets/sprites/druid/fall.png'
-import playerJump from '../assets/sprites/druid/jump.png'
-import playerLand from '../assets/sprites/druid/landing.png'
+import druidTrans from '../assets/sprites/druid/transDruid.png'
+import druidRun from '../assets/sprites/druid/run.png'
+import druidIdle from '../assets/sprites/druid/idle.png'
+import druidFall from '../assets/sprites/druid/fall.png'
+import druidJump from '../assets/sprites/druid/jump.png'
+import druidLand from '../assets/sprites/druid/landing.png'
+import druidDeath from '../assets/sprites/druid/death.png'
 
 import snailIdle from '../assets/sprites/snail/idleSnail.png'
 import snailTrans from '../assets/sprites/snail/transSnail.png'
@@ -47,27 +48,31 @@ export default class Boot extends Phaser.Scene {
   preload() {
 
     //DRUID
-    this.load.spritesheet('playerRun', playerRun, {
+    this.load.spritesheet('druidRun', druidRun, {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerIdle', playerIdle, {
+    this.load.spritesheet('druidIdle', druidIdle, {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerFall', playerFall, {
+    this.load.spritesheet('druidFall', druidFall, {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerJump', playerJump, {
+    this.load.spritesheet('druidJump', druidJump, {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerLand', playerLand, {
+    this.load.spritesheet('druidLand', druidLand, {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet('playerTrans', playerTrans,{
+    this.load.spritesheet('druidTrans', druidTrans,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+    this.load.spritesheet('druidDeath', druidDeath,{
       frameWidth : 32,
       frameHeight : 32
     });

@@ -37,6 +37,12 @@ export class SquirrelState extends State {
     }
 
     update(t,dt){
+
+        let canPlayIdle = true;
+
+        if(this.player.checkPlaying("squirrelTrans")) canPlayIdle = false;
+        if(this.player.checkPlaying("squirrelJump")) canPlayIdle = false;
+
         if(this.player.body.onFloor()){
             this.hasGlided = false;
         }
@@ -44,20 +50,8 @@ export class SquirrelState extends State {
         if (this.player.body.velocity.x !== 0 && !this.isGliding && this.player.body.onFloor()) {
             this.player.anims.play("squirrelRun", true);
         }
-
-        let canPlayIdle = true;
-        if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "squirrelTrans" && this.player.anims.isPlaying){
-            canPlayIdle = false;
-        }
-
-        if(this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0 && canPlayIdle){
-            this.player.anims.play("squirrelIdle", true);
-        }
-
-
-        if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "squirrelJump" && this.player.anims.isPlaying){
-            canPlayIdle = false;
-        }
+        
+        this.player.playIdleIfPossible(canPlayIdle, "squirrelIdle");
 
         if(this.player.body.velocity.y !== 0 && canPlayIdle && !this.isGliding){
             this.player.anims.play("squirrelAir", true);
@@ -79,24 +73,9 @@ export class SquirrelState extends State {
         if(this.inputBuffer > 0){
             this.inputBuffer += 1
         }
-        if ((this.justJumped && this.player.body.onFloor())) {
-            this.coyoteTime = 0;
-            this.inputBuffer = 0;
-            this.player.body.setVelocityY(this.jumpSpeed);
-            this.player.anims.play("squirrelJump",true);
-        }
-        if(this.justJumped && this.coyoteTime < this.maxCoyoteTime && this.coyoteTime !== 0){
-            this.coyoteTime = 0;
-            this.inputBuffer = 0;
-            this.player.body.setVelocityY(this.jumpSpeed);
-            this.player.anims.play("squirrelJump",true);
-        }
-        if(this.player.body.onFloor() && this.inputBuffer < this.maxInputBuffer && this.inputBuffer !== 0){
-            this.coyoteTime = 0;
-            this.inputBuffer = 0;
-            this.player.body.setVelocityY(this.jumpSpeed);
-            this.player.anims.play("squirrelJump",true);
-        }
+
+        coyoteTime = 0;
+            inputBuffer = 0;
 
         //Caer mas rapido
         if(this.player.body.velocity.y > 0 && this.player.body.velocity.y < this.topFallingSpeed){

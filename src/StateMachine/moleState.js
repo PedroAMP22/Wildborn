@@ -25,17 +25,17 @@ export class MoleState extends State {
     }
 
     update(t,dt){
+
+        let canPlayIdle = true;
+
+        if(this.player.checkPlaying("moleTrans")) canPlayIdle = false;
+
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("moleRun", true);
         }
 
-        let canPlayIdle = true;
-        if(this.player.anims.currentAnim !== null && this.player.anims.currentAnim.key === "moleTrans" && this.player.anims.isPlaying){
-            canPlayIdle = false;
-        }
+        this.player.playIdleIfPossible(canPlayIdle, "moleIdle");
 
-        if(this.player.body.velocity.y === 0 && this.player.body.velocity.x === 0 && canPlayIdle)
-            this.player.anims.play("moleIdle",true);
         this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
 
         if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor()) {
