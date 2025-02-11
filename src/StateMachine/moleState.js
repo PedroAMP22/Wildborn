@@ -36,16 +36,9 @@ export class MoleState extends State {
         if(this.player.checkPlaying("moleHide")) canPlayIdle = false;
         if(this.player.checkPlaying("moleHiddenIdle")) canPlayIdle = false;
         if(this.player.checkPlaying("moleJump")) canPlayIdle = false;
-       
-
-
-        if (this.player.body.velocity.x !== 0) {
-            this.player.anims.play("moleRun", true);
-        }
            
-        if(this.player.playIdleIfPossible(canPlayIdle, "moleIdle")){
-           
-        }
+        this.player.playIdleIfPossible(canPlayIdle, "moleIdle")
+    
 
         if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor() && !this.hidden) {
             this.player.anims.play("moleHide",true);
@@ -83,6 +76,9 @@ export class MoleState extends State {
 
         if(!this.hidden){
             this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+        }
+        if (this.player.body.velocity.x !== 0 && !this.player.checkPlaying("moleFall")) {
+            this.player.anims.play("moleRun", true);
         }
     }
     checkSate(stateString){
