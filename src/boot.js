@@ -17,9 +17,15 @@ import squirrelIdle from '../assets/sprites/squirrel/idleSquirrel.png'
 import squirrelAir from '../assets/sprites/squirrel/airSquirrel.png'
 import squirrelJump from '../assets/sprites/squirrel/jumpSquirrel.png'
 import squirrelFly from '../assets/sprites/squirrel/flySquirrel.png'
+
 import moleIdle from '../assets/sprites/mole/idleMole.png'
 import moleRun from '../assets/sprites/mole/runMole.png'
 import moleTrans from '../assets/sprites/mole/transMole.png'
+import moleFall from '../assets/sprites/mole/fallMole.png'
+import moleFly from '../assets/sprites/mole/flyMole.png'
+import moleHide from '../assets/sprites/mole/hideMole.png'
+import moleIdleHidden from '../assets/sprites/mole/idleHiddenMole.png'
+import moleJump from '../assets/sprites/mole/jumpMole.png'
 
 import level1 from '../assets/tilemaps/level1_1.json'
 import tileSet1 from '../assets/tilemaps/SheetA.png'
@@ -125,6 +131,26 @@ export default class Boot extends Phaser.Scene {
     this.load.spritesheet('moleRun', moleRun,{
       frameWidth : 32,
       frameHeight: 32
+    });
+    this.load.spritesheet('moleFall', moleFall,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+    this.load.spritesheet('moleFly', moleFly,{
+      frameWidth : 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('moleHide', moleHide,{
+      frameWidth : 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet('moleHiddenIdle', moleIdleHidden,{
+      frameWidth : 32,
+      frameHeight : 32
+    });
+    this.load.spritesheet('moleJump', moleJump,{
+      frameWidth : 32,
+      frameHeight : 32
     });
 
     //Tile maps

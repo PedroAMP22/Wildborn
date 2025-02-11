@@ -17,7 +17,9 @@ export class MoleState extends State {
         this.player.body.setOffset(8,19);
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
-        this.propulsionSpeed = -1800;
+        this.propulsionSpeed = -1000;
+        this.hidden = false;
+        this.canJump = false;
     }
 
     transform(){
@@ -27,22 +29,60 @@ export class MoleState extends State {
     update(t,dt){
 
         let canPlayIdle = true;
+       
 
         if(this.player.checkPlaying("moleTrans")) canPlayIdle = false;
+        if(this.player.checkPlaying("moleHide")) canPlayIdle = false;
+        if(this.player.checkPlaying("moleHiddenIdle")) canPlayIdle = false;
+        if(this.player.checkPlaying("moleJump")) canPlayIdle = false;
+       
+
 
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("moleRun", true);
         }
+           
+        if(this.player.playIdleIfPossible(canPlayIdle, "moleIdle")){
+            this.player.body.setSize(13,5);
+            this.player.body.setOffset(8,19);
+        }
 
-        this.player.playIdleIfPossible(canPlayIdle, "moleIdle");
+        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor() && !this.hidden) {
+            this.player.anims.play("moleHide",true);
+            this.hidden = true;
+            this.player.body.setSize(0.1,0.1);
+            this.player.body.setOffset(0,23);
+        }
 
-        this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+        if(!this.player.checkPlaying("moleHide") && this.hidden){
+            this.player.anims.play("moleHiddenIdle",true);
+            if(Phaser.Input.Keyboard.JustDown(this.player.cursors.space)){
+                this.player.anims.play("moleJump",true);
+                this.hidden = false;
+                this.canJump = true;
+            }   
+        }
+        
 
-        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor()) {
+        if(!this.player.checkPlaying("moleJump") && this.canJump){
+            this.player.anims.play("moleFly",true);
             this.player.body.setVelocityY(this.propulsionSpeed);
+            this.player.body.setSize(5,18);
+            this.player.body.setOffset(13,7);
+            this.canJump = false
+        }
 
+        if(this.player.body.velocity.y > 0 && !this.player.checkPlaying("moleHide") && !this.player.body.onFloor()){
+            this.player.anims.play("moleFall", true);
+            this.player.body.setVelocityY(50);
+            this.player.body.setSize(10,10);
+            this.player.body.setOffset(13,7);
         }
        
+
+        if(!this.hidden){
+            this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+        }
     }
     checkSate(stateString){
         return stateString === MoleState.NAME;

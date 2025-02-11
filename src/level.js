@@ -163,6 +163,35 @@ export default class Level extends Phaser.Scene {
             repeat: -1
         });
 
+        this.anims.create({
+            key: "moleFall",
+            frames: this.anims.generateFrameNumbers('moleFall', { start: 0, end: 3 }),
+            frameRate: 15,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "moleFly",
+            frames: this.anims.generateFrameNumbers('moleFly', { start: 0, end: 3 }),
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "moleHide",
+            frames: this.anims.generateFrameNumbers('moleHide', { start: 0, end: 7 }),
+            frameRate: 10,
+        });
+        this.anims.create({
+            key: "moleHiddenIdle",
+            frames: this.anims.generateFrameNumbers('moleHiddenIdle', { start: 0, end: 11 }),
+            frameRate: 7,
+            repeat: -1
+        });
+        this.anims.create({
+            key: "moleJump",
+            frames: this.anims.generateFrameNumbers('moleJump', { start: 0, end: 9 }),
+            frameRate: 20,
+        });
+
         
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);

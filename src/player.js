@@ -74,7 +74,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     playIdleIfPossible(canPlayIdle, idleName){
         if(this.body.velocity.x === 0 && this.body.velocity.y === 0 && canPlayIdle){
             this.anims.play(idleName, true);
+            return true;
         }
+        return false;
     }
 
     checkPlaying(animationName){

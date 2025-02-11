@@ -18,7 +18,7 @@ export class DruidState extends State {
         this.topSpeed = 150;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
-        this.topFallingSpeed = 100;
+        this.topFallingSpeed = 150;
         this.coyoteTime = 0;
         
         this.lastSpeed = 0;
@@ -70,8 +70,7 @@ export class DruidState extends State {
         }
 
         //Caer mas rapido
-        if(this.player.body.velocity.y > 0 && this.player.body.velocity.y < this.topFallingSpeed){
-            this.player.body.setVelocityY(this.player.body.velocity.y + 0.01 * dt)
+        if(this.player.body.velocity.y > 0){
             if(this.player.body.velocity.y > this.topFallingSpeed){
                 this.player.body.setVelocityY(this.topFallingSpeed);
             }
