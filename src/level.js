@@ -200,12 +200,12 @@ export default class Level extends Phaser.Scene {
         //PUFFERFISH
         this.anims.create({
             key: "fishBig",
-            frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 9 }),
+            frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
             frameRate: 20,
         });
         this.anims.create({
             key: "fishSmall",
-            frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 9 }),
+            frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
             frameRate: 20,
         });
         this.anims.create({

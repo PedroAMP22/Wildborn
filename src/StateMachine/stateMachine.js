@@ -30,8 +30,8 @@ export class StateMachine {
                 case SquirrelState.NAME:
                     this.state = new SquirrelState(this.scene);
                     break;
-                case PufferfishState.NAME:
-                    this.state = new PufferfishState(this.scene);
+                case PufferFishState.NAME:
+                    this.state = new PufferFishState(this.scene);
                     break
             }
             this.state.transform();

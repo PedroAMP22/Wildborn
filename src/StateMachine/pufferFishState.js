@@ -1,128 +1,93 @@
-import {State} from './state'
+import { State } from './state';
 
 export class PufferFishState extends State {
     static NAME = "pufferFish";
 
-   
-    /**
-     * @param {Phaser.Scene} scene 
-     */
     constructor(scene) {
         super();
 
         this.scene = scene;
         this.player = scene.player;
 
-        this.player.body.setCircle(5.5);
-        this.player.body.setOffset(10.5,14.5);
+        // Parámetros de movimiento y flotación
+        this.floatSpeed = -50; // Velocidad vertical al flotar
+        this.moveSpeed = 150; // Velocidad horizontal
+        this.isFloating = false; // Determina si está flotando o no
 
-        this.jumpSpeed = -300;
-        this.topSpeed = 150;
-        this.initialSpeed = 50;
-        this.walkAcceleration = 0.5;
-        this.topFallingSpeed = 200;
-        this.maxCoyoteTime = 5;
-        this.coyoteTime = 0;
-        this.player.body.setAllowGravity(true);
+        // Configuración inicial del cuerpo del jugador
+        this.player.body.setCircle(10); // Tamaño inicial pequeño
+        this.player.body.setOffset(10, 10);
+        this.player.body.setAllowGravity(true); // Gravedad activada por defecto
         this.player.setAngle(0);
 
-        this.lastSpeed = 0;
-        this.wasGrounded = this.player.body.onFloor();
-        this.maxInputBuffer = 6;
-        this.inputBuffer = 0;
-        this.player.body.setAllowGravity(true);
-        this.player.setAngle(0);
-        this.player.setFlipY(false);
-
-        this.hasGlided = false;
+        this.transformToSmall(); // Comienza como un pez pequeño
     }
 
-    transform(){
+    transform() {
         this.player.anims.play("fishTrans", true);
     }
 
-    update(t,dt){
-
-        let canPlayIdle = true;
-        this.justJumped = Phaser.Input.Keyboard.JustDown(this.player.cursors.space);
-
-        if(this.player.checkPlaying("squirrelTrans")) canPlayIdle = false;
-        if(this.player.checkPlaying("squirrelJump")) canPlayIdle = false;
-
-        if(this.player.body.onFloor()){
-            this.hasGlided = false;
-        }
-
-        if (this.player.body.velocity.x !== 0 && !this.isGliding && this.player.body.onFloor()) {
-            this.player.anims.play("squirrelRun", true);
-        }
-        
-        this.player.playIdleIfPossible(canPlayIdle, "squirrelIdle");
-
-        if(this.player.body.velocity.y !== 0 && canPlayIdle && !this.isGliding){
-            this.player.anims.play("squirrelAir", true);
-        }
-        
-
-        //Salto 
-        if(this.wasGrounded && !this.player.body.onFloor() && !this.justJumped) this.coyoteTime = 1;
-        if(this.coyoteTime > 0) this.coyoteTime += 1;
-
-        if(this.justJumped)this.inputBuffer = 1;
-        if(this.inputBuffer > 0)this.inputBuffer += 1;
-       
-        if (this.player.jump(this.justJumped, "squirrelJump", this.jumpSpeed, this.coyoteTime, this.inputBuffer)){
-            this.coyoteTime = 0;
-            this.inputBuffer = 0;
-        }
-
-        
-
-        
-        if(!this.player.body.onFloor() && this.justJumped && !this.isGliding && !this.hasGlided){
-            this.isGliding = true;
-            this.hasGlided = true;
-            if(this.player.keys.left.isDown)
-                this.glideDirection = -1;
-            else if(this.player.keys.right.isDown)
-                this.glideDirection = 1;
-            else{
-                if(this.player.angle === 0)
-                    this.glideDirection = 1;
-                else
-                    this.glideDirection = -1;
-            }
-            this.player.anims.play("squirrelFly", true);
-        }
-
-        
-
-        //Está planeando
-        if(this.isGliding){
-            this.player.body.setAllowGravity(false);
-            this.player.body.setVelocityY(50);
-           
-            if(this.glideDirection === -1){
-                this.player.setFlipX(true);
-            }
-            else{
-                this.player.setFlipX(false);
-            }
-            this.player.body.setVelocityX(this.glideDirection * this.topSpeed);
-            if(!this.player.cursors.space.isDown || this.player.body.onFloor()){
-                this.isGliding = false;
-                this.player.body.setAllowGravity(true);
-            }
-        }
-        else{
-            this.player.fall(this.topFallingSpeed);
-            this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
-            this.wasGrounded = this.player.body.onFloor();
-        }
-
+    transformToSmall() {
+        this.player.anims.play("fishSmall", true);
+        this.player.body.setCircle(10); // Tamaño pequeño
+        this.player.body.setAllowGravity(true); // Activar gravedad
+        this.isFloating = false;
     }
 
-    checkSate(stateString){
+    transformToBig() {
+        this.player.anims.play("fishBig", true);
+        this.player.body.setCircle(20); // Tamaño grande
+        this.player.body.setAllowGravity(false); // Desactivar gravedad
+        this.player.body.setVelocityY(this.floatSpeed); // Flotar hacia arriba
+        this.isFloating = true;
+    }
+
+    update(t, dt) {
+        const cursors = this.player.cursors;
+        let canPlayIdle = true;
+        const justPressedSpace = Phaser.Input.Keyboard.JustDown(cursors.space);
+
+        // Alternar estado de flotación con Espacio
+        if (justPressedSpace) {
+            if (this.isFloating) {
+                this.transformToSmall(); // Cambia a estado pequeño
+            } else {
+                this.transformToBig(); // Cambia a estado grande
+            }
+        }
+
+        // Movimiento horizontal permitido en ambos estados
+        if (cursors.left.isDown) {
+            this.player.body.setVelocityX(-this.moveSpeed);
+            this.player.setFlipX(true);
+            this.player.anims.play("fishSmall", true); // Animación de nadar
+            canPlayIdle = false;
+        } else if (cursors.right.isDown) {
+            this.player.body.setVelocityX(this.moveSpeed);
+            this.player.setFlipX(false);
+            this.player.anims.play("fishSmall", true); // Animación de nadar
+            canPlayIdle = false;
+        } else {
+            this.player.body.setVelocityX(0);
+        }
+
+        // Mantener la velocidad vertical constante si está flotando
+        if (this.isFloating) {
+            this.player.body.setVelocityY(this.floatSpeed);
+        }
+
+        // Reproducir animación de estar flotando si no hay movimiento horizontal
+        if (this.isFloating && canPlayIdle) {
+            this.player.anims.play("fishBig", true);
+        }
+
+        // Reproducir animación de idle si no se está moviendo
+        if (!this.isFloating && this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0 && canPlayIdle) {
+            this.player.anims.play("fishSmall", true);
+        }
+    }
+
+    checkState(stateString) {
         return stateString === PufferFishState.NAME;
     }
 }
