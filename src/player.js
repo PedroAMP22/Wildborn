@@ -70,7 +70,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
             this.stateMachine.transform(SquirrelState.NAME);
         }
-        else if(Phaser.Input.keyboard.JustDown(this.fishKey)){
+        else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
             this.stateMachine.transform(pufferFishState.NAME);
         }
 
