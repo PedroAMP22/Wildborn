@@ -181,6 +181,11 @@ export default class Level extends Phaser.Scene {
             frameRate: 10,
         });
         this.anims.create({
+            key: "moleHide2",
+            frames: this.anims.generateFrameNumbers('moleHide', { start: 3, end: 7 }),
+            frameRate: 10,
+        });
+        this.anims.create({
             key: "moleHiddenIdle",
             frames: this.anims.generateFrameNumbers('moleHiddenIdle', { start: 0, end: 11 }),
             frameRate: 7,

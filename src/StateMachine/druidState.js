@@ -26,7 +26,7 @@ export class DruidState extends State {
         this.inputBuffer = 0;
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
-
+        this.player.setFlipY(false);
         this.transKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
     }
 
