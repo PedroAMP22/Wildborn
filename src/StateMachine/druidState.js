@@ -18,7 +18,7 @@ export class DruidState extends State {
         this.topSpeed = 150;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
-        this.topFallingSpeed = 150;
+        this.topFallingSpeed = 200;
         this.coyoteTime = 0;
         
         this.lastSpeed = 0;
