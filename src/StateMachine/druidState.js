@@ -87,7 +87,7 @@ export class DruidState extends State {
         this.lastSpeed = this.player.body.velocity.y;
        
     }   
-    checkSate(stateString){
+    checkState(stateString){
         return stateString === DruidState.NAME;
     }
 }

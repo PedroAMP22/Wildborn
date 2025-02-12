@@ -120,7 +120,7 @@ export class SquirrelState extends State {
 
     }
 
-    checkSate(stateString){
+    checkState(stateString){
         return stateString === SquirrelState.NAME;
     }
 

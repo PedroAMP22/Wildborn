@@ -15,8 +15,8 @@ export class StateMachine {
     }
 
     transform(transformation){
-        console.log(transformation)
-        if (!this.state || !this.state.checkSate(transformation)){
+        
+        if (!this.state || !this.state.checkState(transformation)){
             switch(transformation){
                 case DruidState.NAME:
                     this.state = new DruidState(this.scene);

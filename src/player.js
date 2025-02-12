@@ -49,6 +49,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.maxInputBuffer = 6;
 
         this.stateMachine = new StateMachine(this.scene);
+
+        this.momentum = 0;
         
     }
 
@@ -74,7 +76,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.stateMachine.transform(PufferFishState.NAME);
         }
 
+        if(this.body.onFloor()){
+            this.momentum = 0;
+        }
         this.stateMachine.update(t,dt);
+        
     }
 
     playIdleIfPossible(canPlayIdle, idleName){
@@ -106,7 +112,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){
-        //Izquierda
+        //GO LEFT
         if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown){
             this.body.setVelocityX(-initialSpeed)
             this.setFlipX(true)
@@ -118,10 +124,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
             }
             this.body.setVelocityX(this.body.velocity.x - walkAcceleration * dt);
         }
-        if(this.body.velocity.x < -topSpeed){
+        if(this.body.velocity.x < -topSpeed && this.momentum === 0){
             this.body.setVelocityX(-topSpeed);
         }
-        //Derecha
+        //GO RIGHT
         else if (Phaser.Input.Keyboard.JustDown(this.keys.right) && !this.keys.left.isDown){
             this.body.setVelocityX(initialSpeed)
             this.setFlipX(false)
@@ -133,16 +139,30 @@ export default class Player extends Phaser.GameObjects.Sprite {
             }
             this.body.setVelocityX(this.body.velocity.x + walkAcceleration * dt);
         }
-        if(this.body.velocity.x > topSpeed){
+        if(this.body.velocity.x > topSpeed && this.momentum === 0){
             this.body.setVelocityX(topSpeed);
         }
-        //Pararse
+        //STOP IN FLOOR
         if(!this.keys.left.isDown && !this.keys.right.isDown && this.body.onFloor()){
             this.body.setVelocityX(0);
         }
-        if(!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor() && this.body.velocity.x !== 0){
-            console.log(this.body.velocity.x)
-            this.body.setVelocityX(this.body.velocity.x);
+        if(!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor() && this.body.velocity.x !== 0 && this.momentum === 0){
+            this.body.setVelocityX(this.body.velocity.x - dt);
+            if(this.body.velocity.x < 0)
+                this.body.setVelocityX(0);
+        }
+        //CONSERVE MOMENTUM
+        if(this.momentum < 0 && !this.body.onFloor()){
+            this.momentum += dt;
+            this.body.setVelocityX(this.momentum);
+           
+            if(this.body.velocity.x > 0)
+                this.body.setVelocityX(0);
+        }
+        if(this.momentum > 0 && !this.body.onFloor()){
+            this.momentum -= dt;
+            this.body.setVelocityX(this.momentum);
+           
             if(this.body.velocity.x < 0)
                 this.body.setVelocityX(0);
         }

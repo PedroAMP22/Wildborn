@@ -55,7 +55,6 @@ export class MoleState extends State {
             this.player.body.setSize(10,0.1);
             this.player.body.setOffset(10,23);
         }
-        console.log(this.lastSpeed)
         //HIDE DOWN
         if (this.player.body.blocked.down && !this.hidden && this.lastSpeed > 0) {
             this.player.anims.play("moleHide",true);
@@ -122,7 +121,14 @@ export class MoleState extends State {
             if(this.left || this.right){
                 this.player.body.setSize(16,5);
                 this.player.body.setOffset(9,7);
-                this.left ?  this.player.body.setVelocityX(-this.propulsionSpeed) : this.player.body.setVelocityX(this.propulsionSpeed);
+                if(this.left){
+                    this.player.body.setVelocityX(-this.propulsionSpeed);
+                    this.player.momentum = -this.propulsionSpeed;
+                }
+                else{
+                    this.player.body.setVelocityX(this.propulsionSpeed);
+                    this.player.momentum = this.propulsionSpeed;
+                }
                 this.left = false;
                 this.right = false;
             }
@@ -132,14 +138,9 @@ export class MoleState extends State {
                 this.player.body.setOffset(13,7);
                 this.top = false;
             }
-            
             this.canJump = false
             this.lastSpeed = this.player.body.velocity.y
         }
-
-        //CHECK COLLISON WITH WALLS
-
-
 
         //FALL
         
@@ -151,7 +152,6 @@ export class MoleState extends State {
         }
        
         //MOVEMENT HORIZONTAL
-        console.log(this.player.anims.currentAnim.key);
         if(!this.hidden && !this.player.checkPlaying("moleFly") && !this.player.checkPlaying("moleJump") && !this.player.checkPlaying("moleHide")){
             this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
         }
@@ -163,7 +163,7 @@ export class MoleState extends State {
 
        
     }
-    checkSate(stateString){
+    checkState(stateString){
         return stateString === MoleState.NAME;
     }
 }

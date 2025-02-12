@@ -16,18 +16,15 @@ export class SnailState extends State{
         this.top = false;
         this.down = false;
         this.topFallingSpeed = 250;
-        this.player.body.setAccelerationY(0)
         this.player.setFlipY(false);
         this.isStuck = false;
-        this.shouldFall = true;
         this.player.body.setAllowGravity(true);
-
+        this.canStuck = false;
 
     }
 
     stickToSurface() {
 
-        console.log(this.left, this.right, this.top);
         this.isStuck = true;
         this.player.body.setOffset(11.5,14.5);
 
@@ -76,21 +73,20 @@ export class SnailState extends State{
         let canPlayIdle = true;
 
         if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
-
         this.left = this.left || this.player.body.blocked.left;
         this.right = this.right || this.player.body.blocked.right;
         this.top = this.top || this.player.body.blocked.up;
-        this.shouldFall = !(this.left || this.right || this.top || this.player.body.onFloor());
 
-        if((this.left || this.right || this.top || this.player.body.onFloor()) && !this.isStuck)
+        if((this.left || this.right || this.top || this.player.body.onFloor()) && !this.isStuck && this.canStuck)
             this.stickToSurface();
         else{
             this.player.fall(this.topFallingSpeed);
         }
         
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
+        this.canStuck = true;
     }
-    checkSate(stateString){
+    checkState(stateString){
         return stateString === SnailState.NAME;
     }
 }
