@@ -105,7 +105,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
     }
 
-
     moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){
         //Izquierda
         if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown){
@@ -138,8 +137,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(topSpeed);
         }
         //Pararse
-        if(!this.keys.left.isDown && !this.keys.right.isDown ){
+        if(!this.keys.left.isDown && !this.keys.right.isDown && this.body.onFloor()){
             this.body.setVelocityX(0);
+        }
+        if(!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor()){
+            console.log(this.body.velocity.x)
+            this.body.setVelocityX(this.body.velocity.x - 10 * dt);
+            if(this.body.velocity.x < 0)
+                this.body.setVelocityX(0);
         }
     }
 

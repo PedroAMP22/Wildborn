@@ -13,11 +13,11 @@ export class MoleState extends State {
         this.topSpeed = 100;
         this.initialSpeed = 50;
         this.walkAcceleration = 0.5;
-        this.player.body.setSize(13,5);
+        this.player.body.setSize(11.5,5);
         this.player.body.setOffset(8,19);
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
-        this.propulsionSpeed = -1000;
+        this.propulsionSpeed = -700;
         this.hidden = false;
         this.canJump = false;
         this.left = false;

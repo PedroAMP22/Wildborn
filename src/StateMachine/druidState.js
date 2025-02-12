@@ -28,6 +28,7 @@ export class DruidState extends State {
         this.player.setAngle(0);
         this.player.setFlipY(false);
         this.transKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.isJumping = false;
     }
 
     transform(){
@@ -37,7 +38,9 @@ export class DruidState extends State {
     update(t,dt){
 
         let canPlayIdle = true;
-        this.lastSpeed = this.player.body.velocity.y;
+        if(this.player.body.onFloor())
+            this.isJumping = false;
+        
         this.justJumped = Phaser.Input.Keyboard.JustDown(this.player.cursors.space);
 
         if(this.player.checkPlaying("druidLand")) canPlayIdle = false;
@@ -67,13 +70,14 @@ export class DruidState extends State {
         if (this.player.jump(this.justJumped, "druidJump", this.jumpSpeed, this.coyoteTime, this.inputBuffer)){
             this.coyoteTime = 0;
             this.inputBuffer = 0;
+            this.isJumping = true;
+            
         }
 
-        //Caer mas rapido
         this.player.fall(this.topFallingSpeed);
 
         //Saltar menos segun cuanto pulses
-        if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown){
+        if(this.player.body.velocity.y < -0 && !this.player.cursors.space.isDown && this.isJumping){
             this.player.body.setVelocityY(this.player.body.velocity.y + 4 * dt)
         }
 
@@ -81,6 +85,8 @@ export class DruidState extends State {
         
         this.wasGrounded = this.player.body.onFloor();
         
+        this.lastSpeed = this.player.body.velocity.y;
+       
     }   
     checkSate(stateString){
         return stateString === DruidState.NAME;
