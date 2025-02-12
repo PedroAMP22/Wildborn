@@ -71,7 +71,6 @@ export class DruidState extends State {
             this.coyoteTime = 0;
             this.inputBuffer = 0;
             this.isJumping = true;
-            
         }
 
         this.player.fall(this.topFallingSpeed);

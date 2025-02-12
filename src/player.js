@@ -140,9 +140,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if(!this.keys.left.isDown && !this.keys.right.isDown && this.body.onFloor()){
             this.body.setVelocityX(0);
         }
-        if(!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor()){
+        if(!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor() && this.body.velocity.x !== 0){
             console.log(this.body.velocity.x)
-            this.body.setVelocityX(this.body.velocity.x - 10 * dt);
+            this.body.setVelocityX(this.body.velocity.x);
             if(this.body.velocity.x < 0)
                 this.body.setVelocityX(0);
         }

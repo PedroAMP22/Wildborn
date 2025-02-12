@@ -78,8 +78,8 @@ export class MoleState extends State {
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
             this.left = true;
-            this.player.body.setSize(0.1,10);
-            this.player.body.setOffset(7,10);
+            this.player.body.setSize(0.01,10);
+            this.player.body.setOffset(5,10);
         }
         //HIDE RIGHT
         if (this.player.body.blocked.right && !this.hidden) {
@@ -92,7 +92,7 @@ export class MoleState extends State {
             this.player.body.setVelocityY(0);
             this.right = true;
             this.player.body.setSize(0.1,10);
-            this.player.body.setOffset(20,10);
+            this.player.body.setOffset(27,10);
         } 
         //HIDE UP
         if (this.player.body.blocked.up && !this.hidden) {
@@ -103,6 +103,8 @@ export class MoleState extends State {
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
             this.top = true;
+            this.player.body.setSize(10,0.1);
+            this.player.body.setOffset(10,8);
         } 
         if(!this.player.checkPlaying("moleHide") && this.hidden){
             this.player.anims.play("moleHiddenIdle",true);
@@ -118,8 +120,8 @@ export class MoleState extends State {
             this.player.anims.play("moleFly",true);
             //WALL
             if(this.left || this.right){
-                this.player.body.setSize(13,5);
-                this.player.body.setOffset(13,7);
+                this.player.body.setSize(16,5);
+                this.player.body.setOffset(9,7);
                 this.left ?  this.player.body.setVelocityX(-this.propulsionSpeed) : this.player.body.setVelocityX(this.propulsionSpeed);
                 this.left = false;
                 this.right = false;
