@@ -4,6 +4,7 @@ import { SnailState } from './snailState';
 import { MoleState } from './moleState';
 import { SquirrelState } from './squirrelState';
 import { PufferFishState } from './pufferFishState';
+import { ChickenState } from './chickenState';
 
 
 export class StateMachine {
@@ -32,7 +33,10 @@ export class StateMachine {
                     break;
                 case PufferFishState.NAME:
                     this.state = new PufferFishState(this.scene);
-                    break
+                    break;
+                case ChickenState.NAME:
+                    this.state = new ChickenState(this.scene);
+                    break;
             }
             this.state.transform();
         }

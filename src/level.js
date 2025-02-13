@@ -214,6 +214,29 @@ export default class Level extends Phaser.Scene {
             frameRate: 20,
         });
 
+        //CHICKEN
+        this.anims.create({
+            key: "chickenIdle",
+            frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
+            frameRate: 20,
+        });
+        this.anims.create({
+            key: "chickenFlap",
+            frames: this.anims.generateFrameNumbers('chickenFlap', { start: 0, end: 5 }),
+            frameRate: 10,
+        });
+        this.anims.create({
+            key: "chickenRun",
+            frames: this.anims.generateFrameNumbers('chickenRun', { start: 0, end: 3 }),
+            frameRate: 10,
+        });
+        this.anims.create({
+            key: "chickenTrans",
+            frames: this.anims.generateFrameNumbers('chickenTrans', { start: 0, end: 5 }),
+            frameRate: 10,
+        });
+
+
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);

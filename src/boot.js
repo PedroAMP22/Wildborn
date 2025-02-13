@@ -32,6 +32,13 @@ import fishBig from '../assets/sprites/pufferfish/idleFishBig.png'
 import fishSmall from '../assets/sprites/pufferfish/idleFishSmall.png'
 import fishTrans from '../assets/sprites/pufferfish/transFish.png'
 
+
+import chickenFlap from '../assets/sprites/chicken/flapChicken.png'
+import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
+import chickenRun from '../assets/sprites/chicken/runChicken.png'
+import chickenTrans from '../assets/sprites/chicken/transChicken.png'
+
+
 import level1 from '../assets/tilemaps/level1_1.json'
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
@@ -174,6 +181,23 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
 
+    //Chicken
+    this.load.spritesheet('chickenFlap', chickenFlap, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
+    this.load.spritesheet('chickenIdle', chickenIdle, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
+    this.load.spritesheet('chickenRun', chickenRun, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
+    this.load.spritesheet('chickenTrans', chickenTrans, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
     //Tile maps
     this.load.tilemapTiledJSON('level1',level1);
     this.load.image("tileSet1", tileSet1);

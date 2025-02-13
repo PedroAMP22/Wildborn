@@ -5,6 +5,7 @@ import { SnailState } from './StateMachine/snailState';
 import { MoleState } from './StateMachine/moleState';
 import { SquirrelState } from './StateMachine/squirrelState';
 import { PufferFishState } from './StateMachine/pufferFishState';
+import { ChickenState } from './StateMachine/chickenState';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -31,6 +32,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.moleKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+
+        this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
 
         //Adding to physics engine
         this.scene.add.existing(this);
@@ -76,6 +79,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
         else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
             this.stateMachine.transform(PufferFishState.NAME);
+        }
+        else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+            this.stateMachine.transform(ChickenState.NAME);
         }
 
         if(this.body.onFloor()){
