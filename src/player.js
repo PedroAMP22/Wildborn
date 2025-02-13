@@ -38,6 +38,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setCollideWorldBounds();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
+        
+
         this.keys = this.scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
             left: Phaser.Input.Keyboard.KeyCodes.A,

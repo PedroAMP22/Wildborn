@@ -17,7 +17,7 @@ export class MoleState extends State {
         this.player.body.setOffset(8,19);
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
-        this.propulsionSpeed = -700;
+        this.propulsionSpeed = -750;
         this.hidden = false;
         this.canJump = false;
         this.left = false;
@@ -54,6 +54,7 @@ export class MoleState extends State {
             this.player.body.setVelocityY(0);
             this.player.body.setSize(10,0.1);
             this.player.body.setOffset(10,23);
+            this.player.momentum = 0;
         }
         //HIDE DOWN
         if (this.player.body.blocked.down && !this.hidden && this.lastSpeed > 0) {
@@ -66,6 +67,7 @@ export class MoleState extends State {
             this.player.body.setVelocityY(0);
             this.player.body.setSize(10,0.1);
             this.player.body.setOffset(10,23);
+            this.player.momentum = 0;
         }
         //HIDE LEFT
         if (this.player.body.blocked.left && !this.hidden) {
@@ -79,6 +81,7 @@ export class MoleState extends State {
             this.left = true;
             this.player.body.setSize(0.01,10);
             this.player.body.setOffset(5,10);
+            this.player.momentum = 0;
         }
         //HIDE RIGHT
         if (this.player.body.blocked.right && !this.hidden) {
@@ -92,6 +95,7 @@ export class MoleState extends State {
             this.right = true;
             this.player.body.setSize(0.1,10);
             this.player.body.setOffset(27,10);
+            this.player.momentum = 0;
         } 
         //HIDE UP
         if (this.player.body.blocked.up && !this.hidden) {
@@ -104,6 +108,7 @@ export class MoleState extends State {
             this.top = true;
             this.player.body.setSize(10,0.1);
             this.player.body.setOffset(10,8);
+            this.player.momentum = 0;
         } 
         if(!this.player.checkPlaying("moleHide") && this.hidden){
             this.player.anims.play("moleHiddenIdle",true);
@@ -154,6 +159,8 @@ export class MoleState extends State {
         //MOVEMENT HORIZONTAL
         if(!this.hidden && !this.player.checkPlaying("moleFly") && !this.player.checkPlaying("moleJump") && !this.player.checkPlaying("moleHide")){
             this.player.moveHorizontal(this.initialSpeed,this.topSpeed,this.walkAcceleration,t,dt);
+            this.player.body.setSize(11.5,5);
+            this.player.body.setOffset(8,19);
         }
         //RUN ANIMATION
         if (this.player.body.velocity.x !== 0 && this.player.body.onFloor()) {

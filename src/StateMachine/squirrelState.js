@@ -83,7 +83,7 @@ export class SquirrelState extends State {
             else if(this.player.keys.right.isDown)
                 this.glideDirection = 1;
             else{
-                if(this.player.angle === 0)
+                if(!this.player.flipX)
                     this.glideDirection = 1;
                 else
                     this.glideDirection = -1;
