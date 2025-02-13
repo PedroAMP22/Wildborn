@@ -272,12 +272,12 @@ export default class Level extends Phaser.Scene {
         this.movingBlock.forEach(block => {
             this.physics.world.enable(block);
             block.body.setAllowGravity(false);  
-            block.body.setImmovable(true); // Hacer que el bloque no se mueva al colisionar
+            block.body.setImmovable(true); 
         });
 
         // Añadir colisión entre el jugador y los bloques
-        this.physics.add.collider(this.player, this.movingBlock);
-
+        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
+        console.log(this.pointA.y + " " + this.pointB.y)
         // Aplicar la animación a cada bloque individualmente
         this.movingBlock.forEach(block => {
             this.tweens.add({

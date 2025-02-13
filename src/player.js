@@ -40,7 +40,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
         this.body.setCollideWorldBounds();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-
+        this.onBlock = null;
         
 
         this.keys = this.scene.input.keyboard.addKeys({
@@ -88,6 +88,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.momentum = 0;
         }
         this.stateMachine.update(t,dt);
+        if (this.onBlock) {
+            
+            let xMovement = this.onBlock.x - this.previousX;
+            let yMovement = this.onBlock.y - this.previousY;
+            let secondsPass = dt/1000;
+
+            let velocityX = xMovement / secondsPass;
+            let velocityY = yMovement / secondsPass;
+
+            this.body.setVelocityX(velocityX);
+
+            this.previousX = this.onBlock.x;
+            this.previousY = this.onBlock.y;
+            // Si el jugador salta o cae, lo despegamos
+            console.log(this.onBlock.y)
+            
+        }
+        
         
     }
 
@@ -181,6 +199,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
             if(this.body.velocity.y > topFallingSpeed){
                 this.body.setVelocityY(topFallingSpeed);
             }
+        }
+    }
+
+    collisionWithMovingBlock(player,block){
+       
+        if(player.body.onFloor() && player.onBlock === null){
+            player.onBlock = block;
+            player.previousX = block.x;
+            player.previousY = block.y;
         }
     }
 
