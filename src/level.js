@@ -33,9 +33,18 @@ export default class Level extends Phaser.Scene {
 
         this.spawnPoint = { x: 100, y: 100 };
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-                if (name === "playerSpawn") {
+                if (name === "spawnpoint") { // spawnPoint
                     this.spawnPoint = { x, y };
-                } else {
+                }else if(name === "pointA"){
+                    this.pointA = {x,y};
+
+                } else if(name === "pointB"){
+                    this.pointB = {x,y};
+                }
+                else if(name === "movingObject"){
+
+                }
+                else {
                     //creates a "invisible sprite" so it can collide
                     let killZone = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
                     killZone.setSize(width, height);
@@ -247,19 +256,50 @@ export default class Level extends Phaser.Scene {
         this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet]);  
         
         
+        
         this.platformLayer.setCollisionByExclusion([-1]);
 
-        //backgrounf image
+        //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
 
+
+        // Crear los objetos en el mapa
+        this.movingBlock = this.map.createFromObjects("objects", { name: 'movingObject' });
+
+        // Habilitar la física en cada objeto creado
+        this.movingBlock.forEach(block => {
+            this.physics.world.enable(block);
+            block.body.setAllowGravity(false);  
+            block.body.setImmovable(true); // Hacer que el bloque no se mueva al colisionar
+        });
+
+        // Añadir colisión entre el jugador y los bloques
+        this.physics.add.collider(this.player, this.movingBlock);
+
+        // Aplicar la animación a cada bloque individualmente
+        this.movingBlock.forEach(block => {
+            this.tweens.add({
+                targets: block,
+                x: this.pointB.x,
+                y: this.pointB.y,
+                duration: 2000,
+                ease: "Linear",
+                yoyo: true,
+                repeat: -1
+            });
+        });
+
+        
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
+
     
         this.physics.add.overlap(this.player, this.killingObjects, () => {
             this.respawn();
         });
+      
 
         //camera config
         this.physics.add.collider(this.player, this.platformLayer);
