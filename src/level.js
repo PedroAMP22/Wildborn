@@ -2,7 +2,7 @@ import Player from './player.js';
 import Phaser from 'phaser';
 import { DruidState } from './StateMachine/druidState.js';
 import { SnailState } from './StateMachine/snailState.js';
-
+import { MovingBlock } from './movingBlock.js';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -265,33 +265,11 @@ export default class Level extends Phaser.Scene {
         this.backgroundImage.setScrollFactor(0);
 
 
-        // Crear los objetos en el mapa
-        this.movingBlock = this.map.createFromObjects("objects", { name: 'movingObject' });
+        this.movingBlocks = new MovingBlock(this, "movingObject", 50, 5000);
 
-        // Habilitar la física en cada objeto creado
-        this.movingBlock.forEach(block => {
-            this.physics.world.enable(block);
-            block.body.setAllowGravity(false);  
-            block.body.setImmovable(true); 
-        });
+        this.physics.add.collider(this.player, this.movingBlocks.getGroup());
 
-        // Añadir colisión entre el jugador y los bloques
-        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
-        console.log(this.pointA.y + " " + this.pointB.y)
-        // Aplicar la animación a cada bloque individualmente
-        this.movingBlock.forEach(block => {
-            this.tweens.add({
-                targets: block,
-                x: this.pointB.x,
-                y: this.pointB.y,
-                duration: 2000,
-                ease: "Linear",
-                yoyo: true,
-                repeat: -1
-            });
-        });
-
-        
+             
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
 
