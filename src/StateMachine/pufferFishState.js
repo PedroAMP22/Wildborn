@@ -14,7 +14,7 @@ export class PufferFishState extends State {
         this.moveSpeed = 150; 
         this.isFloating = false;
 
-        this.player.body.setCircle(4);
+        this.player.body.setSize(8,8);
         this.player.body.setOffset(13, 13);
         this.player.body.setAllowGravity(true);
         this.player.setAngle(0);
@@ -26,7 +26,7 @@ export class PufferFishState extends State {
 
     transformToSmall() {
         this.player.anims.play("fishSmall", true);
-        this.player.body.setCircle(4);
+        this.player.body.setSize(8,8);
         this.player.body.setAllowGravity(false); 
         this.player.body.setVelocityY(this.fallSpeed);
         this.isFloating = false;
@@ -34,7 +34,7 @@ export class PufferFishState extends State {
 
     transformToBig() {
         this.player.anims.play("fishBig", true);
-        this.player.body.setCircle(6);
+        this.player.body.setSize(12,12);
         this.player.body.setAllowGravity(false);
         this.player.body.setVelocityY(this.floatSpeed);
         this.isFloating = true;

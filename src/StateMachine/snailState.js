@@ -9,7 +9,7 @@ export class SnailState extends State{
         super();
         this.scene = scene;
         this.player = scene.player;
-        this.player.body.setCircle(4);
+        this.player.body.setSize(8,8);
         this.player.body.setOffset(11.5,14.5);
         this.left = false;
         this.right = false;
@@ -20,6 +20,7 @@ export class SnailState extends State{
         this.isStuck = false;
         this.player.body.setAllowGravity(true);
         this.canStuck = false;
+        this.blockStucked = null;
 
     }
 
@@ -71,7 +72,7 @@ export class SnailState extends State{
 
     update(t, dt) {
         let canPlayIdle = true;
-
+        
         if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
         this.left = this.left || this.player.body.blocked.left;
         this.right = this.right || this.player.body.blocked.right;
@@ -84,9 +85,16 @@ export class SnailState extends State{
         }
         
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
+        if(this.blockStucked != null){
+            this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
+            this.player.anims.play("snailIdle", true);
+        }
         this.canStuck = true;
     }
     checkState(stateString){
         return stateString === SnailState.NAME;
+    }
+    onCollision(block){
+        this.blockStucked = block;
     }
 }

@@ -11,8 +11,8 @@ export class DruidState extends State {
         
         this.player = scene.player;
 
-        this.player.body.setCircle(5.5);
-        this.player.body.setOffset(10.5,14.5);
+        this.player.body.setSize(7,13);
+        this.player.body.setOffset(15,13);
         
         this.jumpSpeed = -400;
         this.topSpeed = 150;

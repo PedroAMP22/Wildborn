@@ -40,7 +40,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
         this.body.setCollideWorldBounds();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
-        this.onBlock = true;
+        this.onBlock = false;
         
 
         this.keys = this.scene.input.keyboard.addKeys({
@@ -85,15 +85,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
 
         
-        if(this.onBlock){
-            this.body.setVelocityY(0);
-        }
         this.stateMachine.update(t,dt);
-        if(this.onBlock){
-            this.body.setVelocityY(0);
-        }
-        this.onBlock = false;
-        console.log(this.body.velocity);
+        
     }
 
     playIdleIfPossible(canPlayIdle, idleName){
@@ -190,12 +183,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     collisionWithMovingBlock(player,block){
-       
-        if(player.body.onFloor()){
-            player.body.setVelocityY(0);
-            player.x += block.body.velocity.x * (1 / 60); 
-            this.onBlock = true;
-        }
+        player.stateMachine.state.onCollision(block);
     }
 
     moverseturuleca(initialSpeed, topSpeed, walkAcceleration, t, dt) {

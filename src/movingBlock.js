@@ -18,8 +18,8 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(true);
         this.body.setAllowGravity(false);
         this.body.setVelocityX(this.speed);
-        this.body.setSize(40,5);
-        this.body.setOffset(8,19);
+        this.body.setSize(40,30);
+        this.body.setOffset(0,0);
         this.pointA = pointA;
         this.pointB = pointB;
 

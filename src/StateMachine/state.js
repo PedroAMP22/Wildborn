@@ -5,4 +5,6 @@ export class State {
     update(t,dt){
     }
     checkState(stateString){}
+    onCollision(block){}
+    
 }
