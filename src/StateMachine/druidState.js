@@ -85,6 +85,8 @@ export class DruidState extends State {
         this.wasGrounded = this.player.body.onFloor();
         
         this.lastSpeed = this.player.body.velocity.y;
+
+        
        
     }   
     checkState(stateString){

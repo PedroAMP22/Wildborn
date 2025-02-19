@@ -1,36 +1,42 @@
+import { Scene } from 'phaser';
 import Level from './level';
 
-export class MovingBlock {
+export class MovingBlock extends Phaser.GameObjects.Sprite {
     /**
-     * @param {Level} level
+     * @param {Phaser.Scene} scene
      * @param {String} objName - Name of the object in the level.json
      * @param {Number} speed - Speed (default: 100)
-     * @param {Number} delay - Time before chaging direction (default: 2000ms)
      */
-    constructor(level, objName, speed = 100, delay = 2000) {
-        this.level = level;
-        this.objName = objName;
+    constructor(scene, speed,pointA,pointB) {
+        super(scene,pointA.x,pointA.y)
         this.speed = speed;
-        this.delay = delay;
         
-        this.movingBlocks = this.level.map.createFromObjects("objects", { name: objName });
 
-        this.movingBlocks.forEach(block => {
-            this.level.physics.world.enable(block);
-            block.body.setImmovable(true);
-            block.body.setAllowGravity(false);
-            block.body.setVelocityX(this.speed);
+        this.scene.physics.add.existing(this);
+        this.scene.physics.world.enable(this);
+        this.scene.add.existing(this);
+        this.body.setImmovable(true);
+        this.body.setAllowGravity(false);
+        this.body.setVelocityX(this.speed);
+        this.body.setSize(40,5);
+        this.body.setOffset(8,19);
+        this.pointA = pointA;
+        this.pointB = pointB;
 
-            console.log(block)
-            this.level.time.addEvent({
-                delay: this.delay,
-                callback: () => {
-                    block.body.setVelocityX(block.body.velocity.x * -1);
-                },
-                loop: true
-            });
-        });
+    }
 
+    preUpdate(t, d) {
+        super.preUpdate(t, d)
+        if(this.x > this.pointB.x ||this.x < this.pointA.x){
+            this.body.setVelocityX(-this.body.velocity.x)
+        }
+        
+
+    }
+
+    setPoint(pointA, pointB){
+        this.pointA = pointA;
+        this.pointB = pointB;
     }
 
     /**

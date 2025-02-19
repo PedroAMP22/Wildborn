@@ -24,6 +24,7 @@ export default class Level extends Phaser.Scene {
      */
     create() {
 
+
         this.map = this.make.tilemap({key: "level1"});
 
         //spawnpoint and killing zones
@@ -54,6 +55,7 @@ export default class Level extends Phaser.Scene {
                 }
         });
 
+        
         //Player creator
         this.bases = this.add.group();
         this.player = new Player(this, this.spawnPoint.x, this.spawnPoint.y);
@@ -265,10 +267,8 @@ export default class Level extends Phaser.Scene {
         this.backgroundImage.setScrollFactor(0);
 
 
-        this.movingBlocks = new MovingBlock(this, "movingObject", 50, 5000);
-
-        this.physics.add.collider(this.player, this.movingBlocks.getGroup());
-
+        this.movingBlock = new MovingBlock(this,100,this.pointA,this.pointB)        
+        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
              
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
