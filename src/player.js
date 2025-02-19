@@ -211,4 +211,62 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
     }
 
+    moverseturuleca(initialSpeed, topSpeed, walkAcceleration, t, dt) {
+        // GO RIGHT (ahora con la tecla izquierda)
+        if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown) {
+            this.body.setVelocityX(initialSpeed);
+            this.setFlipX(false);
+        } 
+        else if (this.keys.left.isDown && this.body.velocity.x < topSpeed && !this.keys.right.isDown) {
+            this.setFlipX(false);
+            if (this.body.velocity.x < initialSpeed) {
+                this.body.setVelocityX(initialSpeed);
+            }
+            this.body.setVelocityX(this.body.velocity.x + walkAcceleration * dt);
+        }
+        if (this.body.velocity.x > topSpeed && this.momentum === 0) {
+            this.body.setVelocityX(topSpeed);
+        }
+    
+        // GO LEFT (ahora con la tecla derecha)
+        else if (Phaser.Input.Keyboard.JustDown(this.keys.right) && !this.keys.left.isDown) {
+            this.body.setVelocityX(-initialSpeed);
+            this.setFlipX(true);
+        } 
+        else if (this.keys.right.isDown && this.body.velocity.x > -topSpeed && !this.keys.left.isDown) {
+            this.setFlipX(true);
+            if (this.body.velocity.x > -initialSpeed) {
+                this.body.setVelocityX(-initialSpeed);
+            }
+            this.body.setVelocityX(this.body.velocity.x - walkAcceleration * dt);
+        }
+        if (this.body.velocity.x < -topSpeed && this.momentum === 0) {
+            this.body.setVelocityX(-topSpeed);
+        }
+    
+        // STOP IN FLOOR
+        if (!this.keys.left.isDown && !this.keys.right.isDown && this.body.onFloor()) {
+            this.body.setVelocityX(0);
+        }
+        if (!this.keys.left.isDown && !this.keys.right.isDown && !this.body.onFloor() && this.body.velocity.x !== 0 && this.momentum === 0) {
+            this.body.setVelocityX(this.body.velocity.x - dt);
+            if (this.body.velocity.x < 0)
+                this.body.setVelocityX(0);
+        }
+    
+        // CONSERVE MOMENTUM
+        if (this.momentum < 0 && !this.body.onFloor()) {
+            this.momentum += dt;
+            this.body.setVelocityX(this.momentum);
+            if (this.body.velocity.x > 0)
+                this.body.setVelocityX(0);
+        }
+        if (this.momentum > 0 && !this.body.onFloor()) {
+            this.momentum -= dt;
+            this.body.setVelocityX(this.momentum);
+            if (this.body.velocity.x < 0)
+                this.body.setVelocityX(0);
+        }
+    }
+
 }
