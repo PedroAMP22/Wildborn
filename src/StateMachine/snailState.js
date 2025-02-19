@@ -86,7 +86,10 @@ export class SnailState extends State{
         
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
         if(this.blockStucked != null){
-            this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
+            if(this.blockStucked.body.velocity.x !== 0)
+                this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
+            if(this.blockStucked.body.velocity.y !== 0)
+                this.player.body.setVelocityY(this.blockStucked.body.velocity.y);
             this.player.anims.play("snailIdle", true);
         }
         this.canStuck = true;

@@ -39,7 +39,10 @@ import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
 
-import level1 from '../assets/tilemaps/level1_1.json'
+import level1_1 from '../assets/tilemaps/levels/level1_1.json'
+import level1_2 from '../assets/tilemaps/levels/level1_2.json'
+
+
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
@@ -199,7 +202,8 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
     //Tile maps
-    this.load.tilemapTiledJSON('level1',level1);
+    this.load.tilemapTiledJSON('level1_1',level1_1);
+    this.load.tilemapTiledJSON('level1_2',level1_2);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("ForestBG2", backgroundForest);
@@ -211,6 +215,6 @@ export default class Boot extends Phaser.Scene {
    * nivel del juego
    */
   create() {
-    this.scene.start('level');
+    this.scene.start('screen1_2');
   }
 }

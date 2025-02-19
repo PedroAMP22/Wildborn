@@ -1,8 +1,8 @@
-import Player from './player.js';
+import Player from '../player.js';
 import Phaser from 'phaser';
-import { DruidState } from './StateMachine/druidState.js';
-import { SnailState } from './StateMachine/snailState.js';
-import { MovingBlock } from './movingBlock.js';
+import { DruidState } from '../StateMachine/druidState.js';
+import { SnailState } from '../StateMachine/snailState.js';
+import { MovingBlock } from '../movingBlock.js';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -11,12 +11,12 @@ import { MovingBlock } from './movingBlock.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Level extends Phaser.Scene {
+export default class Screen1_2 extends Phaser.Scene {
     /**
      * Constructor de la escena
      */
     constructor() {
-        super({ key: 'level' });
+        super({ key: 'screen1_2' });
     }
 
     /**
@@ -25,7 +25,7 @@ export default class Level extends Phaser.Scene {
     create() {
 
 
-        this.map = this.make.tilemap({key: "level1_1"});
+        this.map = this.make.tilemap({key: "level1_2"});
 
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
@@ -36,14 +36,17 @@ export default class Level extends Phaser.Scene {
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpoint") { // spawnPoint
                     this.spawnPoint = { x, y };
-                }else if(name === "pointA"){
-                    this.pointA = {x,y};
+                    console.log(this.spawnPoint);
+                }else if(name === "pointA1"){
+                    this.pointA1 = {x,y};
 
-                } else if(name === "pointB"){
-                    this.pointB = {x,y};
-                }
-                else if(name === "movingObject"){
+                } else if(name === "pointB1"){
+                    this.pointB1 = {x,y};
+                }else if(name === "pointA2"){
+                    this.pointA2 = {x,y};
 
+                } else if(name === "pointB2"){
+                    this.pointB2 = {x,y};
                 }
                 else {
                     //creates a "invisible sprite" so it can collide
@@ -57,7 +60,6 @@ export default class Level extends Phaser.Scene {
 
         
         //Player creator
-        this.bases = this.add.group();
         this.player = new Player(this, this.spawnPoint.x, this.spawnPoint.y);
         this.player.stateMachine.transform(DruidState.NAME);
         this.player.setDepth(3);
@@ -267,8 +269,11 @@ export default class Level extends Phaser.Scene {
         this.backgroundImage.setScrollFactor(0);
 
 
-        this.movingBlock = new MovingBlock(this,100,this.pointA,this.pointB)        
+        this.movingBlock = new MovingBlock(this,100,this.pointA1,this.pointB1)  
+        this.movingBlock2 = new MovingBlock(this,100,this.pointA2,this.pointB2)        
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
+        this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
+
              
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
@@ -281,9 +286,9 @@ export default class Level extends Phaser.Scene {
 
         //camera config
         this.physics.add.collider(this.player, this.platformLayer);
-        this.physics.world.setBounds(0,0, 64 * 16, 16 * 16);
+        this.physics.world.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
-        this.cameras.main.setBounds(0,0,32 * 16,16 * 16)
+        this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
     }
 
     respawn(){
