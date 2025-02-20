@@ -215,6 +215,6 @@ export default class Boot extends Phaser.Scene {
    * nivel del juego
    */
   create() {
-    this.scene.start('screen1_2');
+    this.scene.start('screen1_1');
   }
 }
