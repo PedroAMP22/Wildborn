@@ -14,6 +14,11 @@ export class SnailState extends State{
         this.left = null;
         this.right = null;
         this.up = null;
+        this.down = null;
+        this.leftBlock = false;
+        this.upBlock = false;
+        this.downBlock = false;
+        this.rightBlock = false;
         this.topFallingSpeed = 250;
         this.player.setFlipY(false);
         this.isStuck = false;
@@ -83,22 +88,26 @@ export class SnailState extends State{
         else if(!this.isStuck){
             this.player.fall(this.topFallingSpeed);
         }
-        this.left = this.blockStucked != null;
-        this.right = this.blockStucked != null;
-        this.top = this.blockStucked != null;
-        this.down = this.blockStucked != null;
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
-        //CHECK STUCK MOVING BLOCK
-        if((this.left || this.right || this.up || this.down) && !this.isStuck){
-            this.stickToSurface();
-        }
+        this.leftBlock = this.leftBlock || this.player.body.blocked.left;
+        this.upBlock = this.leftBlock || this.player.body.blocked.up;
+        this.downBlock = this.leftBlock || this.player.body.blocked.down;
+        this.rightBlock = this.leftBlock || this.player.body.blocked.right;
         if(this.blockStucked != null){
-            if(this.blockStucked.body.velocity.x !== 0)
-                this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
-            if(this.blockStucked.body.velocity.y !== 0)
-                this.player.body.setVelocityY(this.blockStucked.body.velocity.y);
-            this.player.anims.play("snailIdle", true);
+            
+            //CHECK STUCK MOVING BLOCK
+            if((this.leftBlock || this.upBlock || this.downBlock || this.rightBlock) && !this.isStuck){
+                this.stickToSurface();
+            }
+            if(this.blockStucked != null){
+                if(this.blockStucked.body.velocity.x !== 0)
+                    this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
+                if(this.blockStucked.body.velocity.y !== 0)
+                    this.player.body.setVelocityY(this.blockStucked.body.velocity.y);
+                this.player.anims.play("snailIdle", true);
+            }
         }
+        
         
     }
     checkState(stateString){
