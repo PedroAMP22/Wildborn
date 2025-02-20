@@ -50,7 +50,7 @@ export class SnailState extends State{
             this.player.setAngle(-90);
             this.player.body.setVelocityX(0);
             this.player.body.setVelocityY(0);
-        } else if (this.top){
+        } else if (this.up){
             //techo
             this.player.setPosition(this.player.x, this.player.y + 6);
             this.player.body.setOffset(11.5,8);
@@ -97,6 +97,9 @@ export class SnailState extends State{
             
             //CHECK STUCK MOVING BLOCK
             if((this.leftBlock || this.upBlock || this.downBlock || this.rightBlock) && !this.isStuck){
+                this.left = this.leftBlock ? true : null;
+                this.right = this.rightBlock ? true : null;
+                this.up = this.upBlock ? true : null;
                 this.stickToSurface();
             }
             if(this.blockStucked != null){
