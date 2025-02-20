@@ -59,6 +59,192 @@ export default class Player extends Phaser.GameObjects.Sprite {
         
     }
 
+    loadAnimations(){
+        //DRUID
+        this.scene.anims.create({
+            key:"druidRun",
+            frames: this.anims.generateFrameNumbers('druidRun', { start: 0, end: 7 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"druidIdle",
+            frames: this.anims.generateFrameNumbers('druidIdle', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"druidFall",
+            frames: this.anims.generateFrameNumbers('druidFall', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"druidJump",
+            frames: this.anims.generateFrameNumbers('druidJump', { start: 0, end: 4 }),
+            frameRate: 10
+        });
+        this.scene.anims.create({
+            key:"druidLand",
+            frames: this.anims.generateFrameNumbers('druidLand', { start: 0, end: 3 }),
+            frameRate: 10
+        });
+        this.scene.anims.create({
+            key:"druidDeath",
+            frames: this.anims.generateFrameNumbers('druidDeath', { start: 0, end: 7 }),
+            frameRate: 10
+        });
+        this.scene.anims.create({
+            key:"druidTrans",
+            frames: this.anims.generateFrameNumbers('druidTrans', { start: 0, end: 4 }),
+            frameRate: 20
+        });
+
+        //SNAIL
+        this.scene.anims.create({
+            key: "snailIdle",
+            frames: this.anims.generateFrameNumbers('snailIdle', { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: "snailTrans",
+            frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 6 }),
+            frameRate: 20,
+            repeat: 0
+        });
+
+
+        //SQUIRREL
+        this.scene.anims.create({
+            key:"squirrelRun",
+            frames: this.anims.generateFrameNumbers('squirrelRun', { start: 0, end: 4 }),
+            frameRate: 10,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"squirrelIdle",
+            frames: this.anims.generateFrameNumbers('squirrelIdle', { start: 0, end: 3 }),
+            frameRate: 4,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"squirrelAir",
+            frames: this.anims.generateFrameNumbers('squirrelAir', { start: 0, end: 0 }),
+            frameRate: 1,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"squirrelJump",
+            frames: this.anims.generateFrameNumbers('squirrelJump', { start: 0, end: 1 }),
+            frameRate: 20,
+            repeat:0
+        });
+        this.scene.anims.create({
+            key:"squirrelFly",
+            frames: this.anims.generateFrameNumbers('squirrelFly', { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat:-1
+        });
+        this.scene.anims.create({
+            key:"squirrelTrans",
+            frames: this.anims.generateFrameNumbers('squirrelTrans', { start: 0, end: 6 }),
+            frameRate: 20
+
+        });
+        //MOLE
+        this.scene.anims.create({
+            key: "moleIdle",
+            frames: this.anims.generateFrameNumbers('moleIdle', { start: 0, end: 3 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: "moleTrans",
+            frames: this.anims.generateFrameNumbers('moleTrans', { start: 0, end: 5 }),
+            frameRate: 20,
+        });
+        this.scene.anims.create({
+            key: "moleRun",
+            frames: this.anims.generateFrameNumbers('moleRun', { start: 0, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.scene.anims.create({
+            key: "moleFall",
+            frames: this.anims.generateFrameNumbers('moleFall', { start: 0, end: 3 }),
+            frameRate: 15,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: "moleFly",
+            frames: this.anims.generateFrameNumbers('moleFly', { start: 0, end: 3 }),
+            frameRate: 20,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: "moleHide",
+            frames: this.anims.generateFrameNumbers('moleHide', { start: 0, end: 7 }),
+            frameRate: 10,
+        });
+        this.scene.anims.create({
+            key: "moleHide2",
+            frames: this.anims.generateFrameNumbers('moleHide', { start: 3, end: 7 }),
+            frameRate: 10,
+        });
+        this.scene.anims.create({
+            key: "moleHiddenIdle",
+            frames: this.anims.generateFrameNumbers('moleHiddenIdle', { start: 0, end: 11 }),
+            frameRate: 7,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: "moleJump",
+            frames: this.anims.generateFrameNumbers('moleJump', { start: 0, end: 9 }),
+            frameRate: 20,
+        });
+
+        //PUFFERFISH
+        this.scene.anims.create({
+            key: "fishBig",
+            frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
+            frameRate: 20,
+        });
+        this.scene.anims.create({
+            key: "fishSmall",
+            frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
+            frameRate: 20,
+        });
+        this.scene.anims.create({
+            key: "fishTrans",
+            frames: this.anims.generateFrameNumbers('fishTrans', { start: 0, end: 5 }),
+            frameRate: 20,
+        });
+
+        //CHICKEN
+        this.scene.anims.create({
+            key: "chickenIdle",
+            frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
+            frameRate: 20,
+        });
+        this.scene.anims.create({
+            key: "chickenFlap",
+            frames: this.anims.generateFrameNumbers('chickenFlap', { start: 0, end: 5 }),
+            frameRate: 10,
+        });
+        this.scene.anims.create({
+            key: "chickenRun",
+            frames: this.anims.generateFrameNumbers('chickenRun', { start: 0, end: 3 }),
+            frameRate: 10,
+        });
+        this.scene.anims.create({
+            key: "chickenTrans",
+            frames: this.anims.generateFrameNumbers('chickenTrans', { start: 0, end: 5 }),
+            frameRate: 10,
+        });
+    }
+
     /**
      * Métodos preUpdate de Phaser. En este caso solo se encarga del movimiento del jugador.
      * @override

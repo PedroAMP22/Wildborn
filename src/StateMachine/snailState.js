@@ -11,17 +11,15 @@ export class SnailState extends State{
         this.player = scene.player;
         this.player.body.setSize(8,8);
         this.player.body.setOffset(11.5,14.5);
-        this.left = false;
-        this.right = false;
-        this.top = false;
-        this.down = false;
+        this.left = null;
+        this.right = null;
+        this.up = null;
         this.topFallingSpeed = 250;
         this.player.setFlipY(false);
         this.isStuck = false;
         this.player.body.setAllowGravity(true);
-        this.canStuck = false;
         this.blockStucked = null;
-
+        
     }
 
     stickToSurface() {
@@ -74,17 +72,26 @@ export class SnailState extends State{
         let canPlayIdle = true;
         
         if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
-        this.left = this.left || this.player.body.blocked.left;
-        this.right = this.right || this.player.body.blocked.right;
-        this.top = this.top || this.player.body.blocked.up;
-
-        if((this.left || this.right || this.top || this.player.body.onFloor()) && !this.isStuck && this.canStuck)
+        //CHECK STUCK PLATFORM LAYER
+        this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y);
+        this.right = this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y);
+        this.up = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y - 6);
+        this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 6);
+        if((this.left || this.right || this.up || this.down) && !this.isStuck){
             this.stickToSurface();
-        else{
+        }
+        else if(!this.isStuck){
             this.player.fall(this.topFallingSpeed);
         }
-        
+        this.left = this.blockStucked != null;
+        this.right = this.blockStucked != null;
+        this.top = this.blockStucked != null;
+        this.down = this.blockStucked != null;
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
+        //CHECK STUCK MOVING BLOCK
+        if((this.left || this.right || this.up || this.down) && !this.isStuck){
+            this.stickToSurface();
+        }
         if(this.blockStucked != null){
             if(this.blockStucked.body.velocity.x !== 0)
                 this.player.body.setVelocityX(this.blockStucked.body.velocity.x);
@@ -92,7 +99,7 @@ export class SnailState extends State{
                 this.player.body.setVelocityY(this.blockStucked.body.velocity.y);
             this.player.anims.play("snailIdle", true);
         }
-        this.canStuck = true;
+        
     }
     checkState(stateString){
         return stateString === SnailState.NAME;

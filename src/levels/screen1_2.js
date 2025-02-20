@@ -36,7 +36,6 @@ export default class Screen1_2 extends Phaser.Scene {
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpoint") { // spawnPoint
                     this.spawnPoint = { x, y };
-                    console.log(this.spawnPoint);
                 }else if(name === "pointA1"){
                     this.pointA1 = {x,y};
 
@@ -114,7 +113,7 @@ export default class Screen1_2 extends Phaser.Scene {
         });
         this.anims.create({
             key: "snailTrans",
-            frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 5 }),
+            frames: this.anims.generateFrameNumbers('snailTrans', { start: 0, end: 6 }),
             frameRate: 20,
             repeat: 0
         });

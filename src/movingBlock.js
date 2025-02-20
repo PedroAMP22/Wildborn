@@ -36,13 +36,11 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         if(this.pointA.x === this.pointB.x){
             if(this.y < this.pointB.y ||this.y > this.pointA.y){
                 this.body.setVelocityY(-this.body.velocity.y);
-                console.log("aaaaadioooooooooo")
             }
         }
         else{
             if(this.x > this.pointB.x ||this.x < this.pointA.x){
                 this.body.setVelocityX(-this.body.velocity.x)
-                console.log("aaaaadioooooooooo")
             }
         }
         
