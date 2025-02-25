@@ -20,7 +20,7 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, Screen1_3, End],
+    scene: [Boot, Screen1_2, End],
     physics: {
         default: 'arcade',
         arcade: {
