@@ -21,11 +21,12 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.body.setOffset(0,0);
         this.pointA = pointA;
         this.pointB = pointB;
+        this.direction = 1;
         if(this.pointA.x === this.pointB.x){
-            this.body.setVelocityY(this.speed);
+            this.body.setVelocityY(this.speed * this.direction);
         }
         else{
-            this.body.setVelocityX(this.speed);
+            this.body.setVelocityX(this.speed * this.direction);
         }
 
     }
@@ -34,15 +35,16 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, d)
         if(this.pointA.x === this.pointB.x){
             if(this.y < this.pointB.y ||this.y > this.pointA.y){
-                this.body.setVelocityY(-this.body.velocity.y);
+                this.direction = -this.direction;
             }
+            this.body.setVelocityY(this.speed * this.direction);
         }
         else{
             if(this.x > this.pointB.x ||this.x < this.pointA.x){
-                this.body.setVelocityX(-this.body.velocity.x)
+                this.direction = -this.direction;
             }
+            this.body.setVelocityX(this.speed * this.direction)
         }
-        
 
     }
 
