@@ -50,7 +50,7 @@ export class SnailState extends State{
 
         if(this.blockStuck != null ){
 
-            const distanciaMax = 5;
+            const distanciaMax = 2;
 
             const sigueCerca = (
             (this.rightBlock && Math.abs(this.player.x - this.blockStuck.x) - this.player.width <= distanciaMax) ||
