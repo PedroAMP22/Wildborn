@@ -74,7 +74,6 @@ export default class Screen1_1 extends Phaser.Scene {
         this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet]);  
         
         
-        
         this.platformLayer.setCollisionByExclusion([-1]);
 
         //background image
@@ -83,7 +82,7 @@ export default class Screen1_1 extends Phaser.Scene {
         this.backgroundImage.setScrollFactor(0);
 
 
-        this.movingBlock = new MovingBlock(this,100,this.pointA1,this.pointA2)  
+        this.movingBlock = new MovingBlock(this,50,this.pointA1,this.pointA2)  
         this.movingBlock2 = new MovingBlock(this,58,this.pointB1,this.pointB2)     
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
