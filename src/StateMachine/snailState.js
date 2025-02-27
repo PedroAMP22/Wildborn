@@ -31,39 +31,27 @@ export class SnailState extends State{
 
         this.isStuck = true;
         this.player.body.setOffset(11.5,14.5);
-
+        this.player.body.setVelocityX(0);
+        this.player.body.setVelocityY(0);
+        this.player.body.setAllowGravity(false);
         if (this.left) {
             //izquierda
             this.player.setPosition(this.player.x + 1, this.player.y);
             this.player.body.setOffset(9,12);
             this.player.setFlipX(false);
-            this.player.body.setAllowGravity(false);
             this.player.setAngle(90);
-            this.player.body.setVelocityX(0);
-            this.player.body.setVelocityY(0);
         } else if (this.right) {
             //derecha
             this.player.setPosition(this.player.x - 2, this.player.y);
             this.player.body.setOffset(15,12);
             this.player.setFlipX(true);
-            this.player.body.setAllowGravity(false);
             this.player.setAngle(-90);
-            this.player.body.setVelocityX(0);
-            this.player.body.setVelocityY(0);
         } else if (this.up){
             //techo
             this.player.setPosition(this.player.x, this.player.y + 6);
             this.player.body.setOffset(11.5,8);
             this.player.body.setGravityY(0);
-            this.player.body.setAllowGravity(false);
             this.player.setAngle(180);
-            this.player.body.setVelocityX(0);
-            this.player.body.setVelocityY(0);
-        }
-        else{
-            this.player.body.setVelocityX(0);
-            this.player.body.setVelocityY(0);
-            this.player.body.setAllowGravity(false);
         }
        
         
@@ -81,9 +69,10 @@ export class SnailState extends State{
         this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y);
         this.right = this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y);
         this.up = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y - 6);
-        this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 6);
+        this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 8);
         if((this.left || this.right || this.up || this.down) && !this.isStuck){
             this.stickToSurface();
+            console.log("aaaaaa")
         }
         else if(!this.isStuck){
             this.player.fall(this.topFallingSpeed);

@@ -11,7 +11,7 @@ import { MovingBlock } from '../movingBlock.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Screen1_2 extends Phaser.Scene {
+export default class Screen1_1 extends Phaser.Scene {
     /**
      * Constructor de la escena
      */
@@ -84,7 +84,7 @@ export default class Screen1_2 extends Phaser.Scene {
 
 
         this.movingBlock = new MovingBlock(this,100,this.pointA1,this.pointA2)  
-        this.movingBlock2 = new MovingBlock(this,100,this.pointB1,this.pointB2)     
+        this.movingBlock2 = new MovingBlock(this,58,this.pointB1,this.pointB2)     
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
 

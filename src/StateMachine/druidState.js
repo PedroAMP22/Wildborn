@@ -20,6 +20,8 @@ export class DruidState extends State {
         this.walkAcceleration = 0.5;
         this.topFallingSpeed = 200;
         this.coyoteTime = 0;
+
+        this.onBlock = false;
         
         this.lastSpeed = 0;
         this.wasGrounded = this.player.body.onFloor();
@@ -54,8 +56,10 @@ export class DruidState extends State {
         }
     
         this.player.playIdleIfPossible(canPlayIdle, "druidIdle");
+        if(this.onBlock)
+            this.player.anims.play("druidIdle",true)
         
-        if(this.player.body.velocity.y !== 0){
+        if(this.player.body.velocity.y > 0 && !this.onBlock){
             this.player.anims.play("druidFall", true);
         }
 
@@ -86,10 +90,16 @@ export class DruidState extends State {
         
         this.lastSpeed = this.player.body.velocity.y;
 
-        
+        this.onBlock = false;
        
     }   
     checkState(stateString){
         return stateString === DruidState.NAME;
+    }
+
+    onCollision(block){
+        if(block.body.velocity.y !== 0)
+            this.player.body.setVelocityY(block.body.velocity.y);
+        this.onBlock = true;
     }
 }
