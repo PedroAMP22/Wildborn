@@ -228,7 +228,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "chickenIdle",
             frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
-            frameRate: 20,
+            frameRate: 10,
         });
         this.scene.anims.create({
             key: "chickenFlap",

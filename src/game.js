@@ -1,6 +1,5 @@
 import Boot from './boot.js';
 import End from './end.js';
-import Level from './level.js';
 import Phaser from 'phaser';
 import Screen1_1 from './levels/screen1_1.js';
 import Screen1_2 from './levels/screen1_2.js';

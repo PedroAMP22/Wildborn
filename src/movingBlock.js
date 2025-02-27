@@ -1,5 +1,4 @@
 import { Scene } from 'phaser';
-import Level from './level';
 
 export class MovingBlock extends Phaser.GameObjects.Sprite {
     /**
