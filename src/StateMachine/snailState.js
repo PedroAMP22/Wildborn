@@ -59,7 +59,7 @@ export class SnailState extends State{
                 (this.player.x - distanciaMax > this.blockStuck.x + this.blockStuck.width)
     
             );
-            console.log(gone);
+            //console.log(gone);
             
             if((this.leftBlock || this.upBlock || this.downBlock || this.rightBlock)){
                 this.left = this.leftBlock ? true : null;
@@ -119,9 +119,6 @@ export class SnailState extends State{
             this.player.setAngle(0);
             this.player.body.setOffset(11.5,14.5);
         }
-
-        
-
     }
 
     transform() {
