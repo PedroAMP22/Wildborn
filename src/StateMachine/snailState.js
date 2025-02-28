@@ -50,15 +50,16 @@ export class SnailState extends State{
 
         if(this.blockStuck != null ){
 
-            const distanciaMax = 2;
+            const distanciaMax = 5;
 
-            const sigueCerca = (
-            (this.rightBlock && Math.abs(this.player.x - this.blockStuck.x) - this.player.width <= distanciaMax) ||
-            (this.leftBlock && Math.abs(this.player.x - this.blockStuck.x) - this.blockStuck.width <= distanciaMax) ||
-            (this.downBlock && Math.abs(this.player.y - this.blockStuck.y) - this.player.height <= distanciaMax) ||
-            (this.upBlock && Math.abs(this.player.y - this.blockStuck.y) - this.blockStuck.height <= distanciaMax)
+            const gone = (
+                (this.player.y + this.player.height + distanciaMax < this.blockStuck.y) ||
+                (this.player.y - distanciaMax > this.blockStuck.y + this.blockStuck.height) ||
+                (this.player.x + this.player.width + distanciaMax < this.blockStuck.x) ||
+                (this.player.x - distanciaMax > this.blockStuck.x + this.blockStuck.width)
+    
             );
-            console.log(sigueCerca);
+            console.log(gone);
             
             if((this.leftBlock || this.upBlock || this.downBlock || this.rightBlock)){
                 this.left = this.leftBlock ? true : null;
@@ -77,7 +78,7 @@ export class SnailState extends State{
                 this.player.anims.play("snailIdle", true);
             }
 
-            if(!sigueCerca)
+            if(gone)
                 this.blockStuck = null;
         }
         else{
