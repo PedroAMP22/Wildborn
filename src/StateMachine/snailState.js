@@ -102,6 +102,23 @@ export class SnailState extends State{
         this.player.body.setVelocityY(0);
         this.player.body.setAllowGravity(false);
 
+        if (this.left) {
+            this.player.setAngle(90);
+            this.player.body.setOffset(9,12);
+
+        } else if (this.right) {
+            this.player.setAngle(-90);
+            this.player.body.setOffset(15,12);
+        } else if (this.up){
+            this.player.setAngle(180);
+            this.player.body.setOffset(11.5,8);
+
+        }
+        else{
+            this.player.setAngle(0);
+            this.player.body.setOffset(11.5,14.5);
+        }
+
         
 
     }
