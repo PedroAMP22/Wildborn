@@ -13,6 +13,9 @@ export default class ScreenBase extends Phaser.Scene {
         this.levelkey = levelkey
     }
 
+    init(data){
+        this.point = data.point;
+    }
 
     create(){
         this.map = this.make.tilemap({key: this.levelkey });
@@ -21,13 +24,25 @@ export default class ScreenBase extends Phaser.Scene {
         this.objectsLayer = this.map.getObjectLayer("objects");
 
         this.killingObjects = this.physics.add.staticGroup();
-
-        this.spawnPoint = { x: 100, y: 100 };
+        this.spawnZoneA = this.physics.add.staticGroup();
+        this.spawnZoneB = this.physics.add.staticGroup();
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-                if (name.startsWith("spawnpoint")) { // spawnPoint
-                    this[name] = { x, y };
-                    console.log("Spawpoint:" + this.spawnPoint);
-                    console.log(x , y)
+                if (name === "spawnpointA") { // spawnPoint
+                    this.spawnPointA = { x, y };
+                    let spawn = this.physics.add.staticSprite(x- 12, y, null);
+                    spawn.setSize(10,10);
+                    spawn.setOrigin(0.5);
+                    spawn.setAlpha(0);
+                    this.spawnZoneA.add(spawn);
+                    
+                }
+                else if(name === "spawnpointB") {
+                    this.spawnPointB = { x, y };
+                    let spawn = this.physics.add.staticSprite(x- 12, y, null);
+                    spawn.setSize(10,10);
+                    spawn.setOrigin(0.5);
+                    spawn.setAlpha(0);
+                    this.spawnZoneB.add(spawn);
                 }
                 else if(name === "killingZone") {
                     //creates a "invisible sprite" so it can collide
@@ -40,7 +55,18 @@ export default class ScreenBase extends Phaser.Scene {
         });
 
         //Player creator
-        this.player = new Player(this, this.spawnPoint.x, this.spawnPoint.y);
+        if(this.point){
+            if(this.point === 'A'){
+                this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+            }
+            else{
+                this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y);
+            }
+        }
+        else{
+            this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+        }
+        
         this.player.stateMachine.transform(DruidState.NAME);
         this.player.setDepth(3);
 
@@ -58,10 +84,15 @@ export default class ScreenBase extends Phaser.Scene {
              
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
-
-    
         this.physics.add.overlap(this.player, this.killingObjects, () => {
-            this.respawn();
+            this.respawn()
+        });
+        this.physics.add.overlap(this.player, this.spawnPointA, () => {
+            console.log("hola")
+            this.createLastScreen();
+        });
+        this.physics.add.overlap(this.player, this.spawnPointB, () => {
+            this.createNextScene();
         });
 
         //camera config
@@ -78,4 +109,12 @@ export default class ScreenBase extends Phaser.Scene {
         this.player.stateMachine.transform(DruidState.NAME);
         this.player.setPosition(this.spawnPoint.x, this.spawnPoint.y);
     }
+
+    createLastScreen(){
+
+    }
+    createNextScene(){
+
+    }
+    
 }

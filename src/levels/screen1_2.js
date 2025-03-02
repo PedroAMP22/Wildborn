@@ -44,8 +44,6 @@ export default class Screen1_2 extends ScreenBase  {
                 }
         });
 
-        
-        
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
@@ -60,6 +58,11 @@ export default class Screen1_2 extends ScreenBase  {
   
     }
 
-    
+    createLastScreen(){
+        this.scene.start('screen1_1',{point:"B"});
+    }
+    createNextScene(){
+        this.scene.start('screen1_3',{point:"A"});
+    }
    
 }
