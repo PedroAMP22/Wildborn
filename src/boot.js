@@ -49,6 +49,8 @@ import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
+import movingBlock from '../assets/tilemaps/backgrounds/RockTile.png'
+
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
  * Esta escena se puede mejorar añadiendo una imagen del juego y una 
@@ -210,6 +212,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image("tileSet2", tileSet2);
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("thorns",thorns);
+    this.load.spritesheet('movingBlock', movingBlock, { frameWidth: 40, frameHeight: 30 });
   }
 
   /**
