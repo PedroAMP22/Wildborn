@@ -56,11 +56,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.stateMachine = new StateMachine(this.scene);
 
         this.momentum = 0;
+
+        this.loadAnimations();
+        
         
     }
 
     loadAnimations(){
-        //DRUID
         this.scene.anims.create({
             key:"druidRun",
             frames: this.anims.generateFrameNumbers('druidRun', { start: 0, end: 7 }),
@@ -226,7 +228,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "chickenIdle",
             frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
-            frameRate: 20,
+            frameRate: 10,
         });
         this.scene.anims.create({
             key: "chickenFlap",
