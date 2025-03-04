@@ -87,11 +87,11 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.killingObjects, () => {
             this.respawn()
         });
-        this.physics.add.overlap(this.player, this.spawnPointA, () => {
+        this.physics.add.overlap(this.player, this.spawnZoneA, () => {
             console.log("hola")
             this.createLastScreen();
         });
-        this.physics.add.overlap(this.player, this.spawnPointB, () => {
+        this.physics.add.overlap(this.player, this.spawnZoneB, () => {
             this.createNextScene();
         });
 
