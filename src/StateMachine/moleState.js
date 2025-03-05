@@ -173,4 +173,7 @@ export class MoleState extends State {
     checkState(stateString){
         return stateString === MoleState.NAME;
     }
+    toString(){
+        return MoleState.NAME;
+    }
 }

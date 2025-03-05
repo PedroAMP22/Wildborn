@@ -110,5 +110,7 @@ export class ChickenState extends State {
     checkState(stateString){
         return stateString === ChickenState.NAME;
     }
-
+    toString(){
+        return ChickenState.NAME;
+    }
 }

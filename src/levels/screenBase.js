@@ -15,6 +15,13 @@ export default class ScreenBase extends Phaser.Scene {
 
     init(data){
         this.point = data.point;
+        if(data.transformation){
+            this.transformation = data.transformation;
+        }
+        else{
+            this.transformation = DruidState.NAME;
+        }
+        
     }
 
     create(){
@@ -26,12 +33,16 @@ export default class ScreenBase extends Phaser.Scene {
         this.killingObjects = this.physics.add.staticGroup();
         this.spawnZoneA = this.physics.add.staticGroup();
         this.spawnZoneB = this.physics.add.staticGroup();
+        this.spawnZoneC = this.physics.add.staticGroup();
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpointA") { // spawnPoint
                     this.spawnPointA = { x, y };  
                 }
                 else if(name === "spawnpointB") {
                     this.spawnPointB = { x, y };  
+                }
+                else if(name === "spawnpointC") {
+                    this.spawnPointC = { x, y };  
                 }
                 else if (name === "spawnZoneA") { //change level zones
                     let spawn = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
@@ -48,6 +59,13 @@ export default class ScreenBase extends Phaser.Scene {
                     spawn.setAlpha(0);
                     this.spawnZoneB.add(spawn);
                 }
+                else if(name === "spawnZoneC") {
+                    let spawn = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
+                    spawn.setSize(width, height);
+                    spawn.setOrigin(0.5);
+                    spawn.setAlpha(0);
+                    this.spawnZoneC.add(spawn);
+                }
                 else if(name === "killingZone") {
                     //creates a "invisible sprite" so it can collide
                     let killZone = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
@@ -63,15 +81,18 @@ export default class ScreenBase extends Phaser.Scene {
             if(this.point === 'A'){
                 this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
             }
-            else{
+            else if(this.point === 'B'){
                 this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y);
+            }
+            else{
+                this.player = new Player(this, this.spawnPointC.x, this.spawnPointC.y);
             }
         }
         else{
             this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
         }
         
-        this.player.stateMachine.transform(DruidState.NAME);
+        this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
 
         //load all tileset and layers
@@ -92,10 +113,13 @@ export default class ScreenBase extends Phaser.Scene {
             this.respawn()
         });
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
-            this.createLastScreen();
+            this.createAScreen();
         });
         this.physics.add.overlap(this.player, this.spawnZoneB, () => {
-            this.createNextScene();
+            this.createBScreen();
+        });
+        this.physics.add.overlap(this.player, this.spawnZoneC, () => {
+            this.createCScreen();
         });
 
         //camera config
@@ -113,8 +137,11 @@ export default class ScreenBase extends Phaser.Scene {
         if(this.point){
             if(this.point === 'A')
                 this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-            else
+            else if(this.point === 'B')
                 this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
+            else{
+                this.player.setPosition( this.spawnPointC.x, this.spawnPointC.y);
+            }
         }
         else{
             this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
@@ -122,11 +149,14 @@ export default class ScreenBase extends Phaser.Scene {
         
     }
 
-    createLastScreen(){
+    createAScreen(){
 
     }
-    createNextScene(){
+    createBScreen(){
 
+    }
+    createCScreen(){
+        
     }
     
 }

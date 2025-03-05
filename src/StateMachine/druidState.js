@@ -102,4 +102,7 @@ export class DruidState extends State {
             this.player.body.setVelocityY(block.body.velocity.y);
         this.onBlock = true;
     }
+    toString(){
+        return DruidState.NAME;
+    }
 }

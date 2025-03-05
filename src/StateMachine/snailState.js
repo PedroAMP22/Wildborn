@@ -132,4 +132,7 @@ export class SnailState extends State{
     onCollision(block){
         this.blockStuck = block;
     }
+    toString(){
+        return SnailState.NAME;
+    }
 }

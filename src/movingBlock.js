@@ -3,10 +3,9 @@ import { Scene } from 'phaser';
 export class MovingBlock extends Phaser.GameObjects.Sprite {
     /**
      * @param {Phaser.Scene} scene
-     * @param {String} objName - Name of the object in the level.json
      * @param {Number} speed - Speed (default: 100)
      */
-    constructor(scene, speed,pointA,pointB) {
+    constructor(scene, speed,pointA,pointB,x,y) {
         super(scene,pointA.x,pointA.y, 'movingBlock')
         this.speed = speed;
         
@@ -18,13 +17,14 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(true);
         this.body.setAllowGravity(false);
        
-        this.body.setSize(40,30);
+        this.body.setSize(x,y);
         this.body.setOffset(0,0);
         this.pointA = pointA;
         this.pointB = pointB;
         this.direction = 1;
         if(this.pointA.x === this.pointB.x){
             if(this.pointA.y < this.pointB.y){
+               
                 this.body.setVelocityY(this.speed * this.direction);
             }
             else{
@@ -35,10 +35,11 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         }
         else{
             if(this.pointA.x < this.pointB.x){
+                this.direction = -1;
                 this.body.setVelocityX(this.speed * this.direction);
             }
             else{
-                this.direction = -1;
+               
                 this.body.setVelocityX(this.speed * this.direction);
             }
         }
@@ -48,15 +49,33 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
     preUpdate(t, d) {
         super.preUpdate(t, d)
         if(this.pointA.x === this.pointB.x){
-            if(this.y < this.pointB.y ||this.y > this.pointA.y){
-                this.direction = -this.direction;
-            }º
+            if(this.pointA.y < this.pointB.y){
+                if(this.y > this.pointB.y ||this.y < this.pointA.y){
+                    this.direction = -this.direction;
+                }
+            }
+            else{
+                
+                if(this.y < this.pointB.y ||this.y > this.pointA.y){
+                    this.direction = -this.direction;
+                }
+            }
+           
             this.body.setVelocityY(this.speed * this.direction * d);
         }
         else{
-            if(this.x > this.pointB.x ||this.x < this.pointA.x){
-                this.direction = -this.direction;
+            if(this.pointA.x < this.pointB.x){
+                if(this.x > this.pointB.x ||this.x < this.pointA.x){
+                    this.direction = -this.direction;
+                }
             }
+            else{
+               
+                if(this.x < this.pointB.x ||this.x > this.pointA.x){
+                    this.direction = -this.direction;
+                }
+            }
+            
             this.body.setVelocityX(this.speed * this.direction * d)
         }
 

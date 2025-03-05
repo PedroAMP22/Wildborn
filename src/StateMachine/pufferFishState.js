@@ -73,4 +73,7 @@ export class PufferFishState extends State {
     checkState(stateString) {
         return stateString === PufferFishState.NAME;
     }
+    toString(){
+        return PufferFishState.NAME;
+    }
 }
