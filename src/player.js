@@ -272,7 +272,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.stateMachine.transform(ChickenState.NAME);
         }
 
-        
+        if(this.body.onFloor()){
+            this.momentum = 0;
+        }
         this.stateMachine.update(t,dt);
         
     }

@@ -49,7 +49,7 @@ import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
-import movingBlock from '../assets/tilemaps/backgrounds/RockTile.png'
+import movingBlock from '../assets/tilemaps/RockTile.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -220,6 +220,6 @@ export default class Boot extends Phaser.Scene {
    * nivel del juego
    */
   create() {
-    this.scene.start('screen1_1');
+    this.scene.start('screen1_3');
   }
 }
