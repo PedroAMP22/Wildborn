@@ -49,7 +49,7 @@ import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
-import movingBlock from '../assets/tilemaps/backgrounds/RockTile.png'
+import movingBlock from '../assets/tilemaps/RockTile.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
