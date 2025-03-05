@@ -29,10 +29,10 @@ export default class Screen1_3 extends ScreenBase {
 
 
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-            if(name === "pointA"){
+            if(name === "pointA1"){
                 this.pointA1 = {x,y};
 
-            } else if(name === "pointB")
+            } else if(name === "pointA2")
                 this.pointB1 = {x,y};
            
     });
@@ -43,10 +43,16 @@ export default class Screen1_3 extends ScreenBase {
         this.backgroundImage.setScrollFactor(0);
 
 
-        this.movingBlock = new MovingBlock(this,100,this.pointA1,this.pointB1)  
+        this.movingBlock = new MovingBlock(this,70,this.pointA1,this.pointB1)  
         this.physics.add.collider(this.player, this.movingBlock);
 
              
     }
-   
+    
+    createLastScreen(){
+        this.scene.start('screen1_2',{point:"B"});
+    }
+    createNextScene(){
+        this.scene.start('screen1_1',{point:"A"});
+    }
 }

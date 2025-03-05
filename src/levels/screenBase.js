@@ -28,18 +28,22 @@ export default class ScreenBase extends Phaser.Scene {
         this.spawnZoneB = this.physics.add.staticGroup();
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpointA") { // spawnPoint
-                    this.spawnPointA = { x, y };
-                    let spawn = this.physics.add.staticSprite(x- 12, y, null);
-                    spawn.setSize(10,10);
+                    this.spawnPointA = { x, y };  
+                }
+                else if(name === "spawnpointB") {
+                    this.spawnPointB = { x, y };  
+                }
+                else if (name === "spawnZoneA") { //change level zones
+                    let spawn = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
+                    spawn.setSize(width, height);
                     spawn.setOrigin(0.5);
                     spawn.setAlpha(0);
                     this.spawnZoneA.add(spawn);
                     
                 }
-                else if(name === "spawnpointB") {
-                    this.spawnPointB = { x, y };
-                    let spawn = this.physics.add.staticSprite(x- 12, y, null);
-                    spawn.setSize(10,10);
+                else if(name === "spawnZoneB") {
+                    let spawn = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
+                    spawn.setSize(width, height);
                     spawn.setOrigin(0.5);
                     spawn.setAlpha(0);
                     this.spawnZoneB.add(spawn);
@@ -88,7 +92,6 @@ export default class ScreenBase extends Phaser.Scene {
             this.respawn()
         });
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
-            console.log("hola")
             this.createLastScreen();
         });
         this.physics.add.overlap(this.player, this.spawnZoneB, () => {
@@ -107,10 +110,16 @@ export default class ScreenBase extends Phaser.Scene {
         this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
         this.player.stateMachine.transform(DruidState.NAME);
-        if(this.point === 'A')
+        if(this.point){
+            if(this.point === 'A')
+                this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
+            else
+                this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
+        }
+        else{
             this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-        else
-            this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
+        }
+        
     }
 
     createLastScreen(){
