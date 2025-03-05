@@ -24,10 +24,23 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.pointB = pointB;
         this.direction = 1;
         if(this.pointA.x === this.pointB.x){
-            this.body.setVelocityY(this.speed * this.direction);
+            if(this.pointA.y < this.pointB.y){
+                this.body.setVelocityY(this.speed * this.direction);
+            }
+            else{
+                this.direction = -1;
+                this.body.setVelocityY(this.speed * this.direction);
+            }
+            
         }
         else{
-            this.body.setVelocityX(this.speed * this.direction);
+            if(this.pointA.x < this.pointB.x){
+                this.body.setVelocityX(this.speed * this.direction);
+            }
+            else{
+                this.direction = -1;
+                this.body.setVelocityX(this.speed * this.direction);
+            }
         }
 
     }
@@ -37,14 +50,14 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         if(this.pointA.x === this.pointB.x){
             if(this.y < this.pointB.y ||this.y > this.pointA.y){
                 this.direction = -this.direction;
-            }
-            this.body.setVelocityY(this.speed * this.direction);
+            }º
+            this.body.setVelocityY(this.speed * this.direction * d);
         }
         else{
             if(this.x > this.pointB.x ||this.x < this.pointA.x){
                 this.direction = -this.direction;
             }
-            this.body.setVelocityX(this.speed * this.direction)
+            this.body.setVelocityX(this.speed * this.direction * d)
         }
 
     }
