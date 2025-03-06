@@ -45,6 +45,8 @@ import level1_3 from '../assets/tilemaps/levels/level1_3.json'
 import level1_4 from '../assets/tilemaps/levels/level1_4.json'
 import level1_5 from '../assets/tilemaps/levels/level1_5.json'
 import level1_6 from '../assets/tilemaps/levels/level1_6.json'
+import level1_7 from '../assets/tilemaps/levels/level1_7.json'
+
 
 
 import tileSet1 from '../assets/tilemaps/SheetA.png'
@@ -214,6 +216,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('level1_4',level1_4);
     this.load.tilemapTiledJSON('level1_5',level1_5);
     this.load.tilemapTiledJSON('level1_6',level1_6);
+    this.load.tilemapTiledJSON('level1_7',level1_7);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("ForestBG2", backgroundForest);

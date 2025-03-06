@@ -24,20 +24,47 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.direction = 1;
         this.vertical = vertical;
 
+        if(vertical){
+            if(this.pointA.y < this.pointB.y){
+               
+                this.body.setVelocityY(this.speed * this.direction);
+            }
+            else{
+                this.direction = -1;
+                this.body.setVelocityY(this.speed * this.direction);
+            }
+            
+        }
+        else{
+            if(this.pointA.x < this.pointB.x){
+                
+                this.body.setVelocityX(this.speed * this.direction);
+            }
+            else{
+                this.direction = -1;
+                this.body.setVelocityX(this.speed * this.direction);
+            }
+        }
+
     }
 
     preUpdate(t, d) {
         super.preUpdate(t, d)
         if(this.vertical){
             if(this.pointA.y < this.pointB.y){
-                if(this.y > this.pointB.y ||this.y < this.pointA.y){
-                    this.direction = -this.direction;
+                if(this.y > this.pointB.y){
+                    this.direction = -Math.abs(this.direction);
+                }
+                else if(this.y < this.pointA.y){
+                    this.direction = Math.abs(this.direction);
                 }
             }
             else{
-                
-                if(this.y < this.pointB.y ||this.y > this.pointA.y){
-                    this.direction = -this.direction;
+                if(this.y < this.pointB.y){
+                    this.direction = Math.abs(this.direction);
+                }
+                else if(this.y > this.pointA.y){
+                    this.direction = -Math.abs(this.direction);
                 }
             }
            
@@ -45,14 +72,19 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         }
         else{
             if(this.pointA.x < this.pointB.x){
-                if(this.x > this.pointB.x ||this.x < this.pointA.x){
-                    this.direction = -this.direction;
+                if(this.x > this.pointB.x){
+                    this.direction = -Math.abs(this.direction);
+                }
+                else if(this.x < this.pointA.x){
+                    this.direction = Math.abs(this.direction);
                 }
             }
             else{
-               
-                if(this.x < this.pointB.x ||this.x > this.pointA.x){
-                    this.direction = -this.direction;
+                if(this.x < this.pointB.x){
+                    this.direction = Math.abs(this.direction);
+                }
+                else if(this.x > this.pointA.x){
+                    this.direction = -Math.abs(this.direction);
                 }
             }
             
