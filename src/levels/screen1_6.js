@@ -43,8 +43,8 @@ export default class Screen1_6 extends ScreenBase {
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
 
-        this.movingBlock = new MovingBlock(this,8,this.pointA1,this.pointA2,16,64)  
-        this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,16,64)        
+        this.movingBlock = new MovingBlock(this,8,this.pointA1,this.pointA2,16,64,true)  
+        this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,16,64,true)        
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
              

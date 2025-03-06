@@ -5,7 +5,7 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
      * @param {Phaser.Scene} scene
      * @param {Number} speed - Speed (default: 100)
      */
-    constructor(scene, speed,pointA,pointB,x,y) {
+    constructor(scene, speed,pointA,pointB,x,y,vertical) {
         super(scene,pointA.x,pointA.y, 'movingBlock')
         this.speed = speed;
         
@@ -22,33 +22,13 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.pointA = pointA;
         this.pointB = pointB;
         this.direction = 1;
-        if(this.pointA.x === this.pointB.x){
-            if(this.pointA.y < this.pointB.y){
-               
-                this.body.setVelocityY(this.speed * this.direction);
-            }
-            else{
-                this.direction = -1;
-                this.body.setVelocityY(this.speed * this.direction);
-            }
-            
-        }
-        else{
-            if(this.pointA.x < this.pointB.x){
-                this.direction = -1;
-                this.body.setVelocityX(this.speed * this.direction);
-            }
-            else{
-               
-                this.body.setVelocityX(this.speed * this.direction);
-            }
-        }
+        this.vertical = vertical;
 
     }
 
     preUpdate(t, d) {
         super.preUpdate(t, d)
-        if(this.pointA.x === this.pointB.x){
+        if(this.vertical){
             if(this.pointA.y < this.pointB.y){
                 if(this.y > this.pointB.y ||this.y < this.pointA.y){
                     this.direction = -this.direction;
