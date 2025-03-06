@@ -99,10 +99,18 @@ export default class ScreenBase extends Phaser.Scene {
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
         this.thonsTileSet = this.map.addTilesetImage("thorns", "thorns", 16,16);
+        this.spikesTileSet = this.map.addTilesetImage("Spikes", "spikes", 16,16);
         
-        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1, this.thonsTileSet]);
         this.backgroundLayer = this.map.createLayer("background");
-        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet]);
+        this.decoBackLayer = this.map.createLayer("decoBack", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+
+        this.decoFrontLayer.setDepth(4);
+        this.platformLayer.setDepth(3);
+        this.decoLayer.setDepth(2);
+        this.decoBackLayer.setDepth(0);
 
         this.platformLayer.setCollisionByExclusion([-1]);
 

@@ -53,9 +53,11 @@ import level1_8 from '../assets/tilemaps/levels/level1_8.json'
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
+import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
-import movingBlock from '../assets/tilemaps/RockTile.png'
+//import movingBlock from '../assets/tilemaps/RockTile.png'
+import movingBlock from '../assets/sprites/blocks/mossyBlock3x2.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -223,7 +225,11 @@ export default class Boot extends Phaser.Scene {
     this.load.image("tileSet2", tileSet2);
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("thorns",thorns);
-    this.load.spritesheet('movingBlock', movingBlock, { frameWidth: 40, frameHeight: 30 });
+    this.load.image("spikes",spikes);
+    this.load.spritesheet('movingBlock', movingBlock, {
+      frameWidth : 48,
+      frameHeight : 32
+    });
   }
 
   /**
