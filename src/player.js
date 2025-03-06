@@ -211,12 +211,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "fishBig",
             frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 5,
         });
         this.scene.anims.create({
             key: "fishSmall",
             frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 5,
         });
         this.scene.anims.create({
             key: "fishTrans",
@@ -228,7 +228,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "chickenIdle",
             frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
-            frameRate: 10,
+            frameRate: 5,
         });
         this.scene.anims.create({
             key: "chickenFlap",
@@ -376,7 +376,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         player.stateMachine.state.onCollision(block);
     }
 
-    moverseturuleca(initialSpeed, topSpeed, walkAcceleration, t, dt) {
+    moveChicken(initialSpeed, topSpeed, walkAcceleration, t, dt) {
         // GO RIGHT (ahora con la tecla izquierda)
         if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown) {
             this.body.setVelocityX(initialSpeed);
