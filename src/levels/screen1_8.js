@@ -9,12 +9,12 @@ import ScreenBase from './screenBase.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Screenbase
  */
-export default class Screen1_3 extends ScreenBase {
+export default class Screen1_8 extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_3',"level1_3" );
+        super('screen1_8',"level1_8" );
     }
 
     /**
@@ -24,38 +24,18 @@ export default class Screen1_3 extends ScreenBase {
 
         super.create()
 
-        //spawnpoint and killing zones
-        this.objectsLayer = this.map.getObjectLayer("objects");
-
-
-        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-            if(name === "pointA1"){
-                this.pointA1 = {x,y};
-
-            } else if(name === "pointA2")
-                this.pointB1 = {x,y};
-           
-    });
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
-
-
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,40,30,false); 
-        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
-
              
     }
     
     createAScreen(){
-        this.scene.start('screen1_2',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_6',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen1_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
-    }
-    createCScreen(){
-        this.scene.start('screen1_5',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_8',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
 }
