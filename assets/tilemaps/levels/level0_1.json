@@ -91,6 +91,28 @@
                  "width":16,
                  "x":-8.88178419700125e-16,
                  "y":223.666666666667
+                }, 
+                {
+                 "height":26,
+                 "id":12,
+                 "name":"spawnZoneB",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":189.333333333333,
+                 "x":272.666666666667,
+                 "y":287.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":146,
+                 "y":-56.6666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -99,7 +121,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":12,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
