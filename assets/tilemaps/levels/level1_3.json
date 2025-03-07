@@ -5,6 +5,8 @@
         {
          "id":4,
          "image":"..\/backgrounds\/ForestBG2.png",
+         "imageheight":240,
+         "imagewidth":480,
          "name":"background",
          "opacity":1,
          "repeatx":true,
@@ -250,7 +252,7 @@
  "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {
@@ -565,6 +567,19 @@
          "name":"thorns",
          "spacing":0,
          "tilecount":56,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":6,
+         "firstgid":381,
+         "image":"..\/Spikes.png",
+         "imageheight":96,
+         "imagewidth":96,
+         "margin":0,
+         "name":"Spikes",
+         "spacing":0,
+         "tilecount":36,
          "tileheight":16,
          "tilewidth":16
         }],
