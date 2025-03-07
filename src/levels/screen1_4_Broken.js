@@ -9,37 +9,42 @@ import ScreenBase from './screenBase.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Screenbase
  */
-export default class Screen1_4 extends ScreenBase {
+export default class Screen1_4_Broken extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_4',"level1_4" );
+        super('screen1_4_Broken',"level1_4_Broken" );
     }
-
+    init(data){
+        super.init(data)
+        this.broken = data.broken;
+            
+    }
     /**
      * Creación de los elementos de la escena principal de juego
      */
     create() {
 
         super.create()
+        
+        
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
-             
+        if(!this.broken){
+            this.input.keyboard.enabled = false;
+            this.cameras.main.fadeIn(2000, 0, 0, 0); // Fade in from black
+            this.time.delayedCall(2000, () => { 
+                this.input.keyboard.enabled = true;
+            });
+        }
+        
     }
     
-    createAScreen(){
-        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
-    }
     createBScreen(){
-        this.cameras.main.fadeOut(1000, 0, 0, 0); 
-        this.input.keyboard.enabled = false; 
-
-        this.time.delayedCall(1000, () => { 
-            this.scene.start('screen1_4_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
-        });
+        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
     }
 }

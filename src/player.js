@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import {StateMachine} from './StateMachine/stateMachine'
-import { DruidState } from './StateMachine/druidState';
 import { SnailState } from './StateMachine/snailState';
 import { MoleState } from './StateMachine/moleState';
 import { SquirrelState } from './StateMachine/squirrelState';
@@ -25,15 +24,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.snailKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
-        this.druidKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-
-        this.squirrelKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+        this.squirrelKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
         this.moleKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
-        this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+        this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
 
         //Adding to physics engine
         this.scene.add.existing(this);
@@ -211,12 +208,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "fishBig",
             frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
-            frameRate: 5,
+            frameRate: 20,
         });
         this.scene.anims.create({
             key: "fishSmall",
             frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
-            frameRate: 5,
+            frameRate: 20,
         });
         this.scene.anims.create({
             key: "fishTrans",
@@ -228,7 +225,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "chickenIdle",
             frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
-            frameRate: 5,
+            frameRate: 10,
         });
         this.scene.anims.create({
             key: "chickenFlap",
@@ -255,9 +252,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, dt);
         if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
             this.stateMachine.transform(SnailState.NAME);
-        }
-        else if (Phaser.Input.Keyboard.JustDown(this.druidKey)){
-            this.stateMachine.transform(DruidState.NAME);
         }
         else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
             this.stateMachine.transform(MoleState.NAME);

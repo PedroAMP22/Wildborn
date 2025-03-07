@@ -16,12 +16,12 @@ export class StateMachine {
     }
 
     transform(transformation){
-        
-        if (!this.state || !this.state.checkState(transformation)){
+        if(!this.state){
+            this.state = new DruidState(this.scene);
+            this.state.transform();
+        }
+        if (!this.state.checkState(transformation)){
             switch(transformation){
-                case DruidState.NAME:
-                    this.state = new DruidState(this.scene);
-                    break;
                 case SnailState.NAME:
                     this.state = new SnailState(this.scene);
                     break;
@@ -38,6 +38,10 @@ export class StateMachine {
                     this.state = new ChickenState(this.scene);
                     break;
             }
+            this.state.transform();
+        }
+        else{
+            this.state = new DruidState(this.scene);
             this.state.transform();
         }
 

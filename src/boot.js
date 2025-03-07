@@ -43,6 +43,7 @@ import level1_1 from '../assets/tilemaps/levels/level1_1.json'
 import level1_2 from '../assets/tilemaps/levels/level1_2.json'
 import level1_3 from '../assets/tilemaps/levels/level1_3.json'
 import level1_4 from '../assets/tilemaps/levels/level1_4.json'
+import level1_4_Broken from '../assets/tilemaps/levels/level1_4_Broken.json'
 import level1_5 from '../assets/tilemaps/levels/level1_5.json'
 import level1_6 from '../assets/tilemaps/levels/level1_6.json'
 import level1_7 from '../assets/tilemaps/levels/level1_7.json'
@@ -215,6 +216,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('level1_2',level1_2);
     this.load.tilemapTiledJSON('level1_3',level1_3);
     this.load.tilemapTiledJSON('level1_4',level1_4);
+    this.load.tilemapTiledJSON('level1_4_Broken',level1_4_Broken);
     this.load.tilemapTiledJSON('level1_5',level1_5);
     this.load.tilemapTiledJSON('level1_6',level1_6);
     this.load.tilemapTiledJSON('level1_7',level1_7);

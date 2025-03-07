@@ -17,6 +17,11 @@ export default class Screen1_3 extends ScreenBase {
         super('screen1_3',"level1_3" );
     }
 
+
+    init(data){
+        super.init(data)
+        this.broken = data.broken;     
+    }
     /**
      * Creación de los elementos de la escena principal de juego
      */
@@ -53,7 +58,13 @@ export default class Screen1_3 extends ScreenBase {
         this.scene.start('screen1_2',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen1_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        if(this.broken){
+            this.scene.start('screen1_4_Broken',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:this.broken});
+        }
+        else{
+            this.scene.start('screen1_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        }
+        
     }
     createCScreen(){
         this.scene.start('screen1_5',{point:"A",transformation:this.player.stateMachine.state.toString()});

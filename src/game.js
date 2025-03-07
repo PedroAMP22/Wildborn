@@ -4,6 +4,7 @@ import Screen1_1 from './levels/screen1_1.js';
 import Screen1_2 from './levels/screen1_2.js';
 import Screen1_3 from './levels/screen1_3.js';
 import Screen1_4 from './levels/screen1_4.js';
+import Screen1_4_Broken from './levels/screen1_4_Broken.js';
 import Screen1_5 from './levels/screen1_5.js';
 import Screen1_6 from './levels/screen1_6.js';
 import Screen1_7 from './levels/screen1_7.js';
@@ -23,7 +24,7 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_5,Screen1_6,Screen1_7,Screen1_8],
+    scene: [Boot, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8],
     physics: {
         default: 'arcade',
         arcade: {
