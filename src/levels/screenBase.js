@@ -112,6 +112,11 @@ export default class ScreenBase extends Phaser.Scene {
         this.decoLayer.setDepth(1);
         this.decoBackLayer.setDepth(0);
 
+        this.decoFrontLayer.setCollisionFromCollisionGroup();
+        this.platformLayer.setCollisionFromCollisionGroup();
+        this.decoLayer.setCollisionFromCollisionGroup();
+        this.decoBackLayer.setCollisionFromCollisionGroup();
+
         this.platformLayer.setCollisionByExclusion([-1]);
 
              
