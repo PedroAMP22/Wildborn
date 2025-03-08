@@ -268,7 +268,7 @@
         {
          "columns":14,
          "firstgid":1,
-         "image":"..\/SheetA.png",
+         "image":"..\/..\/SheetA.png",
          "imageheight":192,
          "imagewidth":224,
          "margin":0,
@@ -281,7 +281,7 @@
         {
          "columns":13,
          "firstgid":169,
-         "image":"..\/SheetB.png",
+         "image":"..\/..\/SheetB.png",
          "imageheight":192,
          "imagewidth":220,
          "margin":0,
@@ -748,7 +748,7 @@
         {
          "columns":8,
          "firstgid":325,
-         "image":"..\/thorns.png",
+         "image":"..\/..\/thorns.png",
          "imageheight":112,
          "imagewidth":128,
          "margin":0,
@@ -761,7 +761,7 @@
         {
          "columns":6,
          "firstgid":381,
-         "image":"..\/Spikes.png",
+         "image":"..\/..\/Spikes.png",
          "imageheight":96,
          "imagewidth":96,
          "margin":0,
