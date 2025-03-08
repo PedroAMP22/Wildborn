@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import {StateMachine} from './StateMachine/stateMachine'
-import { DruidState } from './StateMachine/druidState';
 import { SnailState } from './StateMachine/snailState';
 import { MoleState } from './StateMachine/moleState';
 import { SquirrelState } from './StateMachine/squirrelState';
@@ -25,15 +24,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.snailKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
 
-        this.druidKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-
-        this.squirrelKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+        this.squirrelKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
         this.moleKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
 
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
-        this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+        this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
 
         //Adding to physics engine
         this.scene.add.existing(this);
@@ -256,9 +253,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
             this.stateMachine.transform(SnailState.NAME);
         }
-        else if (Phaser.Input.Keyboard.JustDown(this.druidKey)){
-            this.stateMachine.transform(DruidState.NAME);
-        }
         else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
             this.stateMachine.transform(MoleState.NAME);
         }
@@ -376,7 +370,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         player.stateMachine.state.onCollision(block);
     }
 
-    moverseturuleca(initialSpeed, topSpeed, walkAcceleration, t, dt) {
+    moveChicken(initialSpeed, topSpeed, walkAcceleration, t, dt) {
         // GO RIGHT (ahora con la tecla izquierda)
         if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown) {
             this.body.setVelocityX(initialSpeed);

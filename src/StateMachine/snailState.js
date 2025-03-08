@@ -10,8 +10,7 @@ export class SnailState extends State{
         super();
         this.scene = scene;
         this.player = scene.player;
-        this.player.body.setSize(8,8);
-        this.player.body.setOffset(11.5,14.5);
+        this.player.body.setSize(6,6);
 
         this.left = null;
         this.right = null;
@@ -36,10 +35,10 @@ export class SnailState extends State{
         
         if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
         
-        this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y);
-        this.right = this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y);
-        this.up = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y - 6);
-        this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 8);
+        this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 4, this.player.y);
+        this.right = this.scene.platformLayer.getTileAtWorldXY(this.player.x + 4, this.player.y);
+        this.up = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y - 4);
+        this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4);
         
         this.player.playIdleIfPossible(canPlayIdle, "snailIdle");
 
@@ -105,19 +104,13 @@ export class SnailState extends State{
 
         if (this.left) {
             this.player.setAngle(90);
-            this.player.body.setOffset(9,12);
-
         } else if (this.right) {
             this.player.setAngle(-90);
-            this.player.body.setOffset(15,12);
         } else if (this.up){
             this.player.setAngle(180);
-            this.player.body.setOffset(11.5,8);
-
         }
         else{
             this.player.setAngle(0);
-            this.player.body.setOffset(11.5,14.5);
         }
     }
 

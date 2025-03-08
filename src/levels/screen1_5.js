@@ -14,7 +14,7 @@ export default class Screen1_5 extends ScreenBase {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_5',"level1_5" );
+        super('screen1_5',"screen1_5" );
     }
 
     /**
@@ -37,7 +37,7 @@ export default class Screen1_5 extends ScreenBase {
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,40,30,true); 
+        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,48,32,true); 
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
              
     }

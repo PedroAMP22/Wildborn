@@ -12,7 +12,7 @@ export class DruidState extends State {
         this.player = scene.player;
 
         this.player.body.setSize(7,13);
-        this.player.body.setOffset(15,13);
+        this.player.body.setOffset(12,10);
         
         this.jumpSpeed = -400;
         this.topSpeed = 150;
@@ -45,14 +45,10 @@ export class DruidState extends State {
         
         this.justJumped = Phaser.Input.Keyboard.JustDown(this.player.cursors.space);
 
-        if(this.player.checkPlaying("druidLand")) canPlayIdle = false;
         if(this.player.checkPlaying("druidTrans")) canPlayIdle = false;
 
         if (this.player.body.velocity.x !== 0) {
             this.player.anims.play("druidRun", true);
-        }
-        if(this.lastSpeed > 0 && this.player.body.velocity.y === 0){
-            this.player.anims.play("druidLand", true);
         }
     
         this.player.playIdleIfPossible(canPlayIdle, "druidIdle");

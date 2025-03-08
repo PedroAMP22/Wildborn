@@ -10,7 +10,7 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.speed = speed;
         
 
-        this.setDepth(-1);
+        this.setDepth(2);
         this.scene.physics.add.existing(this);
         this.scene.physics.world.enable(this);
         this.scene.add.existing(this);

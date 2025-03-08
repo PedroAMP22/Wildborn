@@ -39,23 +39,28 @@ import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
 
-import level1_1 from '../assets/tilemaps/levels/level1_1.json'
-import level1_2 from '../assets/tilemaps/levels/level1_2.json'
-import level1_3 from '../assets/tilemaps/levels/level1_3.json'
-import level1_4 from '../assets/tilemaps/levels/level1_4.json'
-import level1_5 from '../assets/tilemaps/levels/level1_5.json'
-import level1_6 from '../assets/tilemaps/levels/level1_6.json'
-import level1_7 from '../assets/tilemaps/levels/level1_7.json'
-import level1_8 from '../assets/tilemaps/levels/level1_8.json'
+import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
+import screen1_2 from '../assets/tilemaps/levels/level_1/screen1_2.json'
+import screen1_3 from '../assets/tilemaps/levels/level_1/screen1_3.json'
+import screen1_4 from '../assets/tilemaps/levels/level_1/screen1_4.json'
+import screen1_4_Broken from '../assets/tilemaps/levels/level_1/screen1_4_Broken.json'
+import screen1_5 from '../assets/tilemaps/levels/level_1/screen1_5.json'
+import screen1_6 from '../assets/tilemaps/levels/level_1/screen1_6.json'
+import screen1_7 from '../assets/tilemaps/levels/level_1/screen1_7.json'
+import screen1_8 from '../assets/tilemaps/levels/level_1/screen1_8.json'
+import screen2_1 from '../assets/tilemaps/levels/level_2/screen2_1.json'
+import screen2_2 from '../assets/tilemaps/levels/level_2/screen2_2.json'
 
 
 
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
 import thorns from '../assets/tilemaps/thorns.png'
+import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
-import movingBlock from '../assets/tilemaps/RockTile.png'
+//import movingBlock from '../assets/tilemaps/RockTile.png'
+import movingBlock from '../assets/sprites/blocks/mossyBlock3x2.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -211,25 +216,28 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
     //Tile maps
-    this.load.tilemapTiledJSON('level1_1',level1_1);
-    this.load.tilemapTiledJSON('level1_2',level1_2);
-    this.load.tilemapTiledJSON('level1_3',level1_3);
-    this.load.tilemapTiledJSON('level1_4',level1_4);
-    this.load.tilemapTiledJSON('level1_5',level1_5);
-    this.load.tilemapTiledJSON('level1_6',level1_6);
-    this.load.tilemapTiledJSON('level1_7',level1_7);
-    this.load.tilemapTiledJSON('level1_8',level1_8);
+    this.load.tilemapTiledJSON('screen1_1',screen1_1);
+    this.load.tilemapTiledJSON('screen1_2',screen1_2);
+    this.load.tilemapTiledJSON('screen1_3',screen1_3);
+    this.load.tilemapTiledJSON('screen1_4',screen1_4);
+    this.load.tilemapTiledJSON('screen1_4_Broken',screen1_4_Broken);
+    this.load.tilemapTiledJSON('screen1_5',screen1_5);
+    this.load.tilemapTiledJSON('screen1_6',screen1_6);
+    this.load.tilemapTiledJSON('screen1_7',screen1_7);
+    this.load.tilemapTiledJSON('screen1_8',screen1_8);
+    this.load.tilemapTiledJSON('screen2_1',screen2_1);
+    this.load.tilemapTiledJSON('screen2_2',screen2_2);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("thorns",thorns);
-    this.load.spritesheet('movingBlock', movingBlock, { frameWidth: 40, frameHeight: 30 });
+    this.load.image("spikes",spikes);
+    this.load.spritesheet('movingBlock', movingBlock, {
+      frameWidth : 48,
+      frameHeight : 32
+    });
   }
 
-  /**
-   * Creación de la escena. En este caso, solo cambiamos a la escena que representa el
-   * nivel del juego
-   */
   create() {
     this.scene.start('screen1_1');
   }

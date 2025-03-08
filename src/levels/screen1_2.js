@@ -14,7 +14,7 @@ export default class Screen1_2 extends ScreenBase  {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_2',"level1_2" );
+        super('screen1_2',"screen1_2" );
     }
 
     /**
@@ -51,8 +51,8 @@ export default class Screen1_2 extends ScreenBase  {
         this.backgroundImage.setScrollFactor(0);
 
 
-        this.movingBlock = new MovingBlock(this,6,this.pointA1,this.pointA2,40,30,false)  
-        this.movingBlock2 = new MovingBlock(this,6,this.pointB1,this.pointB2,40,30,true)        
+        this.movingBlock = new MovingBlock(this,6,this.pointA1,this.pointA2,48,32,false)  
+        this.movingBlock2 = new MovingBlock(this,6,this.pointB1,this.pointB2,48,32,true)        
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
   
@@ -62,7 +62,7 @@ export default class Screen1_2 extends ScreenBase  {
         this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
     }
    
 }

@@ -14,7 +14,7 @@ export default class Screen1_4 extends ScreenBase {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_4',"level1_4" );
+        super('screen1_4',"screen1_4" );
     }
 
     /**
@@ -32,6 +32,14 @@ export default class Screen1_4 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
+    }
+    createBScreen(){
+        this.cameras.main.fadeOut(1000, 0, 0, 0); 
+        this.input.keyboard.enabled = false; 
+
+        this.time.delayedCall(1000, () => { 
+            this.scene.start('screen1_4_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
+        });
     }
 }
