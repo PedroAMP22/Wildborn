@@ -89,7 +89,7 @@ export class ChickenState extends State {
         } else {
             this.player.body.setAllowGravity(true);
 
-            this.player.moverseturuleca(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
+            this.player.moveChicken(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
         }
 
         if (!this.isFlapping) {

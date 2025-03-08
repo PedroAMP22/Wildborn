@@ -4,9 +4,7 @@
  "layers":[
         {
          "id":4,
-         "image":"..\/backgrounds\/ForestBG2.png",
-         "imageheight":240,
-         "imagewidth":480,
+         "image":"..\/..\/backgrounds\/ForestBG2.png",
          "name":"background",
          "opacity":1,
          "repeatx":true,

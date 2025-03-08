@@ -4,7 +4,7 @@
  "layers":[
         {
          "id":3,
-         "image":"..\/backgrounds\/ForestBG2.png",
+         "image":"..\/..\/backgrounds\/ForestBG2.png",
          "imageheight":240,
          "imagewidth":480,
          "name":"background",
@@ -189,7 +189,7 @@
                 {
                  "height":0,
                  "id":3,
-                 "name":"pointA1",
+                 "name":"pointA2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -201,7 +201,7 @@
                 {
                  "height":0,
                  "id":4,
-                 "name":"pointA2",
+                 "name":"pointA1",
                  "point":true,
                  "rotation":0,
                  "type":"",

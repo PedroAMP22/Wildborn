@@ -14,7 +14,7 @@ export default class Screen1_2 extends ScreenBase  {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_2',"level1_2" );
+        super('screen1_2',"screen1_2" );
     }
 
     /**
@@ -62,7 +62,7 @@ export default class Screen1_2 extends ScreenBase  {
         this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
     }
    
 }

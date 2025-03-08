@@ -9,8 +9,8 @@ export class SquirrelState extends State {
         this.scene = scene;
         this.player = scene.player;
 
-        this.player.body.setSize(7,13);
-        this.player.body.setOffset(15,13);
+        this.player.body.setSize(5,13);
+        this.player.body.setOffset(13,12);
 
         this.jumpSpeed = -300;
         this.topSpeed = 150;

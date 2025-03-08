@@ -370,7 +370,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         player.stateMachine.state.onCollision(block);
     }
 
-    moverseturuleca(initialSpeed, topSpeed, walkAcceleration, t, dt) {
+    moveChicken(initialSpeed, topSpeed, walkAcceleration, t, dt) {
         // GO RIGHT (ahora con la tecla izquierda)
         if (Phaser.Input.Keyboard.JustDown(this.keys.left) && !this.keys.right.isDown) {
             this.body.setVelocityX(initialSpeed);
