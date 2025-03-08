@@ -24,7 +24,16 @@ export default class Screen2_1 extends ScreenBase {
 
         super.create()
 
+        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
+            if(name === "pointA1"){
+                this.pointA1 = {x,y};
 
+            } else if(name === "pointA2")
+                this.pointB1 = {x,y};
+           
+        });
+        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,40,30,false); 
+        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
