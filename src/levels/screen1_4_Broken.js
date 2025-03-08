@@ -14,7 +14,7 @@ export default class Screen1_4_Broken extends ScreenBase {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_4_Broken',"level1_4_Broken" );
+        super('screen1_4_Broken',"screen1_4_Broken" );
     }
     init(data){
         super.init(data)

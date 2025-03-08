@@ -16,7 +16,7 @@ export default class Screen1_1 extends ScreenBase {
      */
     constructor() {
         
-        super('screen1_1',"level1_1" );
+        super('screen1_1',"screen1_1" );
     }
 
     /**

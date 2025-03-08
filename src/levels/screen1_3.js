@@ -14,7 +14,7 @@ export default class Screen1_3 extends ScreenBase {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_3',"level1_3" );
+        super('screen1_3',"screen1_3" );
     }
 
 
