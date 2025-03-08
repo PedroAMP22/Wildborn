@@ -10,6 +10,7 @@ import Screen1_6 from './levels/screen1_6.js';
 import Screen1_7 from './levels/screen1_7.js';
 import Screen1_8 from './levels/screen1_8.js';
 import Screen2_1 from './levels/screen2_1.js';
+import Screen2_2 from './levels/screen2_2.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos

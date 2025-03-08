@@ -141,7 +141,7 @@ export default class ScreenBase extends Phaser.Scene {
     respawn(){
         this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
-        this.player.stateMachine.transform(DruidState.NAME);
+        this.player.stateMachine.transform(this.player.stateMachine.state.toString());
         if(this.point){
             if(this.point === 'A')
                 this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
