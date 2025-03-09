@@ -59,6 +59,7 @@ import tileSet3 from '../assets/tilemaps/SheetC.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
+import backgroundMountain from '../assets/tilemaps/backgrounds/MountainBG.png'
 
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
@@ -233,6 +234,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image("tileSet2", tileSet2);
     this.load.image("tileSet3", tileSet3);
     this.load.image("ForestBG2", backgroundForest);
+    this.load.image("MountainBG", backgroundMountain);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {

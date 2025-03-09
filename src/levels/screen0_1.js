@@ -29,9 +29,11 @@ export default class Screen0_1 extends ScreenBase {
         this.objectsLayer = this.map.getObjectLayer("objects");
 
         //background image
-        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
+        this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
+
+        this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
       
     }
