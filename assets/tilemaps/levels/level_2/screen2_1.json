@@ -146,7 +146,7 @@
          "name":"objects",
          "objects":[
                 {
-                 "height":10.8333333333334,
+                 "height":15.8333333333334,
                  "id":12,
                  "name":"killingZone",
                  "rotation":0,
@@ -154,7 +154,7 @@
                  "visible":true,
                  "width":9.66666666666666,
                  "x":194.25,
-                 "y":84.75
+                 "y":79.75
                 }, 
                 {
                  "height":47.1667,
