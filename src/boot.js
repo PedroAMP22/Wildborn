@@ -59,8 +59,8 @@ import thorns from '../assets/tilemaps/thorns.png'
 import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 
-//import movingBlock from '../assets/tilemaps/RockTile.png'
-import movingBlock from '../assets/sprites/blocks/mossyBlock3x2.png'
+import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
+import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -232,9 +232,13 @@ export default class Boot extends Phaser.Scene {
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
-    this.load.spritesheet('movingBlock', movingBlock, {
+    this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
+    });
+    this.load.spritesheet('mossyBlock1x4', mossyBlock1x4, {
+      frameWidth : 16,
+      frameHeight : 64
     });
   }
 

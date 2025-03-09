@@ -42,9 +42,9 @@ export default class Screen2_2 extends ScreenBase {
 
             }
         });
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,40,30,true); 
-        this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,16,64,true);    
-        this.movingBlock3 = new MovingBlock(this,8,this.pointC1,this.pointC2,16,64,false);        
+        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
+        this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2");    
+        this.movingBlock3 = new MovingBlock(this,8,this.pointC1,this.pointC2,48,32,false, "mossyBlock3x2");        
         this.physics.add.collider(this.player, this.movingBlock3, this.player.collisionWithMovingBlock);    
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
