@@ -98,14 +98,15 @@ export default class ScreenBase extends Phaser.Scene {
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
+        this.tileset3 = this.map.addTilesetImage("SheetC", "tileSet3", 16, 16);
         this.thonsTileSet = this.map.addTilesetImage("thorns", "thorns", 16,16);
         this.spikesTileSet = this.map.addTilesetImage("Spikes", "spikes", 16,16);
         
         this.backgroundLayer = this.map.createLayer("background");
-        this.decoBackLayer = this.map.createLayer("decoBack", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoBackLayer = this.map.createLayer("decoBack", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoLayer = this.map.createLayer("deco", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.platformLayer = this.map.createLayer("platforms", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
 
         this.decoFrontLayer.setDepth(4);
         this.platformLayer.setDepth(3);

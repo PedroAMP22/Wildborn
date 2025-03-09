@@ -38,7 +38,7 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
-
+import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
 import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
 import screen1_2 from '../assets/tilemaps/levels/level_1/screen1_2.json'
 import screen1_3 from '../assets/tilemaps/levels/level_1/screen1_3.json'
@@ -55,6 +55,7 @@ import screen2_2 from '../assets/tilemaps/levels/level_2/screen2_2.json'
 
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
+import tileSet3 from '../assets/tilemaps/SheetC.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
@@ -216,6 +217,7 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
     //Tile maps
+    this.load.tilemapTiledJSON('screen0_1',screen0_1);
     this.load.tilemapTiledJSON('screen1_1',screen1_1);
     this.load.tilemapTiledJSON('screen1_2',screen1_2);
     this.load.tilemapTiledJSON('screen1_3',screen1_3);
@@ -229,6 +231,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_2',screen2_2);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
+    this.load.image("tileSet3", tileSet3);
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
@@ -243,6 +246,6 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen1_1');
+    this.scene.start('screen0_1');
   }
 }
