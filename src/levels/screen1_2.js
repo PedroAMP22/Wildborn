@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { MovingBlock } from '../movingBlock.js';
 import ScreenBase from './screenBase.js';
+import { Rune } from '../rune.js';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -41,6 +42,10 @@ export default class Screen1_2 extends ScreenBase  {
 
                 } else if(name === "pointB2"){
                     this.pointB2 = {x,y};
+                }
+                else if(name === "rune"){
+                    this.rune = new Rune(this,x,y);
+                    this.player.setRune(this.rune);
                 }
         });
 

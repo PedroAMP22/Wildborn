@@ -38,6 +38,8 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
+import rune from '../assets/sprites/items/rune1.png'
+
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
 import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
 import screen1_2 from '../assets/tilemaps/levels/level_1/screen1_2.json'
@@ -237,6 +239,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image("MountainBG", backgroundMountain);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
+    this.load.image("rune",rune);
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
@@ -248,6 +251,6 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen0_1');
+    this.scene.start('screen1_1');
   }
 }

@@ -31,7 +31,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
         this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
-
+        this.rune = null;
         //Adding to physics engine
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -44,7 +44,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
             up: Phaser.Input.Keyboard.KeyCodes.W,
             left: Phaser.Input.Keyboard.KeyCodes.A,
             down: Phaser.Input.Keyboard.KeyCodes.S,
-            right: Phaser.Input.Keyboard.KeyCodes.D
+            right: Phaser.Input.Keyboard.KeyCodes.D,
+            e: Phaser.Input.Keyboard.KeyCodes.E
         });
 
         this.maxCoyoteTime = 5;
@@ -244,14 +245,35 @@ export default class Player extends Phaser.GameObjects.Sprite {
         });
     }
 
+    setRune(rune){
+        this.rune = rune;
+    }
+
     /**
      * Métodos preUpdate de Phaser. En este caso solo se encarga del movimiento del jugador.
      * @override
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
+        
+        if(this.rune){
+            const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
+            if(distance < 20){
+                this.scene.eKeyText.setVisible(true); 
+                this.scene.eKeyText.setPosition(this.rune.x - 10,this.rune.y -14);
+            }
+            else{
+                this.scene.eKeyText.setVisible(false); 
+            }
+            if (distance < 20 && Phaser.Input.Keyboard.JustDown(this.keys.e)) {
+                this.rune.interact();
+            }
+        }
+
+        
         if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
             this.stateMachine.transform(SnailState.NAME);
+            this.momentum = 0;
         }
         else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
             this.stateMachine.transform(MoleState.NAME);

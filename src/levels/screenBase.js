@@ -137,6 +137,14 @@ export default class ScreenBase extends Phaser.Scene {
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
+        this.runeImage = this.add.image(400, 400, 'tileSet1');
+        this.runeImage.setVisible(false);
+        this.runeImage.setDepth(100);
+
+        this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
+        this.eKeyText.setVisible(false); // Escondemos la letra "E" inicialmente
+        this.eKeyText.setDepth(100);
+
     }
 
     respawn(){
