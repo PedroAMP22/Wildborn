@@ -1,6 +1,8 @@
 
 import Phaser from 'phaser';
 import ScreenBase from './screenBase.js';
+import { SnailState } from '../StateMachine/snailState';
+
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -28,6 +30,17 @@ export default class Screen0_1 extends ScreenBase {
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
 
+        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
+            if(name === "triggerZone"){
+                let triggerZone = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
+                triggerZone.setSize(width, height);
+                triggerZone.setOrigin(0.5);
+                triggerZone.setAlpha(0);  //to make it invisible
+                this.triggerZone = triggerZone;
+            }
+           
+        });
+
         //background image
         this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
@@ -35,8 +48,38 @@ export default class Screen0_1 extends ScreenBase {
 
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
-      
+        this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
     }
+
+    triggerFunction(player) {
+        // Remove collider (weird loop if not)
+        this.physics.world.removeCollider(this.overlapEvent);
+    
+        // Deactivate keyboard control
+        this.input.keyboard.enabled = false;
+        player.body.stop()
+        player.body.setVelocityY(-50);
+        
+        player.body.setAllowGravity(false)
+    
+    
+        this.time.delayedCall(500, () => {
+            player.stateMachine.transform(SnailState.NAME);
+            player.body.setAllowGravity(false)
+            player.body.stop()
+
+
+        });
+    
+        // Restore normal gameplay
+        this.time.delayedCall(2000, () => {
+            this.input.keyboard.enabled = true;
+            player.body.setAllowGravity(true)
+            console.log("Se restauró el control del jugador.");
+        });
+    }
+    
+    
 
     createAScreen(){
         this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString()});
