@@ -37,7 +37,7 @@ export default class Screen2_1 extends ScreenBase {
         //background image
         this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
-        this.backgroundImage.setScrollFactor(0);
+        this.backgroundImage.setScrollFactor(1);
              
     }
     
