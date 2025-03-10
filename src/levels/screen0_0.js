@@ -11,13 +11,13 @@ import { SnailState } from '../StateMachine/snailState';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Screen0_1 extends ScreenBase {
+export default class Screen0_0 extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
         
-        super('screen0_1',"screen0_1" );
+        super('screen0_0',"screen0_0" );
     }
 
     /**
@@ -82,10 +82,10 @@ export default class Screen0_1 extends ScreenBase {
     
 
     createAScreen(){
-        this.scene.start('screen0_0',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen0_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     
    
