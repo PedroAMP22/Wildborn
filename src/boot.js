@@ -38,7 +38,7 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
-import rune from '../assets/sprites/items/rune1.png'
+import rune from '../assets/sprites/runes/rune1.png'
 
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
 import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
