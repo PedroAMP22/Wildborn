@@ -333,6 +333,18 @@
                  "width":16,
                  "x":752,
                  "y":288.333333333333
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"rune",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":383.291666666667,
+                 "y":99.4166666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -341,7 +353,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":16,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

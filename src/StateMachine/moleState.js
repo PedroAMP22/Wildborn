@@ -27,6 +27,7 @@ export class MoleState extends State {
         this.top = false;
         this.topFallingSpeed = 200;
         this.lastSpeed = 0;
+        this.flying = false;
     }
 
     transform(){
@@ -43,13 +44,20 @@ export class MoleState extends State {
         if(this.player.checkPlaying("moleHide2")) canPlayIdle = false;
         if(this.player.checkPlaying("moleHiddenIdle")) canPlayIdle = false;
         if(this.player.checkPlaying("moleJump")) canPlayIdle = false;
+
+        
            
         this.player.playIdleIfPossible(canPlayIdle, "moleIdle")
     
 
+        if(this.player.body.allowGravity === false && this.player.body.velocity.x === 0 && !this.hidden && this.flying){
+            this.player.body.setAllowGravity(true);
+            this.player.setAngle(0);
+            this.player.setFlipY(false);
+        }
          //HIDE IN WALL OR FLOOR AND START PROPULSION
 
-        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.player.body.onFloor() && !this.hidden) {
+        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setVelocityX(0);
@@ -59,7 +67,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE DOWN
-        if (this.player.body.blocked.down && !this.hidden && this.lastSpeed > 0) {
+        if (this.player.body.blocked.down && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden && this.lastSpeed > 0) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -72,7 +80,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE LEFT
-        if (this.player.body.blocked.left && !this.hidden) {
+        if (this.player.keys.left.isDown && this.player.body.blocked.left && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y).index === 193  && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -86,7 +94,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE RIGHT
-        if (this.player.body.blocked.right && !this.hidden) {
+        if (this.player.keys.right.isDown && this.player.body.blocked.right && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y).index === 193 && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -100,7 +108,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         } 
         //HIDE UP
-        if (this.player.body.blocked.up && !this.hidden) {
+        if (this.player.body.blocked.top && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -146,7 +154,8 @@ export class MoleState extends State {
                 this.top = false;
             }
             this.canJump = false
-            this.lastSpeed = this.player.body.velocity.y
+            this.lastSpeed = this.player.body.velocity.yç
+            this.flying = true;
         }
 
         //FALL

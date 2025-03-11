@@ -26,7 +26,8 @@ export class SnailState extends State{
         this.player.setFlipY(false);
         this.player.body.setAllowGravity(true);
         this.isStuck = false;
-        this.blockStuck = null;       
+        this.blockStuck = null; 
+        this.momentum = 0;      
     }
 
     update(t, dt) {

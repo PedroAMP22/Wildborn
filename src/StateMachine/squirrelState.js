@@ -31,6 +31,7 @@ export class SquirrelState extends State {
         this.player.setFlipY(false);
 
         this.hasGlided = false;
+        this.onBlock = false;
     }
 
     transform(){
@@ -48,6 +49,8 @@ export class SquirrelState extends State {
         if(this.player.body.onFloor()){
             this.hasGlided = false;
         }
+        if(this.onBlock)
+            this.player.anims.play("squirrelIdle",true)
 
         if (this.player.body.velocity.x !== 0 && !this.isGliding && this.player.body.onFloor()) {
             this.player.anims.play("squirrelRun", true);
@@ -55,7 +58,7 @@ export class SquirrelState extends State {
         
         this.player.playIdleIfPossible(canPlayIdle, "squirrelIdle");
 
-        if(this.player.body.velocity.y !== 0 && canPlayIdle && !this.isGliding){
+        if(this.player.body.velocity.y !== 0 && canPlayIdle && !this.isGliding && !this.onBlock){
             this.player.anims.play("squirrelAir", true);
         }
         
@@ -117,9 +120,14 @@ export class SquirrelState extends State {
         }
         
         
-
+        
+        this.onBlock = false;
     }
-
+    onCollision(block){
+        if(block.body.velocity.y !== 0)
+            this.player.body.setVelocityY(block.body.velocity.y);
+        this.onBlock = true;
+    }
     checkState(stateString){
         return stateString === SquirrelState.NAME;
     }

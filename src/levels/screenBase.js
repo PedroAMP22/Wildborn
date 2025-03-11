@@ -98,14 +98,15 @@ export default class ScreenBase extends Phaser.Scene {
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
         this.tileset2 = this.map.addTilesetImage("SheetB","tileSet2",16,16);
+        this.tileset3 = this.map.addTilesetImage("SheetC", "tileSet3", 16, 16);
         this.thonsTileSet = this.map.addTilesetImage("thorns", "thorns", 16,16);
         this.spikesTileSet = this.map.addTilesetImage("Spikes", "spikes", 16,16);
         
         this.backgroundLayer = this.map.createLayer("background");
-        this.decoBackLayer = this.map.createLayer("decoBack", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.decoLayer = this.map.createLayer("deco", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.platformLayer = this.map.createLayer("platforms", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-        this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoBackLayer = this.map.createLayer("decoBack", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoLayer = this.map.createLayer("deco", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.platformLayer = this.map.createLayer("platforms", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
+        this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
 
         this.decoFrontLayer.setDepth(4);
         this.platformLayer.setDepth(3);
@@ -135,6 +136,14 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.world.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
+
+        this.runeImage = this.add.image(400, 400, 'tileSet1');
+        this.runeImage.setVisible(false);
+        this.runeImage.setDepth(100);
+
+        this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
+        this.eKeyText.setVisible(false); // Escondemos la letra "E" inicialmente
+        this.eKeyText.setDepth(100);
 
     }
 

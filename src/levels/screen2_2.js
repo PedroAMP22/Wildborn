@@ -28,12 +28,26 @@ export default class Screen2_2 extends ScreenBase {
             if(name === "pointA1"){
                 this.pointA1 = {x,y};
 
-            } else if(name === "pointA2")
+            } else if(name === "pointB1"){
                 this.pointB1 = {x,y};
-           
+            }else if(name === "pointA2"){
+                this.pointA2 = {x,y};
+
+            } else if(name === "pointB2"){
+                this.pointB2 = {x,y};
+            } else if(name === "pointC1"){
+                this.pointC1 = {x,y};
+            }else if(name === "pointC2"){
+                this.pointC2 = {x,y};
+
+            }
         });
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,40,30,false); 
+        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
+        this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2");    
+        this.movingBlock3 = new MovingBlock(this,8,this.pointC1,this.pointC2,48,32,false, "mossyBlock3x2");        
+        this.physics.add.collider(this.player, this.movingBlock3, this.player.collisionWithMovingBlock);    
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
+        this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
@@ -42,7 +56,7 @@ export default class Screen2_2 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen2_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
         this.scene.start('screen2_2',{point:"A",transformation:this.player.stateMachine.state.toString()});

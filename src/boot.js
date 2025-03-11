@@ -38,7 +38,11 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
+import rune from '../assets/sprites/runes/rune1.png'
 
+
+import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
+import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
 import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
 import screen1_2 from '../assets/tilemaps/levels/level_1/screen1_2.json'
 import screen1_3 from '../assets/tilemaps/levels/level_1/screen1_3.json'
@@ -55,12 +59,14 @@ import screen2_2 from '../assets/tilemaps/levels/level_2/screen2_2.json'
 
 import tileSet1 from '../assets/tilemaps/SheetA.png'
 import tileSet2 from '../assets/tilemaps/SheetB.png'
+import tileSet3 from '../assets/tilemaps/SheetC.png'
 import thorns from '../assets/tilemaps/thorns.png'
 import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
+import backgroundMountain from '../assets/tilemaps/backgrounds/MountainBG.png'
 
-//import movingBlock from '../assets/tilemaps/RockTile.png'
-import movingBlock from '../assets/sprites/blocks/mossyBlock3x2.png'
+import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
+import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -216,6 +222,8 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
     //Tile maps
+    this.load.tilemapTiledJSON('screen0_0',screen0_0);
+    this.load.tilemapTiledJSON('screen0_1',screen0_1);
     this.load.tilemapTiledJSON('screen1_1',screen1_1);
     this.load.tilemapTiledJSON('screen1_2',screen1_2);
     this.load.tilemapTiledJSON('screen1_3',screen1_3);
@@ -229,16 +237,23 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_2',screen2_2);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
+    this.load.image("tileSet3", tileSet3);
     this.load.image("ForestBG2", backgroundForest);
+    this.load.image("MountainBG", backgroundMountain);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
-    this.load.spritesheet('movingBlock', movingBlock, {
+    this.load.image("rune",rune);
+    this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
+    });
+    this.load.spritesheet('mossyBlock1x4', mossyBlock1x4, {
+      frameWidth : 16,
+      frameHeight : 64
     });
   }
 
   create() {
-    this.scene.start('screen1_1');
+    this.scene.start('screen0_1');
   }
 }

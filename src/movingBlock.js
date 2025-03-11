@@ -5,8 +5,8 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
      * @param {Phaser.Scene} scene
      * @param {Number} speed - Speed (default: 100)
      */
-    constructor(scene, speed,pointA,pointB,x,y,vertical) {
-        super(scene,pointA.x,pointA.y, 'movingBlock')
+    constructor(scene, speed,pointA,pointB,x,y,vertical, model) {
+        super(scene,pointA.x,pointA.y, model)
         this.speed = speed;
         
 

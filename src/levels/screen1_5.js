@@ -29,7 +29,7 @@ export default class Screen1_5 extends ScreenBase {
                 this.pointA1 = {x,y};
 
             } else if(name === "pointA2")
-                this.pointB1 = {x,y};
+                this.pointA2 = {x,y};
            
     });
 
@@ -37,7 +37,7 @@ export default class Screen1_5 extends ScreenBase {
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointB1,48,32,true); 
+        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
              
     }
