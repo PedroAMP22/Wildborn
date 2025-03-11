@@ -9,12 +9,12 @@ import ScreenBase from './screenBase.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Screenbase
  */
-export default class Screen2_2 extends ScreenBase {
+export default class Screen2_3 extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
-        super('screen2_2',"screen2_2" );
+        super('screen2_3',"screen2_3" );
     }
 
     /**
@@ -42,11 +42,11 @@ export default class Screen2_2 extends ScreenBase {
 
             }
         });
-        this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
+        this.movingBlock = new MovingBlock(this,8,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
         this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2");    
         this.movingBlock3 = new MovingBlock(this,8,this.pointC1,this.pointC2,48,32,false, "mossyBlock3x2");        
         this.physics.add.collider(this.player, this.movingBlock3, this.player.collisionWithMovingBlock);    
-        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
+        this.physics.add.collider(this.player, this.movingBlock, () => this.respawn());
         this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
@@ -56,9 +56,9 @@ export default class Screen2_2 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen2_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen2_2',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen2_3',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
 }

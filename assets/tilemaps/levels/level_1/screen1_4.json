@@ -191,6 +191,17 @@
                  "width":321.833333333333,
                  "x":82.5,
                  "y":314.833333333333
+                }, 
+                {
+                 "height":13.75,
+                 "id":14,
+                 "name":"killingZone",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":142.5,
+                 "x":481.25,
+                 "y":228.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -199,7 +210,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":14,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
