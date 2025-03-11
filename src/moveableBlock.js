@@ -30,7 +30,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, d)
     }
 
-    collisionWithAir(air,block){
+    collisionWithAir(block,air){
         if(block.pointC){
             if(block.point === block.pointA){
                 block.point = block.pointB;

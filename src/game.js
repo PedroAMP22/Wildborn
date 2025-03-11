@@ -31,11 +31,8 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-<<<<<<< Updated upstream
-    scene: [Boot, Screen0_0, Screen0_1, Screen1_0, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8,Screen2_1,Screen2_2,Screen2_3],
-=======
-    scene: [Boot, Screen0_0, Screen0_1, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8,Screen2_1,Screen2_2,Screen2_3,Screen3_1],
->>>>>>> Stashed changes
+    scene: [Boot, Screen0_0, Screen0_1, Screen1_0, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8,Screen2_1,Screen2_2,Screen2_3, Screen3_1],
+
     physics: {
         default: 'arcade',
         arcade: {
