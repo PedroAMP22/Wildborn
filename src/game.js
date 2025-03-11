@@ -2,6 +2,7 @@ import Boot from './boot.js';
 import Phaser from 'phaser';
 import Screen0_0 from './levels/screen0_0.js';
 import Screen0_1 from './levels/screen0_1.js';
+import Screen1_0 from './levels/screen1_0.js';
 import Screen1_1 from './levels/screen1_1.js';
 import Screen1_2 from './levels/screen1_2.js';
 import Screen1_3 from './levels/screen1_3.js';
@@ -29,7 +30,7 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, Screen0_0, Screen0_1, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8,Screen2_1,Screen2_2,Screen2_3],
+    scene: [Boot, Screen0_0, Screen0_1, Screen1_0, Screen1_1, Screen1_2, Screen1_3,Screen1_4,Screen1_4_Broken,Screen1_5,Screen1_6,Screen1_7,Screen1_8,Screen2_1,Screen2_2,Screen2_3],
     physics: {
         default: 'arcade',
         arcade: {

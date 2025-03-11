@@ -11,13 +11,13 @@ import { SnailState } from '../StateMachine/snailState';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Screen0_0 extends ScreenBase {
+export default class Screen1_0 extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
         
-        super('screen0_0',"screen0_0" );
+        super('screen1_0',"screen1_0" );
     }
 
     /**
@@ -42,17 +42,17 @@ export default class Screen0_0 extends ScreenBase {
         });
 
         //background image
-        this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
+        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
 
-        this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
+        this.textures.get("ForestBG2").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
         this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
     }
-
+    
     createBScreen(){
-        this.scene.start('screen0_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     
    
