@@ -38,6 +38,7 @@ export default class Screen3_1 extends ScreenBase {
         this.moveableBlock = new MoveableBlock(this,8,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2");           
         this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
+        this.physics.add.collider(this.moveableBlock, this.platformLayer);
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
@@ -47,7 +48,7 @@ export default class Screen3_1 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen2_2',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
         this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});

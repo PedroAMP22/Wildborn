@@ -453,7 +453,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     shoot(){
-        new Air(this.scene,this.x,this.y);
+        new Air(this.scene,this.x,this.y,this.flipX);
     }
 
 }

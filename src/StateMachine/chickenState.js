@@ -10,7 +10,7 @@ export class ChickenState extends State {
         this.scene = scene;
         this.player = scene.player;
 
-        this.player.body.setSize(7,13);
+        this.player.body.setSize(7,11);
         this.player.body.setOffset(10.5,14.5);
 
         this.jumpSpeed = -300;
