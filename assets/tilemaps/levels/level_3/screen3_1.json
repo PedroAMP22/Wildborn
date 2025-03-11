@@ -235,17 +235,6 @@
                  "y":489.734831818182
                 }, 
                 {
-                 "height":5.86367,
-                 "id":54,
-                 "name":"killingZone",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":223.2273,
-                 "x":161.219683333333,
-                 "y":265.526498333333
-                }, 
-                {
                  "height":0,
                  "id":76,
                  "name":"spawnpointA",
