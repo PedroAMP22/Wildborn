@@ -1,4 +1,5 @@
 import {State} from './state'
+import {Air} from '../air'
 
 export class ChickenState extends State {
     static NAME = "chicken";
@@ -57,7 +58,7 @@ export class ChickenState extends State {
                 this.isFlapping = true;
                 this.flapDirection = this.player.flipX; //dir
                 this.flapTimer = 0; //reset the timer
-
+                this.player.shoot();
                 this.player.anims.play("chickenFlap", true);
 
                 if (isFalling && !this.flapUsedInAir) {

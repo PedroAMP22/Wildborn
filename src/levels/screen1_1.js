@@ -59,7 +59,11 @@ export default class Screen1_1 extends ScreenBase {
     }
 
     createAScreen(){
+<<<<<<< Updated upstream
         this.scene.start('screen1_0',{point:"B",transformation:this.player.stateMachine.state.toString()});
+=======
+        this.scene.start('screen3_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+>>>>>>> Stashed changes
     }
     createBScreen(){
         this.scene.start('screen1_2',{point:"A",transformation:this.player.stateMachine.state.toString()});

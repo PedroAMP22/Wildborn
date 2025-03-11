@@ -5,6 +5,7 @@ import { MoleState } from './StateMachine/moleState';
 import { SquirrelState } from './StateMachine/squirrelState';
 import { PufferFishState } from './StateMachine/pufferFishState';
 import { ChickenState } from './StateMachine/chickenState';
+import {Air} from './air';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -285,6 +286,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.stateMachine.transform(PufferFishState.NAME);
         }
         else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+            
             this.stateMachine.transform(ChickenState.NAME);
         }
 
@@ -448,6 +450,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
             if (this.body.velocity.x < 0)
                 this.body.setVelocityX(0);
         }
+    }
+
+    shoot(){
+        new Air(this.scene,this.x,this.y);
     }
 
 }

@@ -142,9 +142,10 @@ export default class ScreenBase extends Phaser.Scene {
         this.runeImage.setDepth(100);
 
         this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
-        this.eKeyText.setVisible(false); // Escondemos la letra "E" inicialmente
+        this.eKeyText.setVisible(false);
         this.eKeyText.setDepth(100);
 
+        this.airGroup = this.physics.add.staticGroup();
     }
 
     respawn(){
