@@ -41,6 +41,13 @@ export default class Screen2_3 extends ScreenBase {
                 this.pointC2 = {x,y};
 
             }
+            else if(name === "posA1"){
+                this.posA1 = {x,y};
+            }else if(name === "posA2"){
+                this.posA2 = {x,y};
+            }else if(name === "posA3"){
+                this.posA3 = {x,y};
+            }
         });
         this.movingBlock = new MovingBlock(this,8,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
         this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2");    
@@ -48,6 +55,10 @@ export default class Screen2_3 extends ScreenBase {
         this.physics.add.collider(this.player, this.movingBlock3, this.player.collisionWithMovingBlock);    
         this.physics.add.collider(this.player, this.movingBlock, () => this.respawn());
         this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
+        this.moveableBlock = new MoveableBlock(this,8,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2");           
+        this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
+        this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
+        this.physics.add.collider(this.moveableBlock, this.platformLayer);
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
