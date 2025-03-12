@@ -55,7 +55,7 @@ export default class Screen2_2 extends ScreenBase {
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
         //background image
-        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
+        this.backgroundImage = this.add.image(0, 0, "CaveBG1").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
              
