@@ -7,7 +7,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
      */
     constructor(scene, speed,pointA,pointB,pointC,x,y,falling, model) {
         super(scene,pointA.x,pointA.y, model)
-        this.speed = speed;
+        this.speed = 50;
         
         this.pointA = pointA;
         this.pointB = pointB;
@@ -22,102 +22,29 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(true);
         this.body.setAllowGravity(falling);
         this.falling = falling;
-        this.body.setSize(x,y);
+        this.body.setSize(x - 1,y);
         this.body.setOffset(0,0);
         this.moving = false;
     }
 
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-       
+
         if(this.moving){
-            if(this.pointA.x > this.pointB.x){
-                if(this.point === this.pointA){
-                    if(this.x > this.pointB.x){
-                        this.body.setVelocity(-this.speed*dt,0);
-                    }
-                    else{
-                        this.moving = false;
-                        this.point = this.pointB;
-                    }
-                       
-                }
-                else if(this.point === this.pointB){
-                    if(this.pointObj === this.pointA){
-                        if(this.x < this.pointA.x){
-                            this.body.setVelocity(this.speed*dt,0);
-                        }
-                        else{
-                            this.moving = false;
-                            this.point = this.pointA;
-                        }
-                    }
-                    else{
-                        if(this.x > this.pointC.x){
-                            this.body.setVelocity(-this.speed*dt,0);
-                        }
-                        else{
-                            this.moving = false;
-                            this.point = this.pointC;
-                        }
-                    }
-                }
-                else{
-                    if(this.x < this.pointB.x){
-                        this.body.setVelocity(this.speed*dt,0);
-                    }
-                    else{
-                        this.moving = false;
-                        this.point = this.pointB;
-                    }
-                }
+            if(Math.abs( this.pointObj.x - this.x) > 0.17){
+                var dir = this.pointObj.x - this.point.x;
+                dir = dir / Math.abs(dir);
+                this.body.setVelocityX(this.speed * dir);
             }
             else{
-                if(this.point === this.pointA){
-                    if(this.x < this.pointB.x){
-                        this.body.setVelocity(this.speed*dt,0);
-                    }
-                    else{
-                        this.moving = false;
-                        this.point = this.pointB;
-                    }
-                       
-                }
-                else if(this.point === this.pointB){
-                    if(this.pointObj === this.pointA){
-                        if(this.x > this.pointA.x){
-                            this.body.setVelocity(-this.speed*dt,0);
-                        }
-                        else{
-                            this.moving = false;
-                            this.point = this.pointA;
-                        }
-                    }
-                    else{
-                        if(this.x < this.pointC.x){
-                            this.body.setVelocity(this.speed*dt,0);
-                        }
-                        else{
-                            this.moving = false;
-                            this.point = this.pointC;
-                        }
-                    }
-                }
-                else{
-                    if(this.x > this.pointB.x){
-                        this.body.setVelocity(-this.speed*dt,0);
-                    }
-                    else{
-                        this.moving = false;
-                        this.point = this.pointB;
-                    }
-                }
+                this.moving = false;
+                this.point = this.pointObj;
+
             }
-        }   
-        else{
-            this.body.setVelocity(0);
         }
-        
+        else{
+            this.body.setVelocityX(0);
+        }
     }
 
     collisionWithAir(block,air){
