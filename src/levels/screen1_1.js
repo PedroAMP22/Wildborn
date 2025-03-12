@@ -60,7 +60,7 @@ export default class Screen1_1 extends ScreenBase {
 
     createAScreen(){
 
-        this.scene.start('screen2_3',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen2_5',{point:"A",transformation:this.player.stateMachine.state.toString()});
 
     }
     createBScreen(){

@@ -36,7 +36,7 @@ export class SnailState extends State{
         
         if(this.player.checkPlaying("snailTrans")) canPlayIdle = false;
         
-        this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 4, this.player.y);
+        this.left = this.scene.platformLayer.getTileAtWorldXY(this.player.x - 5, this.player.y);
         this.right = this.scene.platformLayer.getTileAtWorldXY(this.player.x + 4, this.player.y);
         this.up = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y - 4);
         this.down = this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4);

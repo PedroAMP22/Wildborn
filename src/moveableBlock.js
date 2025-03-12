@@ -7,7 +7,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
      */
     constructor(scene, speed,pointA,pointB,pointC,x,y,falling, model) {
         super(scene,pointA.x,pointA.y, model)
-        this.speed = 50;
+        this.speed = speed * 10;
         
         this.pointA = pointA;
         this.pointB = pointB;
@@ -31,7 +31,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, dt);
 
         if(this.moving){
-            if(Math.abs( this.pointObj.x - this.x) > 0.17){
+            if(Math.abs( this.pointObj.x - this.x) > 0.5){
                 var dir = this.pointObj.x - this.point.x;
                 dir = dir / Math.abs(dir);
                 this.body.setVelocityX(this.speed * dir);
@@ -91,9 +91,12 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
                 }
             }
         }
-        console.log("aaaaaaaaaaaaaaaaaaa")
         
         air.destroy();
     }
 
+    respawn(){
+        this.setPosition(this.pointA.x,this.pointA.y)
+        this.point = this.pointA;
+    }
 }

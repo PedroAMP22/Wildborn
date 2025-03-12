@@ -56,7 +56,8 @@ export default class Screen2_3 extends ScreenBase {
         this.physics.add.collider(this.player, this.movingBlock3, this.player.collisionWithMovingBlock);    
         this.physics.add.collider(this.player, this.movingBlock, () => this.respawn());
         this.physics.add.collider(this.player, this.movingBlock2, () => this.respawn());
-        this.moveableBlock = new MoveableBlock(this,8,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2");           
+
+        this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,null,48,32,true, "mossyBlock3x2");           
         this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock, this.platformLayer);
@@ -72,5 +73,8 @@ export default class Screen2_3 extends ScreenBase {
     }
     createBScreen(){
         this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+    }
+    createCScreen(){
+        this.scene.start('screen2_5',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
 }
