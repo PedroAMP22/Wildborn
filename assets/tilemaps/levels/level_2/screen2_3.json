@@ -5,6 +5,8 @@
         {
          "id":2,
          "image":"..\/..\/backgrounds\/ForestBG2.png",
+         "imageheight":240,
+         "imagewidth":480,
          "name":"background",
          "opacity":1,
          "repeatx":true,
@@ -371,7 +373,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":185,
+                 "x":184,
                  "y":80
                 }],
          "opacity":1,
@@ -384,7 +386,7 @@
  "nextobjectid":81,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.10.1",
+ "tiledversion":"1.11.2",
  "tileheight":16,
  "tilesets":[
         {

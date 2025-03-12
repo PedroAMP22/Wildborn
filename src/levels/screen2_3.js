@@ -1,3 +1,4 @@
+import { MoveableBlock } from '../moveableBlock.js';
 import { MovingBlock } from '../movingBlock.js';
 import ScreenBase from './screenBase.js';
 

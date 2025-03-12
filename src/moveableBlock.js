@@ -117,6 +117,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         else{
             this.body.setVelocity(0);
         }
+        
     }
 
     collisionWithAir(block,air){
