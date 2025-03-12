@@ -121,51 +121,45 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
 
     collisionWithAir(block,air){
 
-        if(block.pointC){
-            if(block.pointA.x > block.pointB.x){
-                if(block.point === block.pointA){
-                    if(air.x > block.x){
-                        block.pointObj = block.pointB;
-                        block.moving = true;
-                    }
-
-                }
-                if(block.point === block.pointB){
-                    if(air.x > block.x)
-                        block.pointObj = block.pointC;
-                    else
-                        block.pointObj = block.pointA;
+        if(block.pointA.x > block.pointB.x){
+            if(block.point === block.pointA){
+                if(air.x > block.x){
+                    block.pointObj = block.pointB;
                     block.moving = true;
-                }
-                if(block.point === block.pointC){
-                    if(air.x < block.x){
-                        block.pointObj = block.pointB;
-                        block.moving = true;
-                    }
-
                 }
             }
-            else{
-                if(block.point === block.pointA){
-                    if(air.x < block.x){
-                        block.pointObj = block.pointB;
-                        block.moving = true;
-                    }
-
-                }
-                if(block.point === block.pointB){
-                    if(air.x < block.x)
-                        block.pointObj = block.pointC;
-                    else
-                        block.pointObj = block.pointA;
+            if(block.point === block.pointB){
+                if(air.x > block.x)
+                    block.pointObj = block.pointC;
+                else
+                    block.pointObj = block.pointA;
+                block.moving = true;
+            }
+            if(block.point === block.pointC){
+                if(air.x < block.x){
+                    block.pointObj = block.pointB;
                     block.moving = true;
                 }
-                if(block.point === block.pointC){
-                    if(air.x > block.x){
-                        block.pointObj = block.pointB;
-                        block.moving = true;
-                    }
-
+            }
+        }
+        else{
+            if(block.point === block.pointA){
+                if(air.x < block.x){
+                    block.pointObj = block.pointB;
+                    block.moving = true;
+                }
+            }
+            if(block.point === block.pointB){
+                if(air.x < block.x)
+                    block.pointObj = block.pointC;
+                else
+                    block.pointObj = block.pointA;
+                block.moving = true;
+            }
+            if(block.point === block.pointC){
+                if(air.x > block.x){
+                    block.pointObj = block.pointB;
+                    block.moving = true;
                 }
             }
         }

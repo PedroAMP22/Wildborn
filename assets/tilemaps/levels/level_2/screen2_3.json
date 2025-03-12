@@ -364,18 +364,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":79,
-                 "name":"posA3",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":184,
-                 "y":140
-                }, 
-                {
-                 "height":0,
                  "id":80,
                  "name":"posA2",
                  "point":true,
@@ -383,7 +371,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":184,
+                 "x":185,
                  "y":80
                 }],
          "opacity":1,
