@@ -35,7 +35,13 @@ export default class Screen1_8 extends ScreenBase {
     createAScreen(){
         this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
+
     createBScreen(){
-        this.scene.start('screen2_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.cameras.main.fadeOut(1000, 0, 0, 0); 
+        this.input.keyboard.enabled = false; 
+
+        this.time.delayedCall(1000, () => { 
+            this.scene.start('screen1_9_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
+        });
     }
 }

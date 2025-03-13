@@ -14,12 +14,13 @@ export default class Screen1_8 extends ScreenBase {
      * Constructor de la escena
      */
     constructor() {
-        super('screen1_8',"screen1_8" );
+        super('screen1_9_Broken',"screen1_9_Broken" );
     }
 
     init(data){
         super.init(data)
-        this.broken = data.broken;     
+        this.broken = data.broken;
+            
     }
 
     /**
@@ -34,20 +35,20 @@ export default class Screen1_8 extends ScreenBase {
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
-             
-    }
-    
-    createAScreen(){
-        this.scene.start('screen1_7',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        
+        if(!this.broken){
+            this.input.keyboard.enabled = false;
+            this.cameras.main.fadeIn(2000, 0, 0, 0); // Fade in from black
+            this.time.delayedCall(2000, () => { 
+                this.input.keyboard.enabled = true;
+            });
+        }
     }
 
+    createCScreen(){
+        this.scene.start('screen2_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+    }
     createBScreen(){
-        if(this.broken){
-            this.scene.start('screen1_9_Broken',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:this.broken});
-        }
-        else{
-            this.scene.start('screen1_9',{point:"A",transformation:this.player.stateMachine.state.toString()});
-        }
-        
+        this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
     }
 }
