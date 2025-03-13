@@ -1,4 +1,5 @@
 import ScreenBase from './screenBase.js';
+import { MoveableBlock } from '../moveableBlock.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -27,8 +28,35 @@ export default class Screen2_4_Broken extends ScreenBase {
 
         super.create()
         
-        
+        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
+            if(name === "posA1"){
+                this.posA1 = {x,y};
+            }else if(name === "posA2"){
+                this.posA2 = {x,y};
+            }else if(name === "posB1"){
+                this.posB1 = {x,y};
+            }else if(name === "posB2"){
+                this.posB2 = {x,y};
+            }
+        });
 
+        if(this.broken){
+            this.moveableBlock1 = new MoveableBlock(this,8,this.posA2,null,null,48,32,true, "mossyBlock3x2");           
+            this.moveableBlock2 = new MoveableBlock(this,8,this.posB2,null,null,48,32,true, "mossyBlock3x2");           
+        }
+        else{
+            this.moveableBlock1 = new MoveableBlock(this,8,this.posA1,this.posA2,null,48,32,true, "mossyBlock3x2");           
+            this.moveableBlock2 = new MoveableBlock(this,8,this.posB1,this.posB2,null,48,32,true, "mossyBlock3x2");           
+        }
+
+        this.physics.add.collider(this.player, this.moveableBlock1, this.player.collisionWithMovingBlock); 
+        this.physics.add.collider(this.airGroup, this.moveableBlock1, this.moveableBlock1.collisionWithAir); 
+        this.physics.add.collider(this.moveableBlock1, this.platformLayer);
+
+        this.physics.add.collider(this.player, this.moveableBlock2, this.player.collisionWithMovingBlock); 
+        this.physics.add.collider(this.airGroup, this.moveableBlock2, this.moveableBlock2.collisionWithAir); 
+        this.physics.add.collider(this.moveableBlock2, this.platformLayer);
+        
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
@@ -43,6 +71,14 @@ export default class Screen2_4_Broken extends ScreenBase {
         
     }
     
+    respawn(){
+        super.respawn()
+        
+        this.moveableBlock1.respawn()
+        this.moveableBlock2.respawn()
+           
+    }
+
     createBScreen(){
         this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
     }

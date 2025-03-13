@@ -72,7 +72,12 @@ export default class Screen2_3 extends ScreenBase {
         this.scene.start('screen2_2',{point:"B",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
-        this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        if(!this.broken){
+            this.scene.start('screen2_4_Broken',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:!this.broken});
+        }
+        else{
+            this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        }
     }
     createCScreen(){
         this.scene.start('screen2_5',{point:"A",transformation:this.player.stateMachine.state.toString()});
