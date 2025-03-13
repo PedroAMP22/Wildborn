@@ -5,15 +5,15 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
      * @param {Phaser.Scene} scene
      * @param {Number} speed - Speed (default: 100)
      */
-    constructor(scene, speed,pointA,pointB,pointC,x,y,falling, model) {
-        super(scene,pointA.x,pointA.y, model)
+    constructor(scene, speed,pointA,pointB,pointC,x,y,falling, model,spawnPoint) {
+        super(scene,spawnPoint.x,spawnPoint.y, model)
         this.speed = speed * 10;
         
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
-
-        this.point = pointA;
+        this.spawnPoint = spawnPoint;
+        this.point = spawnPoint;
         this.pointObj = null;
         this.setDepth(2);
         this.scene.physics.add.existing(this);
@@ -31,7 +31,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, dt);
 
         if(this.moving){
-            if(Math.abs( this.pointObj.x - this.x) > 0.5){
+            if(Math.abs( this.pointObj.x - this.x) > 0.6){
                 var dir = this.pointObj.x - this.point.x;
                 dir = dir / Math.abs(dir);
                 this.body.setVelocityX(this.speed * dir);
@@ -48,55 +48,70 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
     }
 
     collisionWithAir(block,air){
-
-        if(block.pointA.x > block.pointB.x){
-            if(block.point === block.pointA){
-                if(air.x > block.x){
-                    block.pointObj = block.pointB;
-                    block.moving = true;
-                }
-            }
-            if(block.point === block.pointB){
-                if(air.x > block.x)
-                    block.pointObj = block.pointC;
-                else
-                    block.pointObj = block.pointA;
-                block.moving = true;
-            }
-            if(block.point === block.pointC){
-                if(air.x < block.x){
-                    block.pointObj = block.pointB;
-                    block.moving = true;
-                }
-            }
+        if(block.moving){
+            var pointAux = block.point;
+            block.point = block.pointObj;
+            block.pointObj = pointAux;
         }
         else{
-            if(block.point === block.pointA){
-                if(air.x < block.x){
-                    block.pointObj = block.pointB;
-                    block.moving = true;
+            if(block.pointA.x > block.pointB.x){
+                if(block.point === block.pointA){
+                    if(air.x > block.x){
+                        block.pointObj = block.pointB;
+                        block.moving = true;
+                    }
+                }
+                if(block.point === block.pointB){
+                    if(air.x > block.x){
+                       
+                        if(block.pointC){
+                            block.pointObj = block.pointC;
+                            block.moving = true;
+                        }
+                    } 
+                    else{
+                        block.pointObj = block.pointA;
+                        block.moving = true;
+                    }
+                        
+                    
+                }
+                if(block.point === block.pointC){
+                    if(air.x < block.x){
+                        block.pointObj = block.pointB;
+                        block.moving = true;
+                    }
                 }
             }
-            if(block.point === block.pointB){
-                if(air.x < block.x)
-                    block.pointObj = block.pointC;
-                else
-                    block.pointObj = block.pointA;
-                block.moving = true;
-            }
-            if(block.point === block.pointC){
-                if(air.x > block.x){
-                    block.pointObj = block.pointB;
+            else{
+                if(block.point === block.pointA){
+                    if(air.x < block.x){
+                        block.pointObj = block.pointB;
+                        block.moving = true;
+                    }
+                }
+                if(block.point === block.pointB){
+                    if(air.x < block.x)
+                        block.pointObj = block.pointC;
+                    else
+                        block.pointObj = block.pointA;
                     block.moving = true;
+                }
+                if(block.point === block.pointC){
+                    if(air.x > block.x){
+                        block.pointObj = block.pointB;
+                        block.moving = true;
+                    }
                 }
             }
         }
+        
         
         air.destroy();
     }
 
     respawn(){
-        this.setPosition(this.pointA.x,this.pointA.y)
-        this.point = this.pointA;
+        this.setPosition(this.spawnPoint.x,this.spawnPoint.y)
+        this.point = this.spawnPoint;
     }
 }
