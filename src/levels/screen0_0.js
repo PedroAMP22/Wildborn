@@ -49,6 +49,7 @@ export default class Screen0_0 extends ScreenBase {
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
         this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
+        this.decoBackLayer.setTint(0x999999);
     }
 
     createBScreen(){
