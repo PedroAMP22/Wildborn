@@ -40,6 +40,7 @@ import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
 import rune from '../assets/sprites/runes/rune1.png'
 
+import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
@@ -234,6 +235,8 @@ export default class Boot extends Phaser.Scene {
       frameHeight : 32
     })
     //Tile maps
+    this.load.tilemapTiledJSON("screenMenu", screenMenu);
+
     this.load.tilemapTiledJSON('screen0_0',screen0_0);
     this.load.tilemapTiledJSON('screen0_1',screen0_1);
     this.load.tilemapTiledJSON('screen1_0',screen1_0);
@@ -277,5 +280,6 @@ export default class Boot extends Phaser.Scene {
 
   create() {
     this.scene.start('screen1_1');
+
   }
 }

@@ -1,5 +1,6 @@
 import Boot from './boot.js';
 import Phaser from 'phaser';
+import MenuScene from './menus/MenuScreen.js';
 import Screen0_0 from './levels/screen0_0.js';
 import Screen0_1 from './levels/screen0_1.js';
 import Screen1_0 from './levels/screen1_0.js';
@@ -37,6 +38,7 @@ let config = {
     },
     pixelArt: true,
     scene: [Boot, 
+        MenuScene,
         Screen0_0,
         Screen0_1, 
         Screen1_0,
