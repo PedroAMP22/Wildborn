@@ -294,7 +294,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.momentum = 0;
         }
         this.stateMachine.update(t,dt);
-        
+        if(this.body.velocity.x > 10){
+            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
+        }
+        else if(this.body.velocity.x < 10){
+            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
+        }
+        else{
+            this.scene.cameras.main.setFollowOffset(0,0);
+        }
+
     }
 
     playIdleIfPossible(canPlayIdle, idleName){

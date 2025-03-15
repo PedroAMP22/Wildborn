@@ -135,6 +135,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.world.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
+
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
         this.runeImage = this.add.image(400, 400, 'tileSet1');
