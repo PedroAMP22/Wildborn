@@ -23,6 +23,7 @@ import Screen2_4_Broken from './levels/screen2_4_Broken.js';
 import Screen3_1 from './levels/screen3_1.js';
 import Screen2_5 from './levels/screen2_5.js';
 import Screen2_6 from './levels/screen2_6.js';
+import Screen2_7 from './levels/screen2_7.js';
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
@@ -59,8 +60,10 @@ let config = {
         Screen2_4,
         Screen2_4_Broken,
         Screen2_5,
-        Screen3_1,
-        Screen2_6],
+        Screen2_6,
+        Screen2_7,
+        Screen3_1
+        ],
 
     physics: {
         default: 'arcade',
