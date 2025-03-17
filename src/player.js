@@ -210,12 +210,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "fishBig",
             frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 7,
         });
         this.scene.anims.create({
             key: "fishSmall",
             frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 7,
         });
         this.scene.anims.create({
             key: "fishTrans",
