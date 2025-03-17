@@ -1,0 +1,62 @@
+  body {
+    background: linear-gradient(to bottom, #5f0c9a, #6c4d82);
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+  }
+  
+  .custom-navbar {
+    background-color: #44146e;
+  }
+  
+  .navbar-brand .logo {
+    max-height: 50px;
+  }
+
+  .game-container {
+    height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #logo-placeholder {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-large {
+    max-width: 50%;
+    opacity: 1;
+  }
+  
+  #juego {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .description-section {
+    padding: 2rem 0;
+    text-align: center;
+  }
+  
+  .btn-custom {
+    background-color: #2ecc71;
+    border: none;
+    color: #fff;
+  }
+  
+  .btn-custom:hover {
+    background-color: #28b760;
+  }
+
+    
