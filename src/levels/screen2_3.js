@@ -62,7 +62,7 @@ export default class Screen2_3 extends ScreenBase {
         this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock, this.platformLayer);
         //background image
-        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
+        this.backgroundImage = this.add.image(0, 0, "CaveBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
              
