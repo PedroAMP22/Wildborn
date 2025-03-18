@@ -283,7 +283,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen2_5');
+    this.scene.start('screen2_6');
 
   }
 }
