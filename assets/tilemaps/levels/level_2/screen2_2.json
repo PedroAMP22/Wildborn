@@ -5,8 +5,6 @@
         {
          "id":2,
          "image":"..\/..\/backgrounds\/CaveBG1.png",
-         "imageheight":350,
-         "imagewidth":500,
          "name":"background",
          "offsetx":128,
          "offsety":0,
@@ -510,7 +508,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
@@ -518,7 +516,7 @@
  "nextobjectid":80,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.10.1",
  "tileheight":16,
  "tilesets":[
         {

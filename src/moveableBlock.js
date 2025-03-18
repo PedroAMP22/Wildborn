@@ -118,5 +118,6 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
     respawn(){
         this.setPosition(this.spawnPoint.x,this.spawnPoint.y)
         this.point = this.spawnPoint;
+        this.moving = false;
     }
 }
