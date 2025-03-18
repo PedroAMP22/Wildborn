@@ -25,6 +25,8 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         this.body.setSize(x - 1,y);
         this.body.setOffset(0,0);
         this.moving = false;
+        this.body.setCollideWorldBounds();
+
     }
 
     preUpdate(t, dt) {
@@ -44,6 +46,9 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         }
         else{
             this.body.setVelocityX(0);
+        }
+        if(!this.body.onFloor() && this.falling){
+           this.body.setAccelerationY(-1400)
         }
     }
 

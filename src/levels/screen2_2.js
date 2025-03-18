@@ -1,6 +1,5 @@
 import { MovingBlock } from '../movingBlock.js';
 import ScreenBase from './screenBase.js';
-import { Rune } from '../rune.js';
 
 
 /**
@@ -43,10 +42,7 @@ export default class Screen2_2 extends ScreenBase {
                 this.pointC2 = {x,y};
 
             }
-            else if(name === "rune"){
-                this.rune = new Rune(this,x,y);
-                this.player.setRune(this.rune);
-            }
+            
         });
         this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,true, "mossyBlock3x2"); 
         this.movingBlock2 = new MovingBlock(this,8,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2");    

@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import Player from '../player.js';
 import { DruidState } from '../StateMachine/druidState.js';
+import { Rune } from '../rune.js';
+
 
 export default class ScreenBase extends Phaser.Scene {
 
@@ -74,6 +76,10 @@ export default class ScreenBase extends Phaser.Scene {
                     killZone.setAlpha(0);  //to make it invisible
                     this.killingObjects.add(killZone);
                 }
+                else if(name === "rune"){
+                    this.rune = new Rune(this,x,y);
+                    
+                }
         });
 
         //Player creator
@@ -94,6 +100,7 @@ export default class ScreenBase extends Phaser.Scene {
         
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
+        this.player.setRune(this.rune);
 
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
@@ -138,7 +145,7 @@ export default class ScreenBase extends Phaser.Scene {
 
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
-        this.runeImage = this.add.image(400, 400, 'tileSet1');
+        this.runeImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
         this.runeImage.setVisible(false);
         this.runeImage.setDepth(100);
 

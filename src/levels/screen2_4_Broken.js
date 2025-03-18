@@ -41,8 +41,8 @@ export default class Screen2_4_Broken extends ScreenBase {
         });
 
         if(this.broken){
-            this.moveableBlock1 = new MoveableBlock(this,8,this.posA2,null,null,48,32,true, "mossyBlock3x2");           
-            this.moveableBlock2 = new MoveableBlock(this,8,this.posB2,null,null,48,32,true, "mossyBlock3x2");           
+            this.moveableBlock1 = new MoveableBlock(this,8,this.posA2,null,null,48,32,true, "mossyBlock3x2",this.posA2);           
+            this.moveableBlock2 = new MoveableBlock(this,8,this.posB2,null,null,48,32,true, "mossyBlock3x2",this.posB2);           
         }
         else{
             this.moveableBlock1 = new MoveableBlock(this,8,this.posA1,this.posA2,null,48,32,true, "mossyBlock3x2",this.posA1);           

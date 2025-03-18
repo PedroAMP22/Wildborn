@@ -49,6 +49,7 @@ export default class Screen2_6 extends ScreenBase {
             }else if(name === "posE2"){
                 this.posE2 = {x,y};
             }
+            
         });
         
         this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2",this.posA2);           

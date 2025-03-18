@@ -43,10 +43,7 @@ export default class Screen1_2 extends ScreenBase  {
                 } else if(name === "pointB2"){
                     this.pointB2 = {x,y};
                 }
-                else if(name === "rune"){
-                    this.rune = new Rune(this,x,y);
-                    this.player.setRune(this.rune);
-                }
+                
         });
 
 

@@ -83,6 +83,9 @@ import backgroundCave2 from '../assets/tilemaps/backgrounds/CaveBG2.png'
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 
+import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
+
+
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
  * Esta escena se puede mejorar añadiendo una imagen del juego y una 
@@ -272,6 +275,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
     this.load.image("rune",rune);
+    this.load.image("snailInfo",snailInfo);
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
