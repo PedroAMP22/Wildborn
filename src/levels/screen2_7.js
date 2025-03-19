@@ -44,7 +44,7 @@ export default class Screen2_7 extends ScreenBase {
         
         this.movingBlock = new MovingBlock(this,4,this.pointA1,this.pointA2,16,64,true, "mossyBlock1x4");
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
-        this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2",this.posA1);           
+        this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,this.posA3,48,32,true, "icyBlock3x2",this.posA1);           
         this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
         this.physics.add.overlap(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock, this.platformLayer);

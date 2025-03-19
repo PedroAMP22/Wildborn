@@ -48,22 +48,22 @@ export default class Screen2_5 extends ScreenBase {
             }
         });
         
-        this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,null,48,32,true, "mossyBlock3x2",this.posA1);           
+        this.moveableBlock = new MoveableBlock(this,5,this.posA1,this.posA2,null,48,32,true, "icyBlock3x2",this.posA1);           
         this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock, this.platformLayer);
 
-        this.moveableBlock2 = new MoveableBlock(this,5,this.posB1,this.posB2,null,48,32,true, "mossyBlock3x2",this.posB1);           
+        this.moveableBlock2 = new MoveableBlock(this,5,this.posB1,this.posB2,null,48,32,true, "icyBlock3x2",this.posB1);           
         this.physics.add.collider(this.player, this.moveableBlock2, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock2, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock2, this.platformLayer);
 
-        this.moveableBlock3 = new MoveableBlock(this,5,this.posC1,this.posC2,null,48,32,false, "mossyBlock3x2",this.posC1);           
+        this.moveableBlock3 = new MoveableBlock(this,5,this.posC1,this.posC2,null,48,32,false, "icyBlock3x2",this.posC1);           
         this.physics.add.collider(this.player, this.moveableBlock3, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock3, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock3, this.platformLayer);
 
-        this.moveableBlock5 = new MoveableBlock(this,8,this.posE1,this.posE2,null,48,32,false, "mossyBlock3x2",this.posE1);           
+        this.moveableBlock5 = new MoveableBlock(this,8,this.posE1,this.posE2,null,48,32,false, "icyBlock3x2",this.posE1);           
         this.physics.add.collider(this.player, this.moveableBlock5, this.player.collisionWithMovingBlock); 
         this.physics.add.collider(this.airGroup, this.moveableBlock5, this.moveableBlock.collisionWithAir); 
         this.physics.add.collider(this.moveableBlock5, this.platformLayer);
