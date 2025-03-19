@@ -82,6 +82,10 @@ import backgroundCave2 from '../assets/tilemaps/backgrounds/CaveBG2.png'
 
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
+import icyBlock3x2 from '../assets/sprites/blocks/icyBlock3x2.png'
+import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
+import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
+
 
 import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
 
@@ -276,6 +280,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image("spikes",spikes);
     this.load.image("rune",rune);
     this.load.image("snailInfo",snailInfo);
+    this.load.image("icyBlock3x2",icyBlock3x2);
+    this.load.image("caveBlock3x2",caveBlock3x2);
+    this.load.image("spikedBlock2x2",spikedBlock2x2);
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
@@ -287,7 +294,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen2_7');
+    this.scene.start('screen1_4');
 
   }
 }

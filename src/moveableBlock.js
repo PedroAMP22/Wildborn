@@ -33,7 +33,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         super.preUpdate(t, dt);
 
         if(this.moving){
-            if(Math.abs( this.pointObj.x - this.x) > 0.6){
+            if(Math.abs( this.pointObj.x - this.x) > 0.65){
                 var dir = this.pointObj.x - this.point.x;
                 dir = dir / Math.abs(dir);
                 this.body.setVelocityX(this.speed * dir);
@@ -46,9 +46,6 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         }
         else{
             this.body.setVelocityX(0);
-        }
-        if(!this.body.onFloor() && this.falling){
-           this.body.setAccelerationY(-1400)
         }
     }
 

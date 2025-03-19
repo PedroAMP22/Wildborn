@@ -1,4 +1,5 @@
 import { MovingBlock } from '../movingBlock.js';
+import { SquirrelState } from '../StateMachine/squirrelState.js';
 import ScreenBase from './screenBase.js';
 
 /**
@@ -35,10 +36,32 @@ export default class Screen1_4 extends ScreenBase {
         this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
     }
     createBScreen(){
-        this.cameras.main.fadeOut(1000, 0, 0, 0); 
+        this.physics.world.removeCollider(this.bScreenOverlap);
+    
+        // Deactivate keyboard control
+        this.map.layers.forEach(layer => {
+            layer.tilemapLayer.setVisible(false);
+        });
+        this.player.body.stop();
+        this.backgroundImage.setVisible(false);
+        this.input.keyboard.enabled = false;
+        this.cameras.main.setZoom(1.5);
+        this.player.body.setAllowGravity(false);
+        this.cameras.main.setFollowOffset(0);
+        this.player.setPosition(100,100)
+        this.time.delayedCall(1000, () => { 
+            this.player.stateMachine.transform(SquirrelState.NAME);
+            this.player.body.setAllowGravity(false);
+            this.cameras.main.setZoom(2);
+            
+        });
+        this.time.delayedCall(3000, () => { 
+            this.cameras.main.fadeOut(1000, 0, 0, 0); 
+        });
+        
         this.input.keyboard.enabled = false; 
 
-        this.time.delayedCall(1000, () => { 
+        this.time.delayedCall(4000, () => { 
             this.scene.start('screen1_4_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
         });
     }

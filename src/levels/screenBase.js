@@ -114,14 +114,15 @@ export default class ScreenBase extends Phaser.Scene {
         this.decoLayer = this.map.createLayer("deco", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
         this.platformLayer = this.map.createLayer("platforms", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
         this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-
+        
         this.decoFrontLayer.setDepth(4);
         this.platformLayer.setDepth(3);
         this.decoLayer.setDepth(1);
         this.decoBackLayer.setDepth(0);
-
+        
         this.platformLayer.setCollisionByExclusion([-1]);
 
+        
              
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
@@ -131,7 +132,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
             this.createAScreen();
         });
-        this.physics.add.overlap(this.player, this.spawnZoneB, () => {
+        this.bScreenOverlap = this.physics.add.overlap(this.player, this.spawnZoneB, () => {
             this.createBScreen();
         });
         this.physics.add.overlap(this.player, this.spawnZoneC, () => {
