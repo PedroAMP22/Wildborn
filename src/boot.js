@@ -309,7 +309,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen2_1');
+    this.scene.start('screenMenu');
 
   }
 }
