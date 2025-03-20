@@ -1,12 +1,18 @@
 import ScreenBase from "../levels/screenBase";
 
+import titleImage from "../../assets/tilemaps/menuImages/MenuTitle.png"
+import playButtonHighlight from "../../assets/tilemaps/menuImages/playButtonHighlight.png"
+import playButtonImage from "../../assets/tilemaps/menuImages/playButton.png"
+
 export default class MenuScene extends ScreenBase {
     constructor() {
         super('screenMenu', "screenMenu");
     }
 
     preload() {
-        this.load.image('wildBornTitle', '../../assets/tilemaps/menuImages/MenuTitle.png');
+        this.load.image('wildBornTitle', titleImage);
+        this.load.image('playButtonImage', playButtonImage);
+        this.load.image('playButtonHighlight', playButtonHighlight)
     }
 
     create() {
@@ -26,37 +32,62 @@ export default class MenuScene extends ScreenBase {
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
         
         //TODO This will be set at false when the menu is done
-        this.input.keyboard.enabled = true;
+        this.input.keyboard.enabled = false;
 
         this.cameras.main.setZoom(0.8);
-
-        
-
 
         this.createMenu();
 
     }
 
     createMenu() {
-        // Menu Background Panel
-        const titleImage = this.add.image(250, 130, 'wildBornTitle');
+        // Menu Title 
+        const titleImage = this.add.image(250, 125, 'wildBornTitle');
         titleImage.setOrigin(0.5); 
         titleImage.setDepth(10)
-        titleImage.setScale(0.20)
+        titleImage.setScale(1)
 
-        this.cameras.main.startFollow(this.cameraFocus,true,0.1, 50)
-        
+        this.playing= false;
+
+
+        this.playButton = this.add.image(255, 200, 'playButtonImage')
+            .setOrigin(0.5)
+            .setInteractive() 
+            .on('pointerover', () => {
+                this.playButton.setTexture('playButtonHighlight')
+            })
+            .on('pointerout', () => {
+                this.playButton.setTexture('playButtonImage');
+            })
+            .on('pointerdown', () => {
+                this.play()
+            })
+            .setDepth(10)
+               
+
+
+        // The camera focus on an object, so it doesnt move when the character starts moving
+        this.cameras.main.startFollow(this.cameraFocus,true, true, 50)  
+    
     }
 
-    play(){
-        this.time.delayedCall(100, () => {
-            this.input.keyboard.enabled = true;
-            this.player.body.setVelocityX(50);
-        });
-    }
+    
     createAScreen(){
         this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     createBScreen(){
     }
+
+    play(){
+        this.playing = true;
+        
+    }
+
+    update(){
+        if(this.playing){
+            this.player.body.setVelocityX(10);
+            this.player.setPosition(this.player.x + 2, this.player.y)
+        }
+    }
+
 }
