@@ -27,6 +27,12 @@ export default class ScreenBase extends Phaser.Scene {
     }
 
     create(){
+        this.anims.create({
+            key:"rune",
+            frames: this.anims.generateFrameNumbers('rune', { start: 0, end: 15 }),
+            frameRate: 10,
+            repeat:-1
+        });
         this.map = this.make.tilemap({key: this.levelkey });
 
         //spawnpoint and killing zones
@@ -81,6 +87,8 @@ export default class ScreenBase extends Phaser.Scene {
                     
                 }
         });
+
+        
 
         //Player creator
         if(this.point){
@@ -145,10 +153,6 @@ export default class ScreenBase extends Phaser.Scene {
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
 
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
-
-        this.runeImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
-        this.runeImage.setVisible(false);
-        this.runeImage.setDepth(100);
 
         this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
         this.eKeyText.setVisible(false);

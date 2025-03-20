@@ -57,6 +57,10 @@ export default class Screen1_2 extends ScreenBase  {
         this.movingBlock2 = new MovingBlock(this,6,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2")        
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
+
+        this.runeImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.runeImage.setVisible(false);
+        this.runeImage.setDepth(100);
   
     }
 

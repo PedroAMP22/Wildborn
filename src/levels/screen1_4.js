@@ -48,7 +48,7 @@ export default class Screen1_4 extends ScreenBase {
         this.cameras.main.setZoom(1.5);
         this.player.body.setAllowGravity(false);
         this.cameras.main.setFollowOffset(0);
-        this.player.setPosition(100,100)
+        this.player.setPosition(200,180)
         this.time.delayedCall(1000, () => { 
             this.player.stateMachine.transform(SquirrelState.NAME);
             this.player.body.setAllowGravity(false);

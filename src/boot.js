@@ -38,7 +38,7 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
-import rune from '../assets/sprites/runes/rune1.png'
+import rune from '../assets/sprites/runes/rune1Spin.png'
 
 import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
 
@@ -88,6 +88,10 @@ import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
+import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
+import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
+import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
+import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
 
 
 /**
@@ -243,6 +247,10 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     })
+    this.load.spritesheet('rune', rune, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
     //Tile maps
     this.load.tilemapTiledJSON("screenMenu", screenMenu);
 
@@ -278,8 +286,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image("CaveBG2", backgroundCave2);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
-    this.load.image("rune",rune);
     this.load.image("snailInfo",snailInfo);
+    this.load.image("moleInfo",MoleInfo);
+    this.load.image("squirrelInfo",SquirrelInfo);
+    this.load.image("moleInfo",MoleInfo);
+    this.load.image("fishInfo",FishInfo);
+    this.load.image("chickenInfo",ChickenInfo);
     this.load.image("icyBlock3x2",icyBlock3x2);
     this.load.image("caveBlock3x2",caveBlock3x2);
     this.load.image("spikedBlock2x2",spikedBlock2x2);
@@ -294,7 +306,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screen1_4');
+    this.scene.start('screen1_0');
 
   }
 }
