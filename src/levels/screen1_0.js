@@ -24,7 +24,7 @@ export default class Screen1_0 extends ScreenBase {
      * Creación de los elementos de la escena principal de juego
      */
     create() {
-
+        
         super.create()
 
         //spawnpoint and killing zones
@@ -55,5 +55,4 @@ export default class Screen1_0 extends ScreenBase {
         this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }
     
-   
 }

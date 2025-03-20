@@ -4,6 +4,7 @@ import { DruidState } from '../StateMachine/druidState.js';
 import { Rune } from '../rune.js';
 
 
+
 export default class ScreenBase extends Phaser.Scene {
 
     /**
@@ -14,6 +15,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.key = key
         this.levelkey = levelkey
     }
+
 
     init(data){
         this.point = data.point;
@@ -34,6 +36,26 @@ export default class ScreenBase extends Phaser.Scene {
             repeat:-1
         });
         this.map = this.make.tilemap({key: this.levelkey });
+
+        //musicote
+        let trackKey = null;
+        if (this.key.startsWith('screen1')) {
+            trackKey = 'bosque_musica';
+        } else if (this.key.startsWith('screen2')) {
+            trackKey = 'bosque_musica';
+        }
+    
+        if (trackKey) {
+            //no hay música reproducida o la pista actual es distinta, cámbiala.
+            if (!this.game.music || this.game.currentTrack !== trackKey) {
+                if (this.game.music) {
+                    this.game.music.stop();
+                }
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
+                this.game.music.play();
+                this.game.currentTrack = trackKey;
+            }
+        }
 
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");

@@ -88,11 +88,10 @@ import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
-import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
-import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
-import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
-import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
 
+
+
+import bosqueMusica from '../assets/music/bosque.mp3';
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -303,10 +302,14 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 16,
       frameHeight : 64
     });
+
+    //MUSICA
+    this.load.audio('bosque_musica', bosqueMusica);
+
   }
 
   create() {
-    this.scene.start('screen1_0');
+    this.scene.start('screen2_1');
 
   }
 }
