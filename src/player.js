@@ -5,6 +5,7 @@ import { MoleState } from './StateMachine/moleState';
 import { SquirrelState } from './StateMachine/squirrelState';
 import { PufferFishState } from './StateMachine/pufferFishState';
 import { ChickenState } from './StateMachine/chickenState';
+import {Air} from './air';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -209,12 +210,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "fishBig",
             frames: this.anims.generateFrameNumbers('fishBig', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 7,
         });
         this.scene.anims.create({
             key: "fishSmall",
             frames: this.anims.generateFrameNumbers('fishSmall', { start: 0, end: 7 }),
-            frameRate: 20,
+            frameRate: 7,
         });
         this.scene.anims.create({
             key: "fishTrans",
@@ -226,7 +227,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: "chickenIdle",
             frames: this.anims.generateFrameNumbers('chickenIdle', { start: 0, end: 8 }),
-            frameRate: 10,
+            frameRate: 5,
         });
         this.scene.anims.create({
             key: "chickenFlap",
@@ -285,6 +286,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.stateMachine.transform(PufferFishState.NAME);
         }
         else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+            
             this.stateMachine.transform(ChickenState.NAME);
         }
 
@@ -292,7 +294,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.momentum = 0;
         }
         this.stateMachine.update(t,dt);
-        
+        if(this.body.velocity.x > 10){
+            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
+        }
+        else if(this.body.velocity.x < 10){
+            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
+        }
+        else{
+            this.scene.cameras.main.setFollowOffset(0,0);
+        }
+
     }
 
     playIdleIfPossible(canPlayIdle, idleName){
@@ -448,6 +459,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
             if (this.body.velocity.x < 0)
                 this.body.setVelocityX(0);
         }
+    }
+
+    shoot(){
+        new Air(this.scene,this.x,this.y,this.flipX);
     }
 
 }

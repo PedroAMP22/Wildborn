@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import Player from '../player.js';
 import { DruidState } from '../StateMachine/druidState.js';
+import { Rune } from '../rune.js';
+
+
 
 export default class ScreenBase extends Phaser.Scene {
 
@@ -12,6 +15,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.key = key
         this.levelkey = levelkey
     }
+
 
     init(data){
         this.point = data.point;
@@ -25,7 +29,33 @@ export default class ScreenBase extends Phaser.Scene {
     }
 
     create(){
+        this.anims.create({
+            key:"rune",
+            frames: this.anims.generateFrameNumbers('rune', { start: 0, end: 15 }),
+            frameRate: 10,
+            repeat:-1
+        });
         this.map = this.make.tilemap({key: this.levelkey });
+
+        //musicote
+        let trackKey = null;
+        if (this.key.startsWith('screen1')) {
+            trackKey = 'bosque_musica';
+        } else if (this.key.startsWith('screen2')) {
+            trackKey = 'bosque_musica';
+        }
+    
+        if (trackKey) {
+            //no hay música reproducida o la pista actual es distinta, cámbiala.
+            if (!this.game.music || this.game.currentTrack !== trackKey) {
+                if (this.game.music) {
+                    this.game.music.stop();
+                }
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
+                this.game.music.play();
+                this.game.currentTrack = trackKey;
+            }
+        }
 
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
@@ -74,7 +104,13 @@ export default class ScreenBase extends Phaser.Scene {
                     killZone.setAlpha(0);  //to make it invisible
                     this.killingObjects.add(killZone);
                 }
+                else if(name === "rune"){
+                    this.rune = new Rune(this,x,y);
+                    
+                }
         });
+
+        
 
         //Player creator
         if(this.point){
@@ -94,6 +130,7 @@ export default class ScreenBase extends Phaser.Scene {
         
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
+        this.player.setRune(this.rune);
 
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
@@ -107,14 +144,15 @@ export default class ScreenBase extends Phaser.Scene {
         this.decoLayer = this.map.createLayer("deco", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
         this.platformLayer = this.map.createLayer("platforms", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
         this.decoFrontLayer = this.map.createLayer("decoFront", [this.tileset3, this.tileset2,this.tileset1, this.thonsTileSet, this.spikesTileSet]);
-
+        
         this.decoFrontLayer.setDepth(4);
         this.platformLayer.setDepth(3);
         this.decoLayer.setDepth(1);
         this.decoBackLayer.setDepth(0);
-
+        
         this.platformLayer.setCollisionByExclusion([-1]);
 
+        
              
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
@@ -124,7 +162,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
             this.createAScreen();
         });
-        this.physics.add.overlap(this.player, this.spawnZoneB, () => {
+        this.bScreenOverlap = this.physics.add.overlap(this.player, this.spawnZoneB, () => {
             this.createBScreen();
         });
         this.physics.add.overlap(this.player, this.spawnZoneC, () => {
@@ -135,16 +173,14 @@ export default class ScreenBase extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.world.setBounds(0,0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
+
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
-        this.runeImage = this.add.image(400, 400, 'tileSet1');
-        this.runeImage.setVisible(false);
-        this.runeImage.setDepth(100);
-
         this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
-        this.eKeyText.setVisible(false); // Escondemos la letra "E" inicialmente
+        this.eKeyText.setVisible(false);
         this.eKeyText.setDepth(100);
 
+        this.airGroup = this.physics.add.staticGroup();
     }
 
     respawn(){

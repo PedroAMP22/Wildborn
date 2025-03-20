@@ -57,7 +57,7 @@ export class MoleState extends State {
         }
          //HIDE IN WALL OR FLOOR AND START PROPULSION
 
-        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden) {
+        if (Phaser.Input.Keyboard.JustDown(this.player.keys.down) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden && !this.canJump) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setVelocityX(0);
@@ -67,7 +67,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE DOWN
-        if (this.player.body.blocked.down && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden && this.lastSpeed > 0) {
+        if (this.player.body.blocked.down && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden && this.lastSpeed > 0 && !this.canJump) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -80,7 +80,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE LEFT
-        if (this.player.keys.left.isDown && this.player.body.blocked.left && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y).index === 193  && !this.hidden) {
+        if (this.player.keys.left.isDown && this.player.body.blocked.left && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x - 6, this.player.y).index === 193  && !this.hidden && !this.canJump) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -94,7 +94,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         }
         //HIDE RIGHT
-        if (this.player.keys.right.isDown && this.player.body.blocked.right && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y).index === 193 && !this.hidden) {
+        if (this.player.keys.right.isDown && this.player.body.blocked.right && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) && this.scene.platformLayer.getTileAtWorldXY(this.player.x + 6, this.player.y).index === 193 && !this.hidden && !this.canJump) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);
@@ -108,7 +108,7 @@ export class MoleState extends State {
             this.player.momentum = 0;
         } 
         //HIDE UP
-        if (this.player.body.blocked.top && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden) {
+        if (this.player.body.blocked.top && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4) && this.scene.platformLayer.getTileAtWorldXY(this.player.x, this.player.y + 4).index === 193 && !this.hidden && !this.canJump ) {
             this.player.anims.play("moleHide",true);
             this.hidden = true;
             this.player.body.setAllowGravity(false);

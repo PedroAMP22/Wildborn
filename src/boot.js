@@ -38,11 +38,13 @@ import chickenIdle from '../assets/sprites/chicken/idleChicken.png'
 import chickenRun from '../assets/sprites/chicken/runChicken.png'
 import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
-import rune from '../assets/sprites/runes/rune1.png'
+import rune from '../assets/sprites/runes/rune1Spin.png'
 
+import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
+import screen1_0 from '../assets/tilemaps/levels/level_1/screen1_0.json'
 import screen1_1 from '../assets/tilemaps/levels/level_1/screen1_1.json'
 import screen1_2 from '../assets/tilemaps/levels/level_1/screen1_2.json'
 import screen1_3 from '../assets/tilemaps/levels/level_1/screen1_3.json'
@@ -52,8 +54,19 @@ import screen1_5 from '../assets/tilemaps/levels/level_1/screen1_5.json'
 import screen1_6 from '../assets/tilemaps/levels/level_1/screen1_6.json'
 import screen1_7 from '../assets/tilemaps/levels/level_1/screen1_7.json'
 import screen1_8 from '../assets/tilemaps/levels/level_1/screen1_8.json'
+import screen1_9 from '../assets/tilemaps/levels/level_1/screen1_9.json'
+import screen1_9_Broken from '../assets/tilemaps/levels/level_1/screen1_9_Broken.json'
 import screen2_1 from '../assets/tilemaps/levels/level_2/screen2_1.json'
 import screen2_2 from '../assets/tilemaps/levels/level_2/screen2_2.json'
+import screen2_3 from '../assets/tilemaps/levels/level_2/screen2_3.json'
+import screen2_4 from '../assets/tilemaps/levels/level_2/screen2_4.json'
+import screen2_4_Broken from '../assets/tilemaps/levels/level_2/screen2_4_Broken.json'
+import screen2_5 from '../assets/tilemaps/levels/level_2/screen2_5.json'
+import screen2_6 from '../assets/tilemaps/levels/level_2/screen2_6.json'
+import screen2_7 from '../assets/tilemaps/levels/level_2/screen2_7.json'
+import screen3_1 from '../assets/tilemaps/levels/level_3/screen3_1.json'
+
+
 
 
 
@@ -64,9 +77,21 @@ import thorns from '../assets/tilemaps/thorns.png'
 import spikes from '../assets/tilemaps/Spikes.png'
 import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 import backgroundMountain from '../assets/tilemaps/backgrounds/MountainBG.png'
+import backgroundCave from '../assets/tilemaps/backgrounds/CaveBG1.png'
+import backgroundCave2 from '../assets/tilemaps/backgrounds/CaveBG2.png'
 
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
+import icyBlock3x2 from '../assets/sprites/blocks/icyBlock3x2.png'
+import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
+import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
+
+
+import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
+
+
+
+import bosqueMusica from '../assets/music/bosque.mp3';
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -221,9 +246,16 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     })
+    this.load.spritesheet('rune', rune, {
+      frameWidth : 32,
+      frameHeight : 32
+    })
     //Tile maps
+    this.load.tilemapTiledJSON("screenMenu", screenMenu);
+
     this.load.tilemapTiledJSON('screen0_0',screen0_0);
     this.load.tilemapTiledJSON('screen0_1',screen0_1);
+    this.load.tilemapTiledJSON('screen1_0',screen1_0);
     this.load.tilemapTiledJSON('screen1_1',screen1_1);
     this.load.tilemapTiledJSON('screen1_2',screen1_2);
     this.load.tilemapTiledJSON('screen1_3',screen1_3);
@@ -233,16 +265,35 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen1_6',screen1_6);
     this.load.tilemapTiledJSON('screen1_7',screen1_7);
     this.load.tilemapTiledJSON('screen1_8',screen1_8);
+    this.load.tilemapTiledJSON('screen1_9',screen1_9);
+    this.load.tilemapTiledJSON('screen1_9_Broken',screen1_9_Broken);
     this.load.tilemapTiledJSON('screen2_1',screen2_1);
     this.load.tilemapTiledJSON('screen2_2',screen2_2);
+    this.load.tilemapTiledJSON('screen2_3',screen2_3);
+    this.load.tilemapTiledJSON('screen2_4',screen2_4);
+    this.load.tilemapTiledJSON('screen2_4_Broken',screen2_4_Broken);
+    this.load.tilemapTiledJSON('screen2_5',screen2_5);
+    this.load.tilemapTiledJSON('screen2_6',screen2_6);
+    this.load.tilemapTiledJSON('screen2_7',screen2_7);
+    this.load.tilemapTiledJSON('screen3_1',screen3_1);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("tileSet3", tileSet3);
     this.load.image("ForestBG2", backgroundForest);
     this.load.image("MountainBG", backgroundMountain);
+    this.load.image("CaveBG1", backgroundCave);
+    this.load.image("CaveBG2", backgroundCave2);
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
-    this.load.image("rune",rune);
+    this.load.image("snailInfo",snailInfo);
+    this.load.image("moleInfo",MoleInfo);
+    this.load.image("squirrelInfo",SquirrelInfo);
+    this.load.image("moleInfo",MoleInfo);
+    this.load.image("fishInfo",FishInfo);
+    this.load.image("chickenInfo",ChickenInfo);
+    this.load.image("icyBlock3x2",icyBlock3x2);
+    this.load.image("caveBlock3x2",caveBlock3x2);
+    this.load.image("spikedBlock2x2",spikedBlock2x2);
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
@@ -251,9 +302,14 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 16,
       frameHeight : 64
     });
+
+    //MUSICA
+    this.load.audio('bosque_musica', bosqueMusica);
+
   }
 
   create() {
-    this.scene.start('screen0_1');
+    this.scene.start('screenMenu');
+
   }
 }

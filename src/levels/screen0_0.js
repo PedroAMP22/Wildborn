@@ -49,41 +49,9 @@ export default class Screen0_0 extends ScreenBase {
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
         this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
+        this.decoBackLayer.setTint(0x999999);
     }
 
-    triggerFunction(player) {
-        // Remove collider (weird loop if not)
-        this.physics.world.removeCollider(this.overlapEvent);
-    
-        // Deactivate keyboard control
-        this.input.keyboard.enabled = false;
-        player.body.stop()
-        player.body.setVelocityY(-50);
-        
-        player.body.setAllowGravity(false)
-    
-    
-        this.time.delayedCall(500, () => {
-            player.stateMachine.transform(SnailState.NAME);
-            player.body.setAllowGravity(false)
-            player.body.stop()
-
-
-        });
-    
-        // Restore normal gameplay
-        this.time.delayedCall(2000, () => {
-            this.input.keyboard.enabled = true;
-            player.body.setAllowGravity(true)
-            console.log("Se restauró el control del jugador.");
-        });
-    }
-    
-    
-
-    createAScreen(){
-        this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString()});
-    }
     createBScreen(){
         this.scene.start('screen0_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
     }

@@ -49,7 +49,7 @@ export class SquirrelState extends State {
         if(this.player.body.onFloor()){
             this.hasGlided = false;
         }
-        if(this.onBlock)
+        if(this.onBlock && this.player.body.onFloor())
             this.player.anims.play("squirrelIdle",true)
 
         if (this.player.body.velocity.x !== 0 && !this.isGliding && this.player.body.onFloor()) {

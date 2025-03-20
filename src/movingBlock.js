@@ -16,6 +16,7 @@ export class MovingBlock extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.body.setImmovable(true);
         this.body.setAllowGravity(false);
+        
        
         this.body.setSize(x,y);
         this.body.setOffset(0,0);

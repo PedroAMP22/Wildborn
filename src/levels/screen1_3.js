@@ -40,7 +40,7 @@ export default class Screen1_3 extends ScreenBase {
             } else if(name === "pointA2")
                 this.pointB1 = {x,y};
            
-    });
+        });
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);

@@ -43,10 +43,7 @@ export default class Screen1_2 extends ScreenBase  {
                 } else if(name === "pointB2"){
                     this.pointB2 = {x,y};
                 }
-                else if(name === "rune"){
-                    this.rune = new Rune(this,x,y);
-                    this.player.setRune(this.rune);
-                }
+                
         });
 
 
@@ -60,6 +57,10 @@ export default class Screen1_2 extends ScreenBase  {
         this.movingBlock2 = new MovingBlock(this,6,this.pointB1,this.pointB2,48,32,true, "mossyBlock3x2")        
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
         this.physics.add.collider(this.player, this.movingBlock2, this.player.collisionWithMovingBlock);
+
+        this.runeImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.runeImage.setVisible(false);
+        this.runeImage.setDepth(100);
   
     }
 
