@@ -36,33 +36,7 @@ export default class Screen1_4 extends ScreenBase {
         this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
     }
     createBScreen(){
-        this.physics.world.removeCollider(this.bScreenOverlap);
-    
-        // Deactivate keyboard control
-        this.map.layers.forEach(layer => {
-            layer.tilemapLayer.setVisible(false);
-        });
-        this.player.body.stop();
-        this.backgroundImage.setVisible(false);
-        this.input.keyboard.enabled = false;
-        this.cameras.main.setZoom(1.5);
-        this.player.body.setAllowGravity(false);
-        this.cameras.main.setFollowOffset(0);
-        this.player.setPosition(200,180)
-        this.time.delayedCall(1000, () => { 
-            this.player.stateMachine.transform(SquirrelState.NAME);
-            this.player.body.setAllowGravity(false);
-            this.cameras.main.setZoom(2);
-            
-        });
-        this.time.delayedCall(3000, () => { 
-            this.cameras.main.fadeOut(1000, 0, 0, 0); 
-        });
+        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen1_4_Broken",unlock:SquirrelState.NAME});
         
-        this.input.keyboard.enabled = false; 
-
-        this.time.delayedCall(4000, () => { 
-            this.scene.start('screen1_4_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
-        });
     }
 }
