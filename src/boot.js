@@ -40,6 +40,8 @@ import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
 import rune from '../assets/sprites/runes/rune1Spin.png'
 
+import eKey from '../assets/sprites/keys/eKey.png'
+
 import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
@@ -253,6 +255,10 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     })
+    this.load.spritesheet('eKey', eKey, {
+      frameWidth : 13,
+      frameHeight : 13
+    })
     //Tile maps
     this.load.tilemapTiledJSON("screenMenu", screenMenu);
 
@@ -312,7 +318,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screenMenu');
+    this.scene.start('screen1_0');
 
   }
 }

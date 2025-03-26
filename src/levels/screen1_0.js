@@ -49,6 +49,10 @@ export default class Screen1_0 extends ScreenBase {
         this.textures.get("ForestBG2").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
         this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
+        
+        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage.setVisible(false);
+        this.infoImage.setDepth(100);
     }
     
     createBScreen(){

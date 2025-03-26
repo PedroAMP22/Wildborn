@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Player from '../player.js';
 import { DruidState } from '../StateMachine/druidState.js';
 import { Rune } from '../rune.js';
+import { Sign } from '../sign.js';
 
 
 
@@ -33,6 +34,12 @@ export default class ScreenBase extends Phaser.Scene {
             key:"rune",
             frames: this.anims.generateFrameNumbers('rune', { start: 0, end: 15 }),
             frameRate: 10,
+            repeat:-1
+        });
+        const anmimimi = this.anims.create({
+            key:"eKeyBlink",
+            frames: this.anims.generateFrameNumbers('eKey', { start: 0, end: 1 }),
+            frameRate: 2,
             repeat:-1
         });
         this.map = this.make.tilemap({key: this.levelkey });
@@ -105,8 +112,10 @@ export default class ScreenBase extends Phaser.Scene {
                     this.killingObjects.add(killZone);
                 }
                 else if(name === "rune"){
-                    this.rune = new Rune(this,x,y);
-                    
+                    this.rune = new Rune(this,x,y); 
+                }
+                else if(name === "infoStone"){
+                    this.infoRock = new Sign(this,x,y); 
                 }
         });
 
@@ -131,6 +140,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
         this.player.setRune(this.rune);
+        this.player.setInfo(this.infoRock);
 
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
@@ -151,9 +161,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.decoBackLayer.setDepth(0);
         
         this.platformLayer.setCollisionByExclusion([-1]);
-
-        
-             
+ 
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.add.overlap(this.player, this.killingObjects, () => {
@@ -176,7 +184,7 @@ export default class ScreenBase extends Phaser.Scene {
 
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
-        this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
+        this.eKeyText = this.add.sprite(0, 0, 'eKey').setOrigin(0.5);
         this.eKeyText.setVisible(false);
         this.eKeyText.setDepth(100);
 

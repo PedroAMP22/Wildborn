@@ -41,6 +41,9 @@ export default class Screen1_4_Broken extends ScreenBase {
                 this.input.keyboard.enabled = true;
             });
         }
+        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage.setVisible(false);
+        this.infoImage.setDepth(100);
         
     }
     
