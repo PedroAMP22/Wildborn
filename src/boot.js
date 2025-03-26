@@ -88,7 +88,10 @@ import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
-
+import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
+import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
+import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
+import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
 
 
 import bosqueMusica from '../assets/music/bosque.mp3';
