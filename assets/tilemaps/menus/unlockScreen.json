@@ -168,18 +168,6 @@
                  "width":24,
                  "x":551,
                  "y":281.5
-                }, 
-                {
-                 "height":0,
-                 "id":24,
-                 "name":"cameraFocus",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":211,
-                 "y":261
                 }],
          "opacity":1,
          "type":"objectgroup",
