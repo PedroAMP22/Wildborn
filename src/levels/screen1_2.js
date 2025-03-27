@@ -65,10 +65,10 @@ export default class Screen1_2 extends ScreenBase  {
     }
 
     createAScreen(){
-        this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
-        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
+        this.scene.start('screen1_3',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,unlockedTranformations:this.unlockedTranformations});
     }
    
 }

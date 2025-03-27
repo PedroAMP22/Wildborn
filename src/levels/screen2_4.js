@@ -1,4 +1,5 @@
 import { MovingBlock } from '../movingBlock.js';
+import { ChickenState } from '../StateMachine/chickenState.js';
 import ScreenBase from './screenBase.js';
 
 /**
@@ -37,12 +38,12 @@ export default class Screen2_4 extends ScreenBase {
         });
 
         //background image
-        this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
+        this.backgroundImage = this.add.image(0, 0, "CaveBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
         
-        this.movingBlock = new MovingBlock(this,5,this.pointA1,this.pointA2,48,32,false, "caveBlock3x2");
-        this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
+        this.movingBlock = new MovingBlock(this,5,this.pointA1,this.pointA2,32,32,false, "spikedBlock2x2");
+        this.physics.add.collider(this.player, this.movingBlock, () => this.respawn());
 
     }
     
@@ -53,8 +54,6 @@ export default class Screen2_4 extends ScreenBase {
         this.cameras.main.fadeOut(1000, 0, 0, 0); 
         this.input.keyboard.enabled = false; 
 
-        this.time.delayedCall(1000, () => { 
-            this.scene.start('screen2_4_Broken',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false});
-        });
+        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen2_4_Broken",unlock:ChickenState.NAME});
     }
 }

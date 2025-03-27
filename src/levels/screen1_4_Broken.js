@@ -41,13 +41,13 @@ export default class Screen1_4_Broken extends ScreenBase {
                 this.input.keyboard.enabled = true;
             });
         }
-        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage = this.add.image(400, 400, 'squirrelInfo');
         this.infoImage.setVisible(false);
         this.infoImage.setDepth(100);
         
     }
     
     createBScreen(){
-        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
+        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true,unlockedTranformations:this.unlockedTranformations});
     }
 }

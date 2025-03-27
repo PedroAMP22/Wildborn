@@ -36,6 +36,7 @@ export default class UnlockScreen extends ScreenBase {
         this.input.keyboard.enabled = false;
         this.cameras.main.setZoom(1.5);
         this.player.body.setVelocityX(100);
+        this.player.anims.play("druidRun",true)
         this.cameras.main.setFollowOffset(0);
         this.player.canMove = false;
         this.time.delayedCall(1000, () => { 
@@ -46,7 +47,7 @@ export default class UnlockScreen extends ScreenBase {
     }
 
     createAScreen(){
-        this.scene.start(this.nextScreen,{point:this.point,transformation:this.player.stateMachine.state.toString()});
+        this.scene.start(this.nextScreen,{point:this.point,transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     
    

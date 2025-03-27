@@ -33,10 +33,10 @@ export default class Screen1_4 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
+        this.scene.start('screen1_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false,unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
-        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen1_4_Broken",unlock:SquirrelState.NAME});
+        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen1_4_Broken",unlock:SquirrelState.NAME,unlockedTranformations:[true,true,false,false,false]});
         
     }
 }

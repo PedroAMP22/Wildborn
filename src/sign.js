@@ -11,21 +11,26 @@ export class Sign extends Phaser.GameObjects.Sprite {
         this.setDepth(2);
         this.scene.add.existing(this);
         this.setVisible(false);
-
+        this.visible = false;
+        this.player = null;
     }
+
 
     preUpdate(t, d) {
         super.preUpdate(t, d)
-        
+        const distance = Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
 
+        if(distance > 20){
+            this.visible = false;
+            this.scene.infoImage.setVisible(this.visible); 
+        }
     }
-
+    setPlayer(player){
+        this.player = player;
+    }
     interact(){
-        this.scene.infoImage.setVisible(true); 
+        this.visible = !this.visible
+        this.scene.infoImage.setVisible(this.visible); 
         this.scene.infoImage.setPosition(this.x,this.y); 
-
-        this.scene.time.delayedCall(2000, () => {
-            this.scene.infoImage.setVisible(false); 
-        });
     }
 }

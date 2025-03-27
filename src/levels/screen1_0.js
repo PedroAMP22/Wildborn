@@ -50,13 +50,13 @@ export default class Screen1_0 extends ScreenBase {
 
         this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
         
-        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(1.4);
         this.infoImage.setVisible(false);
         this.infoImage.setDepth(100);
     }
     
     createBScreen(){
-        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     
 }

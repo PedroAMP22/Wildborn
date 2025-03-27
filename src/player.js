@@ -20,7 +20,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} x Coordenada X
      * @param {number} y Coordenada Y
      */
-    constructor(scene, x, y) {
+    constructor(scene, x, y,unlockedTransformations) {
         super(scene, x, y,"playerIdle");
 
         this.snailKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
@@ -32,6 +32,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
         this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+
+        this.unlockedTransformations = unlockedTransformations;
+
         this.rune = null;
         this.infoRock = null;
         //Adding to physics engine
@@ -295,20 +298,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
             
             
-            if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
+            if (Phaser.Input.Keyboard.JustDown(this.snailKey) && this.unlockedTransformations[0]) {
                 this.stateMachine.transform(SnailState.NAME);
                 this.momentum = 0;
             }
-            else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
+            else if (Phaser.Input.Keyboard.JustDown(this.moleKey)&& this.unlockedTransformations[2]){
                 this.stateMachine.transform(MoleState.NAME);
             }
-            else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
+            else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)&& this.unlockedTransformations[1]){
                 this.stateMachine.transform(SquirrelState.NAME);
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
+            else if(Phaser.Input.Keyboard.JustDown(this.fishKey) && this.unlockedTransformations[4]){
                 this.stateMachine.transform(PufferFishState.NAME);
             }
-            else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+            else if(Phaser.Input.Keyboard.JustDown(this.chickenKey) && this.unlockedTransformations[3]){
                 
                 this.stateMachine.transform(ChickenState.NAME);
             }

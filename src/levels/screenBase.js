@@ -15,11 +15,13 @@ export default class ScreenBase extends Phaser.Scene {
         super({ key: key});
         this.key = key
         this.levelkey = levelkey
+
     }
 
 
     init(data){
         this.point = data.point;
+        this.unlockedTranformations = data.unlockedTranformations;
         if(data.transformation){
             this.transformation = data.transformation;
         }
@@ -127,23 +129,26 @@ export default class ScreenBase extends Phaser.Scene {
         //Player creator
         if(this.point){
             if(this.point === 'A'){
-                this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+                this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
             }
             else if(this.point === 'B'){
-                this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y);
+                this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y,this.unlockedTranformations);
             }
             else{
-                this.player = new Player(this, this.spawnPointC.x, this.spawnPointC.y);
+                this.player = new Player(this, this.spawnPointC.x, this.spawnPointC.y,this.unlockedTranformations);
             }
         }
         else{
-            this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+            this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
         }
         
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
         this.player.setRune(this.rune);
         this.player.setInfo(this.infoRock);
+        if(this.infoRock)
+            this.infoRock.setPlayer(this.player);
+
 
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
@@ -189,28 +194,38 @@ export default class ScreenBase extends Phaser.Scene {
 
         this.eKeyText = this.add.sprite(0, 0, 'eKey').setOrigin(0.5);
         this.eKeyText.setVisible(false);
-        this.eKeyText.setDepth(100);
+        this.eKeyText.setDepth(99);
 
         this.airGroup = this.physics.add.staticGroup();
     }
 
     respawn(){
+        if(this.player.canMove){
         this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
-        this.player.stateMachine.transform(this.player.stateMachine.state.toString());
-        if(this.point){
-            if(this.point === 'A')
-                this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-            else if(this.point === 'B')
-                this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
-            else{
-                this.player.setPosition( this.spawnPointC.x, this.spawnPointC.y);
+        this.player.canMove = false;
+        this.player.stop();
+        this.player.body.setAllowGravity(false);
+        this.player.anims.play("druidDeath", true);
+        this.time.delayedCall(800, () => { 
+            this.player.stateMachine.transform(this.player.stateMachine.state.toString());
+            this.player.body.setAllowGravity(true);
+            this.player.canMove = true;
+
+            if(this.point){
+                if(this.point === 'A')
+                    this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
+                else if(this.point === 'B')
+                    this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
+                else{
+                    this.player.setPosition( this.spawnPointC.x, this.spawnPointC.y);
+                }
             }
+            else{
+                this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
+            }
+        });  
         }
-        else{
-            this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-        }
-        
     }
 
     createAScreen(){

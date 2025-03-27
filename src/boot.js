@@ -94,7 +94,7 @@ import snailInfo from '../assets/imagesMain/SnailInfo.png'
 import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
 import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
-import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
+import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 
 import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
@@ -323,7 +323,9 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('screenMenu');
+
+    this.scene.start('screen1_4',{unlockedTranformations:[false,false,false,false,false]});
+
 
   }
 }
