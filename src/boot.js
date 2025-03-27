@@ -96,7 +96,7 @@ import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
 import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
 
-
+import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
 import montaniaMusica from '../assets/music/montania.mp3';
 
@@ -316,13 +316,14 @@ export default class Boot extends Phaser.Scene {
     });
 
     //MUSICA
+    this.load.audio('menuMusic', menuMusic)
     this.load.audio('bosque_musica', bosqueMusica);
     this.load.audio('montania_musica', montaniaMusica);
 
   }
 
   create() {
-    this.scene.start('screen2_4');
+    this.scene.start('screenMenu');
 
   }
 }

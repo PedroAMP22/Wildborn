@@ -51,6 +51,9 @@ export default class ScreenBase extends Phaser.Scene {
         } else if (this.key.startsWith('screen2')) {
             trackKey = 'montania_musica';
         }
+        else if(this.key.startsWith("screenMenu")){
+            trackKey = 'menuMusic';
+        }
     
         if (trackKey) {
             //no hay música reproducida o la pista actual es distinta, cámbiala.
