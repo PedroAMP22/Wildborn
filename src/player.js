@@ -41,6 +41,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
         this.onBlock = false;
         
+        this.canMove = true;
 
         this.keys = this.scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -257,73 +258,74 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-        
-        if(this.rune){
-            const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
-            if(distance < 20){
-                this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
-                this.scene.eKeyText.setVisible(true);
-                this.scene.eKeyText.anims.play('eKeyBlink',true);
+        if(this.canMove){
+            if(this.rune){
+                const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
+                if(distance < 20){
+                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setVisible(true);
+                    this.scene.eKeyText.anims.play('eKeyBlink',true);
+                }
+                else{
+                    this.scene.eKeyText.setVisible(false); 
+                    this.scene.eKeyText.anims.stop()
+                }
+                this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
+                if (distance < 20 && this.justPressed ) {
+                    this.rune.interact();
+                }
             }
-            else{
-                this.scene.eKeyText.setVisible(false); 
-                this.scene.eKeyText.anims.stop()
+    
+            if(this.infoRock){
+                const distance2 = Phaser.Math.Distance.Between(this.x, this.y, this.infoRock.x, this.infoRock.y);
+                if(distance2 < 20){
+                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setVisible(true);
+                    this.scene.eKeyText.anims.play('eKeyBlink',true);
+                }
+                else{
+                    this.scene.eKeyText.setVisible(false); 
+                    this.scene.eKeyText.anims.stop()
+                }
+                this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
+                if (distance2 < 20 && this.justPressed) {
+                    this.infoRock.interact();
+                }
             }
-            this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
-            if (distance < 20 && this.justPressed ) {
-                this.rune.interact();
-            }
-        }
-
-        if(this.infoRock){
-            const distance2 = Phaser.Math.Distance.Between(this.x, this.y, this.infoRock.x, this.infoRock.y);
-            if(distance2 < 20){
-                this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
-                this.scene.eKeyText.setVisible(true);
-                this.scene.eKeyText.anims.play('eKeyBlink',true);
-            }
-            else{
-                this.scene.eKeyText.setVisible(false); 
-                this.scene.eKeyText.anims.stop()
-            }
-            this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
-            if (distance2 < 20 && this.justPressed) {
-                this.infoRock.interact();
-            }
-        }
-
-        
-        
-        if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
-            this.stateMachine.transform(SnailState.NAME);
-            this.momentum = 0;
-        }
-        else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
-            this.stateMachine.transform(MoleState.NAME);
-        }
-        else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
-            this.stateMachine.transform(SquirrelState.NAME);
-        }
-        else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
-            this.stateMachine.transform(PufferFishState.NAME);
-        }
-        else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+    
             
-            this.stateMachine.transform(ChickenState.NAME);
-        }
-
-        if(this.body.onFloor()){
-            this.momentum = 0;
-        }
-        this.stateMachine.update(t,dt);
-        if(this.body.velocity.x > 10){
-            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
-        }
-        else if(this.body.velocity.x < 10){
-            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
-        }
-        else{
-            this.scene.cameras.main.setFollowOffset(0,0);
+            
+            if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
+                this.stateMachine.transform(SnailState.NAME);
+                this.momentum = 0;
+            }
+            else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
+                this.stateMachine.transform(MoleState.NAME);
+            }
+            else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
+                this.stateMachine.transform(SquirrelState.NAME);
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
+                this.stateMachine.transform(PufferFishState.NAME);
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
+                
+                this.stateMachine.transform(ChickenState.NAME);
+            }
+    
+            if(this.body.onFloor()){
+                this.momentum = 0;
+            }
+            this.stateMachine.update(t,dt);
+            if(this.body.velocity.x > 10){
+                this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
+            }
+            else if(this.body.velocity.x < 10){
+                this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
+            }
+            else{
+                this.scene.cameras.main.setFollowOffset(0,0);
+            }
         }
 
     }

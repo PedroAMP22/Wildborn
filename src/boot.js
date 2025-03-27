@@ -43,6 +43,7 @@ import rune from '../assets/sprites/runes/rune1Spin.png'
 import eKey from '../assets/sprites/keys/eKey.png'
 
 import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
+import unlockScreen from '../assets/tilemaps/menus/unlockScreen.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
@@ -89,7 +90,7 @@ import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
 import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
-import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
+import snailInfo from '../assets/imagesMain/SnailInfo.png'
 import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
 import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
@@ -286,6 +287,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_6',screen2_6);
     this.load.tilemapTiledJSON('screen2_7',screen2_7);
     this.load.tilemapTiledJSON('screen3_1',screen3_1);
+    this.load.tilemapTiledJSON('unlockScreen',unlockScreen);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("tileSet3", tileSet3);

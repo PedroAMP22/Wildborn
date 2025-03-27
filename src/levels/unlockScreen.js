@@ -33,16 +33,13 @@ export default class UnlockScreen extends ScreenBase {
 
         super.create()    
         // Deactivate keyboard control
-        this.player.body.stop();
         this.input.keyboard.enabled = false;
         this.cameras.main.setZoom(1.5);
-        this.player.body.setAllowGravity(false);
+        this.player.body.setVelocityX(100);
         this.cameras.main.setFollowOffset(0);
+        this.player.canMove = false;
         this.time.delayedCall(1000, () => { 
             this.player.stateMachine.transform(this.unlock);
-            this.player.body.setAllowGravity(false);
-            this.cameras.main.setZoom(2);
-            
         });
         
         this.input.keyboard.enabled = false; 
