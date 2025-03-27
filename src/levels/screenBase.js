@@ -49,7 +49,7 @@ export default class ScreenBase extends Phaser.Scene {
         if (this.key.startsWith('screen1')) {
             trackKey = 'bosque_musica';
         } else if (this.key.startsWith('screen2')) {
-            trackKey = 'bosque_musica';
+            trackKey = 'montania_musica';
         }
     
         if (trackKey) {
