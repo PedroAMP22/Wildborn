@@ -34,7 +34,7 @@ export default class Screen1_8 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
 
     createBScreen(){
@@ -42,7 +42,7 @@ export default class Screen1_8 extends ScreenBase {
         this.input.keyboard.enabled = false; 
 
        
-        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen1_9_Broken",unlock:MoleState.NAME});
+        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen1_9_Broken",unlock:MoleState.NAME,unlockedTranformations:[true,true,true,false,false]});
        
     }
 }

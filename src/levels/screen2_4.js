@@ -48,12 +48,12 @@ export default class Screen2_4 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false});
+        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:false,unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
         this.cameras.main.fadeOut(1000, 0, 0, 0); 
         this.input.keyboard.enabled = false; 
 
-        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen2_4_Broken",unlock:ChickenState.NAME});
+        this.scene.start('unlockScreen',{point:"A",transformation:this.player.stateMachine.state.toString(),broken:false,nextScreen:"screen2_4_Broken",unlock:ChickenState.NAME,unlockedTranformations:[true,true,true,true,false]});
     }
 }

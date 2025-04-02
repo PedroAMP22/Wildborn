@@ -83,6 +83,6 @@ export default class Screen2_4_Broken extends ScreenBase {
     }
 
     createBScreen(){
-        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
+        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true,unlockedTranformations:this.unlockedTranformations});
     }
 }
