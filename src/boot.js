@@ -91,7 +91,7 @@ import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.png'
-import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
+import ChickenInfo from '../assets/imagesMain/ChickenInfo.png'
 import MoleInfo from '../assets/imagesMain/MoleInfo.png'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
 import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'

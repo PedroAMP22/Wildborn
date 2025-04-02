@@ -214,17 +214,6 @@
                  "y":161.083333333333
                 }, 
                 {
-                 "height":47,
-                 "id":8,
-                 "name":"spawnZoneA",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":0.75,
-                 "y":129
-                }, 
-                {
                  "height":8.125,
                  "id":9,
                  "name":"killingZone",
