@@ -54,6 +54,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
             e: Phaser.Input.Keyboard.KeyCodes.E
         });
 
+        // Footsteps sound
+        this.sounds = {
+            dirt: scene.sound.add('footsteps_grass', { volume: 0.5 }),
+            snow: scene.sound.add('footstep_snow', { volume: 0.2 }),
+            stone: scene.sound.add('footstep_stone', { volume: 0.5 })
+        };
+
+        this.jumpSE = scene.sound.add('jump',{volume:0.8})
+
+        this.footstepTimer = scene.time.addEvent({ 
+            delay: 400,
+            callback: () => this.playFootstep(),
+            loop: true
+        });
+
         this.maxCoyoteTime = 5;
         this.maxInputBuffer = 6;
 
@@ -64,6 +79,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.loadAnimations();
         
         
+    }
+
+    playFootstep() {
+        if ((this.body.velocity.x !== 0) && this.sounds[this.currentSurface] && this.body.onFloor()) {
+            this.sounds[this.currentSurface].play();
+        }
     }
 
     loadAnimations(){
@@ -358,11 +379,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityY(jumpSpeed);
             this.anims.play(jumpAnimation,true);
 
+            this.jumpSE.play()
+
             return true;
         }
         else{
             return false;
         }
+
     }
 
     moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){

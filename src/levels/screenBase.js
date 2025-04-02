@@ -16,6 +16,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.key = key
         this.levelkey = levelkey
 
+        this.surfaceType = this.getSurfaceType(key);
     }
 
 
@@ -56,9 +57,7 @@ export default class ScreenBase extends Phaser.Scene {
         else if(this.key.startsWith("screenMenu")){
             trackKey = 'menuMusic';
         }
-        else if(this.key.startsWith("screenMenu")){
-            trackKey = 'menuMusic';
-        }
+        
     
         if (trackKey) {
             //no hay música reproducida o la pista actual es distinta, cámbiala.
@@ -66,11 +65,13 @@ export default class ScreenBase extends Phaser.Scene {
                 if (this.game.music) {
                     this.game.music.stop();
                 }
-                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.4 });
                 this.game.music.play();
                 this.game.currentTrack = trackKey;
             }
+ 
         }
+    
 
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
@@ -144,6 +145,9 @@ export default class ScreenBase extends Phaser.Scene {
         else{
             this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
         }
+
+        // For sfx sounds
+        this.player.currentSurface = this.surfaceType
         
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
@@ -173,9 +177,13 @@ export default class ScreenBase extends Phaser.Scene {
         
         this.platformLayer.setCollisionByExclusion([-1]);
  
+
+        this.deathSE = this.sound.add('death',{volume:2})
+
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.add.overlap(this.player, this.killingObjects, () => {
+            
             this.respawn()
         });
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
@@ -208,12 +216,15 @@ export default class ScreenBase extends Phaser.Scene {
         this.player.momentum = 0;
         this.player.canMove = false;
         this.player.stop();
+        this.deathSE.play()
         this.player.body.setAllowGravity(false);
         this.player.anims.play("druidDeath", true);
         this.time.delayedCall(800, () => { 
             this.player.stateMachine.transform(this.player.stateMachine.state.toString());
             this.player.body.setAllowGravity(true);
             this.player.canMove = true;
+
+            
 
             if(this.point){
                 if(this.point === 'A')
@@ -239,6 +250,13 @@ export default class ScreenBase extends Phaser.Scene {
     }
     createCScreen(){
         
+    }
+
+    getSurfaceType(key) {
+        if (key.startsWith("screen1_")) return "dirt";
+        if (key.startsWith("screen2_") && key > "screen2_4") return "snow";
+        if (key.startsWith("screen3_")) return "stone";
+        return "stone";
     }
     
 }

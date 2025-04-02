@@ -92,14 +92,20 @@ import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 import snailInfo from '../assets/imagesMain/SnailInfo.png'
 import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
-import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
+import MoleInfo from '../assets/imagesMain/MoleInfo.png'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
 import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 
 import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
 import montaniaMusica from '../assets/music/montania.mp3';
-import menuMusic from '../assets/music/menuMusic.mp3'
+
+import grassFootsteps from '../assets/sfx/grass_footsteps.wav'
+import snowFootsteps from '../assets/sfx/snow_footsteps.wav'
+import stoneFootsteps from '../assets/sfx/stone_footsteps.wav'
+import jump from '../assets/sfx/jump.wav'
+import death from '../assets/sfx/death.wav'
+
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -323,11 +329,24 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('menuMusic', menuMusic)
 
 
+    // SFX
+    // walking sound effects
+    this.load.audio('footsteps_grass', grassFootsteps)
+    this.load.audio('footstep_snow', snowFootsteps)
+    this.load.audio('footstep_stone', stoneFootsteps)
+
+    //jump
+    this.load.audio('jump', jump)
+
+    //death
+    this.load.audio('death', death)
+
+
   }
 
   create() {
 
-    this.scene.start('screen1_4',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
 
   }
 }
