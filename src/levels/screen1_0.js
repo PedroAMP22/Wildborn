@@ -41,6 +41,12 @@ export default class Screen1_0 extends ScreenBase {
            
         });
 
+        this.longFallSE = this.sound.add('longFall', {volume : 3})
+
+
+        if(this.point === 'A')
+            this.longFallSE.play();
+
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);

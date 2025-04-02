@@ -105,7 +105,8 @@ import snowFootsteps from '../assets/sfx/snow_footsteps.wav'
 import stoneFootsteps from '../assets/sfx/stone_footsteps.wav'
 import jump from '../assets/sfx/jump.wav'
 import death from '../assets/sfx/death.wav'
-
+import longFall from '../assets/sfx/longFall.wav'
+import puff from '../assets/sfx/puff.wav'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -341,12 +342,18 @@ export default class Boot extends Phaser.Scene {
     //death
     this.load.audio('death', death)
 
+    //long fall
+    this.load.audio('longFall', longFall)
+
+    // Transformation (puff)
+    this.load.audio('puff', puff)
+
 
   }
 
   create() {
 
-    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screen0_1',{unlockedTranformations:[false,false,false,false,false]});
 
   }
 }
