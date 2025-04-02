@@ -56,12 +56,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         // Footsteps sound
         this.sounds = {
-            dirt: scene.sound.add('footsteps_grass', { volume: 0.5 }),
-            snow: scene.sound.add('footstep_snow', { volume: 0.2 }),
-            stone: scene.sound.add('footstep_stone', { volume: 0.5 })
+            dirt: scene.sound.add('footsteps_grass', { volume: 0.3 }),
+            snow: scene.sound.add('footstep_snow', { volume: 0.05 }),
+            stone: scene.sound.add('footstep_stone', { volume: 0.2 })
         };
 
-        this.jumpSE = scene.sound.add('jump',{volume:0.8})
+        this.jumpSE = scene.sound.add('jump',{volume:0.2})
 
         this.footstepTimer = scene.time.addEvent({ 
             delay: 400,

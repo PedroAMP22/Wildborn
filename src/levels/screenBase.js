@@ -65,7 +65,7 @@ export default class ScreenBase extends Phaser.Scene {
                 if (this.game.music) {
                     this.game.music.stop();
                 }
-                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.4 });
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 1 });
                 this.game.music.play();
                 this.game.currentTrack = trackKey;
             }
@@ -178,7 +178,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.platformLayer.setCollisionByExclusion([-1]);
  
 
-        this.deathSE = this.sound.add('death',{volume:2})
+        this.deathSE = this.sound.add('death',{volume:0.7})
 
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
