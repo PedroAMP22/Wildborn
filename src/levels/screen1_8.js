@@ -38,15 +38,15 @@ export default class Screen1_8 extends ScreenBase {
     }
     
     createAScreen(){
-        this.scene.start('screen1_7',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_7',{point:"B",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
 
     createBScreen(){
         if(this.broken){
-            this.scene.start('screen1_9_Broken',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:this.broken});
+            this.scene.start('screen1_9_Broken',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:this.broken,unlockedTranformations:this.unlockedTranformations});
         }
         else{
-            this.scene.start('screen1_9',{point:"A",transformation:this.player.stateMachine.state.toString()});
+            this.scene.start('screen1_9',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
         }
         
     }

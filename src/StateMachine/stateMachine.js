@@ -13,12 +13,16 @@ export class StateMachine {
      */
     constructor(scene){
         this.scene = scene;
+        this.puffSE = this.scene.sound.add('puff', {volume: 0.8})
+
     }
 
     transform(transformation){
+        
         if(!this.state){
             this.state = new DruidState(this.scene);
             this.state.transform();
+            
         }
         if (!this.state.checkState(transformation)){
             switch(transformation){

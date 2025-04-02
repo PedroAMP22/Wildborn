@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Player from '../player.js';
 import { DruidState } from '../StateMachine/druidState.js';
 import { Rune } from '../rune.js';
+import { Sign } from '../sign.js';
 
 
 
@@ -14,11 +15,14 @@ export default class ScreenBase extends Phaser.Scene {
         super({ key: key});
         this.key = key
         this.levelkey = levelkey
+
+        this.surfaceType = this.getSurfaceType(key);
     }
 
 
     init(data){
         this.point = data.point;
+        this.unlockedTranformations = data.unlockedTranformations;
         if(data.transformation){
             this.transformation = data.transformation;
         }
@@ -35,6 +39,12 @@ export default class ScreenBase extends Phaser.Scene {
             frameRate: 10,
             repeat:-1
         });
+        const anmimimi = this.anims.create({
+            key:"eKeyBlink",
+            frames: this.anims.generateFrameNumbers('eKey', { start: 0, end: 1 }),
+            frameRate: 2,
+            repeat:-1
+        });
         this.map = this.make.tilemap({key: this.levelkey });
 
         //musicote
@@ -42,8 +52,12 @@ export default class ScreenBase extends Phaser.Scene {
         if (this.key.startsWith('screen1')) {
             trackKey = 'bosque_musica';
         } else if (this.key.startsWith('screen2')) {
-            trackKey = 'bosque_musica';
+            trackKey = 'montania_musica';
         }
+        else if(this.key.startsWith("screenMenu")){
+            trackKey = 'menuMusic';
+        }
+        
     
         if (trackKey) {
             //no hay música reproducida o la pista actual es distinta, cámbiala.
@@ -51,11 +65,13 @@ export default class ScreenBase extends Phaser.Scene {
                 if (this.game.music) {
                     this.game.music.stop();
                 }
-                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 1 });
                 this.game.music.play();
                 this.game.currentTrack = trackKey;
             }
+ 
         }
+    
 
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
@@ -105,8 +121,10 @@ export default class ScreenBase extends Phaser.Scene {
                     this.killingObjects.add(killZone);
                 }
                 else if(name === "rune"){
-                    this.rune = new Rune(this,x,y);
-                    
+                    this.rune = new Rune(this,x,y); 
+                }
+                else if(name === "infoStone"){
+                    this.infoRock = new Sign(this,x,y); 
                 }
         });
 
@@ -115,22 +133,29 @@ export default class ScreenBase extends Phaser.Scene {
         //Player creator
         if(this.point){
             if(this.point === 'A'){
-                this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+                this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
             }
             else if(this.point === 'B'){
-                this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y);
+                this.player = new Player(this, this.spawnPointB.x, this.spawnPointB.y,this.unlockedTranformations);
             }
             else{
-                this.player = new Player(this, this.spawnPointC.x, this.spawnPointC.y);
+                this.player = new Player(this, this.spawnPointC.x, this.spawnPointC.y,this.unlockedTranformations);
             }
         }
         else{
-            this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y);
+            this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
         }
+
+        // For sfx sounds
+        this.player.currentSurface = this.surfaceType
         
         this.player.stateMachine.transform(this.transformation);
         this.player.setDepth(3);
         this.player.setRune(this.rune);
+        this.player.setInfo(this.infoRock);
+        if(this.infoRock)
+            this.infoRock.setPlayer(this.player);
+
 
         //load all tileset and layers
         this.tileset1 = this.map.addTilesetImage("SheetA","tileSet1",16,16);
@@ -151,12 +176,14 @@ export default class ScreenBase extends Phaser.Scene {
         this.decoBackLayer.setDepth(0);
         
         this.platformLayer.setCollisionByExclusion([-1]);
+ 
 
-        
-             
+        this.deathSE = this.sound.add('death',{volume:0.7})
+
         //if player collides with a "killing zone" respawn
         this.physics.add.collider(this.player, this.platformLayer);
         this.physics.add.overlap(this.player, this.killingObjects, () => {
+            
             this.respawn()
         });
         this.physics.add.overlap(this.player, this.spawnZoneA, () => {
@@ -176,30 +203,43 @@ export default class ScreenBase extends Phaser.Scene {
 
         this.cameras.main.setBounds(0,0,this.map.widthInPixels,this.map.heightInPixels)
 
-        this.eKeyText = this.add.text(0, 0, 'e', { font: '12px Arial', fill: '#ffffff' }).setOrigin(0.5);
+        this.eKeyText = this.add.sprite(0, 0, 'eKey').setOrigin(0.5);
         this.eKeyText.setVisible(false);
-        this.eKeyText.setDepth(100);
+        this.eKeyText.setDepth(99);
 
         this.airGroup = this.physics.add.staticGroup();
     }
 
     respawn(){
+        if(this.player.canMove){
         this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
-        this.player.stateMachine.transform(this.player.stateMachine.state.toString());
-        if(this.point){
-            if(this.point === 'A')
-                this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-            else if(this.point === 'B')
-                this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
-            else{
-                this.player.setPosition( this.spawnPointC.x, this.spawnPointC.y);
+        this.player.canMove = false;
+        this.player.stop();
+        this.deathSE.play()
+        this.player.body.setAllowGravity(false);
+        this.player.anims.play("druidDeath", true);
+        this.time.delayedCall(800, () => { 
+            this.player.stateMachine.transform(this.player.stateMachine.state.toString());
+            this.player.body.setAllowGravity(true);
+            this.player.canMove = true;
+
+            
+
+            if(this.point){
+                if(this.point === 'A')
+                    this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
+                else if(this.point === 'B')
+                    this.player.setPosition( this.spawnPointB.x, this.spawnPointB.y);
+                else{
+                    this.player.setPosition( this.spawnPointC.x, this.spawnPointC.y);
+                }
             }
+            else{
+                this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
+            }
+        });  
         }
-        else{
-            this.player.setPosition( this.spawnPointA.x, this.spawnPointA.y);
-        }
-        
     }
 
     createAScreen(){
@@ -210,6 +250,13 @@ export default class ScreenBase extends Phaser.Scene {
     }
     createCScreen(){
         
+    }
+
+    getSurfaceType(key) {
+        if (key.startsWith("screen1_")) return "dirt";
+        if (key.startsWith("screen2_") && key > "screen2_4") return "snow";
+        if (key.startsWith("screen3_")) return "stone";
+        return "stone";
     }
     
 }

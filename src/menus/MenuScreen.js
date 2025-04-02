@@ -73,7 +73,7 @@ export default class MenuScene extends ScreenBase {
 
     
     createAScreen(){
-        this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen0_0',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
     }

@@ -1,6 +1,7 @@
 import Boot from './boot.js';
 import Phaser from 'phaser';
 import MenuScene from './menus/MenuScreen.js';
+import ScreenLevelSel from './menus/screenLevelSel.js';
 import Screen0_0 from './levels/screen0_0.js';
 import Screen0_1 from './levels/screen0_1.js';
 import Screen1_0 from './levels/screen1_0.js';
@@ -24,6 +25,7 @@ import Screen3_1 from './levels/screen3_1.js';
 import Screen2_5 from './levels/screen2_5.js';
 import Screen2_6 from './levels/screen2_6.js';
 import Screen2_7 from './levels/screen2_7.js';
+import UnlockScreen from './levels/unlockScreen.js'
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
@@ -40,6 +42,7 @@ let config = {
     pixelArt: true,
     scene: [Boot, 
         MenuScene,
+        ScreenLevelSel,
         Screen0_0,
         Screen0_1, 
         Screen1_0,
@@ -62,7 +65,8 @@ let config = {
         Screen2_5,
         Screen2_6,
         Screen2_7,
-        Screen3_1
+        Screen3_1,
+        UnlockScreen
         ],
 
     physics: {

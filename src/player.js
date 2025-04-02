@@ -20,7 +20,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
      * @param {number} x Coordenada X
      * @param {number} y Coordenada Y
      */
-    constructor(scene, x, y) {
+    constructor(scene, x, y,unlockedTransformations) {
         super(scene, x, y,"playerIdle");
 
         this.snailKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
@@ -32,7 +32,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.fishKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
         this.chickenKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+
+        this.unlockedTransformations = unlockedTransformations;
+
         this.rune = null;
+        this.infoRock = null;
         //Adding to physics engine
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -40,6 +44,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
         this.onBlock = false;
         
+        this.canMove = true;
 
         this.keys = this.scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -47,6 +52,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
             down: Phaser.Input.Keyboard.KeyCodes.S,
             right: Phaser.Input.Keyboard.KeyCodes.D,
             e: Phaser.Input.Keyboard.KeyCodes.E
+        });
+
+        // Footsteps sound
+        this.sounds = {
+            dirt: scene.sound.add('footsteps_grass', { volume: 0.3 }),
+            snow: scene.sound.add('footstep_snow', { volume: 0.05 }),
+            stone: scene.sound.add('footstep_stone', { volume: 0.2 })
+        };
+
+        this.jumpSE = scene.sound.add('jump',{volume:0.2})
+
+        this.footstepTimer = scene.time.addEvent({ 
+            delay: 400,
+            callback: () => this.playFootstep(),
+            loop: true
         });
 
         this.maxCoyoteTime = 5;
@@ -59,6 +79,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.loadAnimations();
         
         
+    }
+
+    playFootstep() {
+        if ((this.body.velocity.x !== 0) && this.sounds[this.currentSurface] && this.body.onFloor()) {
+            this.sounds[this.currentSurface].play();
+        }
     }
 
     loadAnimations(){
@@ -256,54 +282,80 @@ export default class Player extends Phaser.GameObjects.Sprite {
      */
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
-        
-        if(this.rune){
-            const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
-            if(distance < 20){
-                this.scene.eKeyText.setVisible(true); 
-                this.scene.eKeyText.setPosition(this.rune.x - 10,this.rune.y -14);
+        if(this.canMove){
+            if(this.rune){
+                const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
+                if(distance < 20){
+                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setVisible(true);
+                    this.scene.eKeyText.anims.play('eKeyBlink',true);
+                }
+                else{
+                    this.scene.eKeyText.setVisible(false); 
+                    this.scene.eKeyText.anims.stop()
+                }
+                this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
+                if (distance < 20 && this.justPressed ) {
+                    this.rune.interact();
+                }
+            }
+    
+            if(this.infoRock){
+                const distance2 = Phaser.Math.Distance.Between(this.x, this.y, this.infoRock.x, this.infoRock.y);
+                if(distance2 < 20){
+                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setVisible(true);
+                    this.scene.eKeyText.anims.play('eKeyBlink',true);
+                }
+                else{
+                    this.scene.eKeyText.setVisible(false); 
+                    this.scene.eKeyText.anims.stop()
+                }
+                this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
+                if (distance2 < 20 && this.justPressed) {
+                    this.infoRock.interact();
+                }
+            }
+    
+            
+            
+            if (Phaser.Input.Keyboard.JustDown(this.snailKey) && this.unlockedTransformations[0]) {
+                this.stateMachine.transform(SnailState.NAME);
+                this.momentum = 0;
+            }
+            else if (Phaser.Input.Keyboard.JustDown(this.moleKey)&& this.unlockedTransformations[2]){
+                this.stateMachine.transform(MoleState.NAME);
+            }
+            else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)&& this.unlockedTransformations[1]){
+                this.stateMachine.transform(SquirrelState.NAME);
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.fishKey) && this.unlockedTransformations[4]){
+                this.stateMachine.transform(PufferFishState.NAME);
+            }
+            else if(Phaser.Input.Keyboard.JustDown(this.chickenKey) && this.unlockedTransformations[3]){
+                
+                this.stateMachine.transform(ChickenState.NAME);
+            }
+    
+            if(this.body.onFloor()){
+                this.momentum = 0;
+            }
+            this.stateMachine.update(t,dt);
+            if(this.body.velocity.x > 10){
+                this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
+            }
+            else if(this.body.velocity.x < 10){
+                this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
             }
             else{
-                this.scene.eKeyText.setVisible(false); 
-            }
-            if (distance < 20 && Phaser.Input.Keyboard.JustDown(this.keys.e)) {
-                this.rune.interact();
+                this.scene.cameras.main.setFollowOffset(0,0);
             }
         }
 
-        
-        if (Phaser.Input.Keyboard.JustDown(this.snailKey)) {
-            this.stateMachine.transform(SnailState.NAME);
-            this.momentum = 0;
-        }
-        else if (Phaser.Input.Keyboard.JustDown(this.moleKey)){
-            this.stateMachine.transform(MoleState.NAME);
-        }
-        else if (Phaser.Input.Keyboard.JustDown(this.squirrelKey)){
-            this.stateMachine.transform(SquirrelState.NAME);
-        }
-        else if(Phaser.Input.Keyboard.JustDown(this.fishKey)){
-            this.stateMachine.transform(PufferFishState.NAME);
-        }
-        else if(Phaser.Input.Keyboard.JustDown(this.chickenKey)){
-            
-            this.stateMachine.transform(ChickenState.NAME);
-        }
+    }
 
-        if(this.body.onFloor()){
-            this.momentum = 0;
-        }
-        this.stateMachine.update(t,dt);
-        if(this.body.velocity.x > 10){
-            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x * 0.2,0);
-        }
-        else if(this.body.velocity.x < 10){
-            this.scene.cameras.main.setFollowOffset(-this.body.velocity.x* 0.2,0);
-        }
-        else{
-            this.scene.cameras.main.setFollowOffset(0,0);
-        }
-
+    setInfo(infoRock){
+        this.infoRock = infoRock;
     }
 
     playIdleIfPossible(canPlayIdle, idleName){
@@ -327,11 +379,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityY(jumpSpeed);
             this.anims.play(jumpAnimation,true);
 
+            this.jumpSE.play()
+
             return true;
         }
         else{
             return false;
         }
+
     }
 
     moveHorizontal(initialSpeed, topSpeed,walkAcceleration,t,dt){

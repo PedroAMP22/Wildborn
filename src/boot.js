@@ -40,7 +40,11 @@ import chickenTrans from '../assets/sprites/chicken/transChicken.png'
 
 import rune from '../assets/sprites/runes/rune1Spin.png'
 
+import eKey from '../assets/sprites/keys/eKey.png'
+
 import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
+import unlockScreen from '../assets/tilemaps/menus/unlockScreen.json'
+import screenLevelSel from '../assets/tilemaps/menus/levelSelectorScreen.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
@@ -80,6 +84,8 @@ import backgroundMountain from '../assets/tilemaps/backgrounds/MountainBG.png'
 import backgroundCave from '../assets/tilemaps/backgrounds/CaveBG1.png'
 import backgroundCave2 from '../assets/tilemaps/backgrounds/CaveBG2.png'
 
+import backgroundWood from '../assets/tilemaps/menuImages/WoodBackground.jpeg'
+
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 import icyBlock3x2 from '../assets/sprites/blocks/icyBlock3x2.png'
@@ -87,15 +93,24 @@ import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
 import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
 
 
-import snailInfo from '../assets/imagesMain/SnailInfo.jpeg'
-import ChickenInfo from '../assets/imagesMain/ChickenInfo.jpeg'
-import MoleInfo from '../assets/imagesMain/MoleInfo.jpeg'
+
+import snailInfo from '../assets/imagesMain/SnailInfo.png'
+import ChickenInfo from '../assets/imagesMain/ChickenInfo.png'
+import MoleInfo from '../assets/imagesMain/MoleInfo.png'
 import FishInfo from '../assets/imagesMain/FishInfo.jpeg'
-import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.jpeg'
+import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 
-
-
+import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
+import montaniaMusica from '../assets/music/montania.mp3';
+
+import grassFootsteps from '../assets/sfx/grass_footsteps.wav'
+import snowFootsteps from '../assets/sfx/snow_footsteps.wav'
+import stoneFootsteps from '../assets/sfx/stone_footsteps.wav'
+import jump from '../assets/sfx/jump.wav'
+import death from '../assets/sfx/death.wav'
+import longFall from '../assets/sfx/longFall.wav'
+import puff from '../assets/sfx/puff.wav'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -254,9 +269,13 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 32,
       frameHeight : 32
     })
+    this.load.spritesheet('eKey', eKey, {
+      frameWidth : 13,
+      frameHeight : 13
+    })
     //Tile maps
     this.load.tilemapTiledJSON("screenMenu", screenMenu);
-
+    this.load.tilemapTiledJSON("screenLevelSel", screenLevelSel)
     this.load.tilemapTiledJSON('screen0_0',screen0_0);
     this.load.tilemapTiledJSON('screen0_1',screen0_1);
     this.load.tilemapTiledJSON('screen1_0',screen1_0);
@@ -280,6 +299,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_6',screen2_6);
     this.load.tilemapTiledJSON('screen2_7',screen2_7);
     this.load.tilemapTiledJSON('screen3_1',screen3_1);
+    this.load.tilemapTiledJSON('unlockScreen',unlockScreen);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
     this.load.image("tileSet3", tileSet3);
@@ -298,6 +318,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image("icyBlock3x2",icyBlock3x2);
     this.load.image("caveBlock3x2",caveBlock3x2);
     this.load.image("spikedBlock2x2",spikedBlock2x2);
+
+    this.load.image("backgroundWood", backgroundWood);
+
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
@@ -308,12 +331,36 @@ export default class Boot extends Phaser.Scene {
     });
 
     //MUSICA
+    this.load.audio('menuMusic', menuMusic)
     this.load.audio('bosque_musica', bosqueMusica);
+    this.load.audio('montania_musica', montaniaMusica);
+    this.load.audio('menuMusic', menuMusic)
+
+
+    // SFX
+    // walking sound effects
+    this.load.audio('footsteps_grass', grassFootsteps)
+    this.load.audio('footstep_snow', snowFootsteps)
+    this.load.audio('footstep_stone', stoneFootsteps)
+
+    //jump
+    this.load.audio('jump', jump)
+
+    //death
+    this.load.audio('death', death)
+
+    //long fall
+    this.load.audio('longFall', longFall)
+
+    // Transformation (puff)
+    this.load.audio('puff', puff)
+
 
   }
 
   create() {
-    this.scene.start('screenMenu');
+
+    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
 
   }
 }

@@ -43,9 +43,9 @@ export default class Screen2_1 extends ScreenBase {
     
     //conectar a 2_0
     createAScreen(){
-        this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen1_1',{point:"B",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
-        this.scene.start('screen2_2',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        this.scene.start('screen2_2',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
 }

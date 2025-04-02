@@ -214,29 +214,18 @@
                  "y":161.083333333333
                 }, 
                 {
-                 "height":47,
-                 "id":8,
-                 "name":"spawnZoneA",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":0.75,
-                 "y":129
-                }, 
-                {
                  "height":8.125,
                  "id":9,
                  "name":"killingZone",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":41.8636363636363,
+                 "width":45.3181818181818,
                  "x":162.329545454545,
                  "y":184.306818181818
                 }, 
                 {
-                 "height":22.25,
+                 "height":32.6136363636364,
                  "id":10,
                  "name":"killingZone",
                  "rotation":0,
@@ -244,7 +233,7 @@
                  "visible":true,
                  "width":8.75,
                  "x":206.227272727273,
-                 "y":196.886363636364
+                 "y":191.25
                 }, 
                 {
                  "height":26.625,

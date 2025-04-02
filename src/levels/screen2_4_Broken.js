@@ -69,6 +69,9 @@ export default class Screen2_4_Broken extends ScreenBase {
             });
         }
         
+        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage.setVisible(false);
+        this.infoImage.setDepth(100);
     }
     
     respawn(){
@@ -80,6 +83,6 @@ export default class Screen2_4_Broken extends ScreenBase {
     }
 
     createBScreen(){
-        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true});
+        this.scene.start('screen2_3',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true,unlockedTranformations:this.unlockedTranformations});
     }
 }
