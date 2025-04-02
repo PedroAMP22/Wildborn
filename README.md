@@ -42,18 +42,21 @@ El objetivo es superar las pruebas del bosque, adquiriendo poderes y habilidades
 ## Interfaz
 - **Cámara**: 
 - **HUD**:
-- **Menús**: 
+- **Menús**:
+
+## Épicas:
+- 
 
 ## Mundo de Juego
 - **Niveles**: Cada nivel está lleno de obstáculos y zonas secretas. Los niveles están diseñados para desafiar tus habilidades de plataforma y tus capacidades de transformación.
-  - **Nivel 1**: h       sssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaa                                                                                       ADADAD        WXS                                                                                         
-  - **Nivel 2**: 
-  - **Nivel 3**: 
+  - **Nivel 1**: Bosque, se adquieren las transformaciones de caracol y ardilla.                                                                                         
+  - **Nivel 2**: Cueva, se obtienen las transformaciones de topo y gallina.
+  - **Nivel 3**: Templo, se obtienen la transformación de pez globo.
 - **Coleccionables**: A medida que avanzas en el juego, podrás encontrar coleccionables que van contando la historia del druida
 
 ## Personajes
 - **Druida**: El protagonista, un joven druida que busca completar las pruebas del bosque.
 ## Jefes
----
+- **Boss Templo**: Al final del juego, el druida deberá enfrentarse a un jefe final para superar las pruebas.
 
 ¡Embárcate en tu aventura y demuestra tu valía como druida en el mágico mundo del bosque!
