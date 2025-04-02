@@ -44,6 +44,7 @@ import eKey from '../assets/sprites/keys/eKey.png'
 
 import screenMenu from '../assets/tilemaps/menus/mainMenuLevel.json'
 import unlockScreen from '../assets/tilemaps/menus/unlockScreen.json'
+import screenLevelSel from '../assets/tilemaps/menus/levelSelectorScreen.json'
 
 import screen0_0 from '../assets/tilemaps/levels/level_0/screen0_0.json'
 import screen0_1 from '../assets/tilemaps/levels/level_0/screen0_1.json'
@@ -82,6 +83,8 @@ import backgroundForest from '../assets/tilemaps/backgrounds/ForestBG2.png'
 import backgroundMountain from '../assets/tilemaps/backgrounds/MountainBG.png'
 import backgroundCave from '../assets/tilemaps/backgrounds/CaveBG1.png'
 import backgroundCave2 from '../assets/tilemaps/backgrounds/CaveBG2.png'
+
+import backgroundWood from '../assets/tilemaps/menuImages/WoodBackground.jpeg'
 
 import mossyBlock3x2 from '../assets/sprites/blocks/mossyBlock3x2.png'
 import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
@@ -271,7 +274,7 @@ export default class Boot extends Phaser.Scene {
     })
     //Tile maps
     this.load.tilemapTiledJSON("screenMenu", screenMenu);
-
+    this.load.tilemapTiledJSON("screenLevelSel", screenLevelSel)
     this.load.tilemapTiledJSON('screen0_0',screen0_0);
     this.load.tilemapTiledJSON('screen0_1',screen0_1);
     this.load.tilemapTiledJSON('screen1_0',screen1_0);
@@ -314,6 +317,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image("icyBlock3x2",icyBlock3x2);
     this.load.image("caveBlock3x2",caveBlock3x2);
     this.load.image("spikedBlock2x2",spikedBlock2x2);
+
+    this.load.image("backgroundWood", backgroundWood);
+
     this.load.spritesheet('mossyBlock3x2', mossyBlock3x2, {
       frameWidth : 48,
       frameHeight : 32
@@ -353,7 +359,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screen1_1',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
 
   }
 }
