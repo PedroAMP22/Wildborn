@@ -99,6 +99,7 @@ import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
 import montaniaMusica from '../assets/music/montania.mp3';
+import menuMusic from '../assets/music/menuMusic.mp3'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -319,13 +320,14 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('menuMusic', menuMusic)
     this.load.audio('bosque_musica', bosqueMusica);
     this.load.audio('montania_musica', montaniaMusica);
+    this.load.audio('menuMusic', menuMusic)
+
 
   }
 
   create() {
 
     this.scene.start('screen1_4',{unlockedTranformations:[false,false,false,false,false]});
-
 
   }
 }
