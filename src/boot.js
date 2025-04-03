@@ -310,7 +310,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image("thorns",thorns);
     this.load.image("spikes",spikes);
     this.load.image("snailInfo",snailInfo);
-    this.load.image("moleInfo",MoleInfo);
     this.load.image("squirrelInfo",SquirrelInfo);
     this.load.image("moleInfo",MoleInfo);
     this.load.image("fishInfo",FishInfo);
@@ -360,7 +359,8 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
+    //this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screen2_4',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }
