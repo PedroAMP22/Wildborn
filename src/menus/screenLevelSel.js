@@ -5,6 +5,9 @@ import level1 from "../../assets/tilemaps/menuImages/Level1.png"
 import level2 from "../../assets/tilemaps/menuImages/Level2.png"
 import level3 from "../../assets/tilemaps/menuImages/playButton.png"
 import levelSelectorLabel from "../../assets/tilemaps/menuImages/levelSelectorLabel.png"
+import { DruidState } from "../StateMachine/druidState";
+import { SnailState } from '../StateMachine/snailState';
+
 
 export default class ScreenLevelSel extends ScreenBase {
     constructor() {
@@ -52,7 +55,7 @@ export default class ScreenLevelSel extends ScreenBase {
         .setOrigin(0.5)
         .setInteractive()
         .on('pointerdown', () => {
-            this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
+            this.scene.start('screen1_0',{point:"A",transformation: SnailState.NAME,unlockedTranformations:this.unlockedTranformations});
 
         })
         .on('pointerover', () => {
@@ -68,7 +71,7 @@ export default class ScreenLevelSel extends ScreenBase {
         .setOrigin(0.5)
         .setInteractive()
         .on('pointerdown', () => {
-            this.scene.start('screen2_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
+            this.scene.start('screen2_1',{point:"A",transformation: DruidState.NAME,unlockedTranformations:this.unlockedTranformations});
 
         })
         .on('pointerover', () => {
