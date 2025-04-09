@@ -71,7 +71,7 @@ export default class ScreenLevelSel extends ScreenBase {
         .setOrigin(0.5)
         .setInteractive()
         .on('pointerdown', () => {
-            this.scene.start('screen2_1',{point:"A",transformation: DruidState.NAME,unlockedTranformations:this.unlockedTranformations});
+            this.scene.start('screen2_1',{point:"A",transformation: DruidState.NAME,unlockedTranformations:[true,true,true,false,false]});
 
         })
         .on('pointerover', () => {
