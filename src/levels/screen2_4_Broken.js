@@ -69,7 +69,7 @@ export default class Screen2_4_Broken extends ScreenBase {
             });
         }
         
-        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage = this.add.image(400, 400, 'chickenInfo').setScale(1.4);
         this.infoImage.setVisible(false);
         this.infoImage.setDepth(100);
     }

@@ -43,13 +43,13 @@ export default class Screen1_8 extends ScreenBase {
                 this.input.keyboard.enabled = true;
             });
         }
-        this.infoImage = this.add.image(400, 400, 'snailInfo').setScale(0.2);
+        this.infoImage = this.add.image(400, 400, 'moleInfo').setScale(1.4);
         this.infoImage.setVisible(false);
         this.infoImage.setDepth(100);
     }
 
     createCScreen(){
-        this.scene.start('screen2_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
+        this.scene.start('screenLevelSel',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     createBScreen(){
         this.scene.start('screen1_8',{point:"B",transformation:this.player.stateMachine.state.toString(),broken:true,unlockedTranformations:this.unlockedTranformations});
