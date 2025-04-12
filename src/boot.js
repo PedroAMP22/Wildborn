@@ -359,7 +359,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screen3_1',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }

@@ -1,7 +1,6 @@
-import { MoveableBlock } from '../moveableBlock.js';
-import { MovingBlock } from '../movingBlock.js';
-import ScreenBase from './screenBase.js';
 
+import ScreenBase from './screenBase.js';
+import Boss from '../boss/boss.js';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -26,20 +25,12 @@ export default class Screen3_1 extends ScreenBase {
         super.create()
 
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-            if(name === "posA1"){
-                this.posA1 = {x,y};
-            }else if(name === "posA2"){
-                this.posA2 = {x,y};
-            }else if(name === "posA3"){
-                this.posA3 = {x,y};
+            if(name === "boss"){
+                this.boss = new Boss(this,x,y);
+
             }
         });
-        
-        this.moveableBlock = new MoveableBlock(this,8,this.posA1,this.posA2,this.posA3,48,32,true, "mossyBlock3x2");           
-        this.physics.add.collider(this.player, this.moveableBlock, this.player.collisionWithMovingBlock); 
-        this.physics.add.collider(this.airGroup, this.moveableBlock, this.moveableBlock.collisionWithAir); 
-        this.physics.add.collider(this.moveableBlock, this.platformLayer);
-
+        this.cameras.main.startFollow(this.boss,true, 0.1, 0.25);
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import Player from '../player.js';
-import { DruidState } from '../StateMachine/druidState.js';
+import { DruidState } from '../PlayerStateMachine/druidState.js';
 import { Rune } from '../rune.js';
 import { Sign } from '../sign.js';
 

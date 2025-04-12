@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
-import {StateMachine} from './StateMachine/stateMachine'
-import { SnailState } from './StateMachine/snailState';
-import { MoleState } from './StateMachine/moleState';
-import { SquirrelState } from './StateMachine/squirrelState';
-import { PufferFishState } from './StateMachine/pufferFishState';
-import { ChickenState } from './StateMachine/chickenState';
+import {StateMachine} from './PlayerStateMachine/stateMachine'
+import { SnailState } from './PlayerStateMachine/snailState';
+import { MoleState } from './PlayerStateMachine/moleState';
+import { SquirrelState } from './PlayerStateMachine/squirrelState';
+import { PufferFishState } from './PlayerStateMachine/pufferFishState';
+import { ChickenState } from './PlayerStateMachine/chickenState';
 import {Air} from './air';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.

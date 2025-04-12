@@ -1,5 +1,4 @@
-import { MovingBlock } from '../movingBlock.js';
-import { SquirrelState } from '../StateMachine/squirrelState.js';
+import { SquirrelState } from '../PlayerStateMachine/squirrelState.js';
 import ScreenBase from './screenBase.js';
 
 /**

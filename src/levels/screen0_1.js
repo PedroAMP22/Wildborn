@@ -1,7 +1,7 @@
 
 import Phaser from 'phaser';
 import ScreenBase from './screenBase.js';
-import { SnailState } from '../StateMachine/snailState';
+import { SnailState } from '../PlayerStateMachine/snailState';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 

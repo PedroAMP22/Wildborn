@@ -7,7 +7,6 @@ export class State {
     checkState(stateString){}
     onCollision(block){}
     toString(){
-        
     }
     
 }
