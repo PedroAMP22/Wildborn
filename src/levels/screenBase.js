@@ -121,7 +121,7 @@ export default class ScreenBase extends Phaser.Scene {
                     this.killingObjects.add(killZone);
                 }
                 else if(name === "rune"){
-                    this.rune = new Rune(this,x,y); 
+                    this.rune = new Rune(this,x,y);
                 }
                 else if(name === "infoStone"){
                     this.infoRock = new Sign(this,x,y); 
@@ -145,6 +145,8 @@ export default class ScreenBase extends Phaser.Scene {
         else{
             this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
         }
+
+        
 
         // For sfx sounds
         this.player.currentSurface = this.surfaceType
