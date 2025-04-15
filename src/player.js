@@ -286,7 +286,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
             if(this.rune){
                 const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
                 if(distance < 20){
-                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setPosition(this.rune.x, this.rune.y - 20);
                     this.scene.eKeyText.setVisible(true);
                     this.scene.eKeyText.anims.play('eKeyBlink',true);
                 }
@@ -297,6 +297,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
                 if (distance < 20 && this.justPressed ) {
                     this.rune.interact();
+
+                    this.scene.addCollectibles()
                 }
             }
     

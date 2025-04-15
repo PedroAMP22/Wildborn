@@ -20,9 +20,9 @@ export class Rune extends Phaser.GameObjects.Sprite {
     }
 
     interact(){
-        this.scene.runeImage.setVisible(true); 
-        this.scene.runeImage.setPosition(this.x,this.y);
-        this.scene.time.delayedCall(2000, () => {
+        //this.scene.runeImage.setVisible(true); 
+        //this.scene.runeImage.setPosition(this.x,this.y);
+        this.scene.time.delayedCall(200, () => {
             this.scene.runeImage.setVisible(false);
             this.scene.player.setRune(null);
             this.scene.eKeyText.setVisible(false); 

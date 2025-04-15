@@ -29,7 +29,10 @@ export default class ScreenBase extends Phaser.Scene {
         else{
             this.transformation = DruidState.NAME;
         }
-        
+        if(data.collectibles)
+            this.collectibles = data.collectibles;
+        else
+            this.collectibles = 0;
     }
 
     create(){
@@ -260,5 +263,49 @@ export default class ScreenBase extends Phaser.Scene {
         if (key.startsWith("screen3_")) return "stone";
         return "stone";
     }
+
+    getCollectibles(){
+        return this.collectibles;
+    }
+
+    addCollectibles(){
+        this.oldValue = this.collectibles;
+        this.newValue = this.collectibles + 1;
+
+        this.popup = this.add.text(-20, 20, ` x ${this.oldValue}`, {
+            fontSize: '1.2rem',
+            fill: '#FFFFFF',
+            fontFamily: 'ArcadeClassic'
+        }).setOrigin(0.5).setScrollFactor(0);
+
+        this.popup.setDepth(100);
+
+        this.tweens.add({
+            targets: this.popup,
+            x: 20,
+            y: 20,
+            duration: 1000,
+        });
+        
+        
+        this.time.delayedCall(1500, () => {
+            this.popup.setText(` x ${this.newValue}`);
+        }, [], this);
+        
+        this.tweens.add({
+            targets: this.popup,
+            x: -20,
+            y: 20,
+            alpha: 0,
+            duration: 1000,
+            delay: 3000,
+        });
+
+        this.time.delayedCall(5000, () => {
+            this.popup.destroy();
+        }, [], this);
+        
+    }
+
     
 }

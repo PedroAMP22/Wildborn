@@ -21,7 +21,6 @@ import Screen2_2 from './levels/screen2_2.js';
 import Screen2_3 from './levels/screen2_3.js';
 import Screen2_4 from './levels/screen2_4.js';
 import Screen2_4_Broken from './levels/screen2_4_Broken.js';
-import Screen3_5 from './levels/screen3_5.js';
 import Screen2_5 from './levels/screen2_5.js';
 import Screen2_6 from './levels/screen2_6.js';
 import Screen2_7 from './levels/screen2_7.js';
