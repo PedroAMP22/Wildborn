@@ -363,7 +363,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screen1_2',{unlockedTranformations:[true,true,true,true,true]});
+    this.scene.start('screen3_0',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }

@@ -1,7 +1,7 @@
 
 import Phaser from 'phaser';
 import ScreenBase from './screenBase.js';
-
+import Statue from '../statue.js';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -29,6 +29,27 @@ export default class Screen3_1 extends ScreenBase {
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
 
+        this.objectsLayer.objects.forEach(({ name, x, y }) => {
+            if (name === "posA1") {
+                this.posA1 = { x, y };
+            } else if (name === "posA2") {
+                this.posA2 = { x, y };
+            } else if (name === "posB2") {
+                this.posB2 = { x, y };
+            }
+        });
+
+
+        this.statueA = new Statue(this, 5, this.posA1, this.posA2, 48, 32, true, "icyBlock3x2", this.posA1); // movible
+        this.statueB = new Statue(this, 5, this.posB2, this.posB2, 48, 32, false, "icyBlock3x2", this.posB2, true); // ya colocada
+
+        this.physics.add.collider(this.player, this.statueA, this.player.collisionWithMovingBlock);
+        this.physics.add.overlap(this.airGroup, this.statueA, this.statueA.collisionWithAir.bind(this.statueA));
+        this.physics.add.collider(this.statueA, this.platformLayer);
+
+        
+        
+
         //background image
         this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
@@ -36,8 +57,6 @@ export default class Screen3_1 extends ScreenBase {
 
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
-        this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
-        this.decoBackLayer.setTint(0x999999);
     }
 
     createAScreen(){

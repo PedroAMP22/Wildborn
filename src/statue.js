@@ -1,10 +1,18 @@
 import { Scene } from 'phaser';
 import { MoveableBlock } from './moveableBlock';
 
-export class Statue extends MoveableBlock {
-    constructor(scene, speed, pointA, pointB, x, y, falling, model, spawnPoint) {
+export default class Statue extends MoveableBlock {
+    constructor(scene, speed, pointA, pointB, x, y, falling, model, spawnPoint, placed = false) {
         super(scene, speed, pointA, pointB, null, x, y, falling, model, spawnPoint);
-        this.isPlaced = false;
+        this.isPlaced = placed;
+
+        if (placed) {
+            this.setDepth(0); // detrás de todo
+            this.play('statue_placed', true); // animación de colocada
+            this.body.enable = false; // no colisiona
+            this.point = pointB; // colocada en puntoB
+            this.moving = false;
+        }
     }
 
     preUpdate(t, dt) {
@@ -23,26 +31,28 @@ export class Statue extends MoveableBlock {
     }
 
     collisionWithAir(statue, air) {
-        // solo permitir movimiento si está en A y va a B
-        if (statue.point === statue.pointA && air.x > statue.x) {
-            // verificar si ya hay una estatua en el punto B
-            let overlappingStatue = false;
-            statue.scene.children.list.forEach(obj => {
-                if (obj instanceof Statue && obj !== statue && obj.point === statue.pointB) {
-                    overlappingStatue = true;
-                }
-            });
-
-            if (overlappingStatue) {
-                statue.play('statue_blocked', true); // animacion en B
-            } else {
+        // Si ya está colocada, se ignora la interacción
+        if (statue.isPlaced) {
+            air.destroy();
+            return;
+        }
+        
+        // Solo se procesa el movimiento si la estatua está en pointA
+        if (statue.point === statue.pointA) {
+            // Calculamos la dirección que indica hacia dónde se moverá la estatua
+            const direction = statue.pointB.x - statue.pointA.x;
+            
+            // Si la estatua debe moverse hacia la derecha, el aire debe venir de la izquierda para empujarla.
+            // Si debe moverse hacia la izquierda, el aire debe venir de la derecha.
+            if ((direction > 0 && air.x < statue.x) || (direction < 0 && air.x > statue.x)) {
                 statue.pointObj = statue.pointB;
                 statue.moving = true;
-            }
-
-            air.destroy();
+            } 
         }
+        
+        air.destroy();
     }
+    
 
     respawn() {
         super.respawn();
