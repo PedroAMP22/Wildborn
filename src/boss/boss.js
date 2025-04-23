@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Proyectile } from './proyectile';
+import { Cross } from './cross';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -61,7 +62,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
     }
 
     cross(){
-
+        new Cross(this.scene,this.x,this.y)
     }
 
     change(){
