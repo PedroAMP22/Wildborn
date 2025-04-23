@@ -39,11 +39,11 @@ export default class Statue extends MoveableBlock {
         
         // Solo se procesa el movimiento si la estatua está en pointA
         if (statue.point === statue.pointA) {
-            // Calculamos la dirección que indica hacia dónde se moverá la estatua
+            // calculamos la dirección 
             const direction = statue.pointB.x - statue.pointA.x;
             
-            // Si la estatua debe moverse hacia la derecha, el aire debe venir de la izquierda para empujarla.
-            // Si debe moverse hacia la izquierda, el aire debe venir de la derecha.
+            // si la estatua debe moverse hacia la derecha el aire debe venir de la izquierda para empujarla
+            // si debe moverse hacia la izquierda el aire debe venir de la derecha
             if ((direction > 0 && air.x < statue.x) || (direction < 0 && air.x > statue.x)) {
                 statue.pointObj = statue.pointB;
                 statue.moving = true;
