@@ -39,7 +39,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
             callbackScope: this,
             loop: true
           });
-        
+        this.crossEvent.paused = true;
         this.mechChange = this.scene.time.addEvent({
             delay: 10000, 
             callback: this.change,
@@ -62,7 +62,8 @@ export default class Boss extends Phaser.GameObjects.Sprite {
     }
 
     cross(){
-        new Cross(this.scene,this.x,this.y)
+        new Cross(this.scene,this.x,this.y,true)
+        new Cross(this.scene,this.x,this.y,false)
     }
 
     change(){

@@ -70,6 +70,7 @@ import screen2_6 from '../assets/tilemaps/levels/level_2/screen2_6.json'
 import screen2_7 from '../assets/tilemaps/levels/level_2/screen2_7.json'
 import screen3_0 from '../assets/tilemaps/levels/level_3/screen3_0.json'
 import screen3_1 from '../assets/tilemaps/levels/level_3/screen3_1.json'
+import screen3_2 from '../assets/tilemaps/levels/level_3/screen3_2.json'
 import screen3_5 from '../assets/tilemaps/levels/level_3/screen3_5.json'
 
 
@@ -302,6 +303,7 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_7',screen2_7);
     this.load.tilemapTiledJSON('screen3_0',screen3_0);
     this.load.tilemapTiledJSON('screen3_1',screen3_1);
+    this.load.tilemapTiledJSON('screen3_2',screen3_2);
     this.load.tilemapTiledJSON('screen3_5',screen3_5);
     this.load.tilemapTiledJSON('unlockScreen',unlockScreen);
     this.load.image("tileSet1", tileSet1);
@@ -363,7 +365,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screen3_0',{unlockedTranformations:[true,true,true,true,true]});
+    this.scene.start('screen3_5',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }

@@ -21,11 +21,14 @@ export class Proyectile extends Phaser.GameObjects.Sprite {
         this.setVisible(false);
         this.body.setSize(5,5);
         this.body.setOffset(0,0);
-        this.scene.killingObjects.add(this);
         const angle = Phaser.Math.Angle.Between(x1, y1, x2, y2);
         const velocityX = Math.cos(angle) * speed;
         const velocityY = Math.sin(angle) * speed;
         this.body.setVelocity(velocityX, velocityY);
+        this.scene.physics.add.overlap(this.scene.player, this, () => {
+            
+            this.scene.respawn()
+        });
     }
 
     preUpdate(t, d) {
@@ -34,6 +37,7 @@ export class Proyectile extends Phaser.GameObjects.Sprite {
             this.y < 0 || this.y > this.scene.physics.world.bounds.height) {
             this.destroy();
         }
+
        
     }
 

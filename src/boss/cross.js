@@ -20,7 +20,7 @@ export class Cross extends Phaser.GameObjects.Sprite {
         this.body.setOffset(0,0);
         this.body.setSize(0.1,0.1);
         this.scene.time.addEvent({
-            delay: 2000, 
+            delay: 1000, 
             callback: this.explode,
             callbackScope: this,
             loop: false
@@ -32,15 +32,27 @@ export class Cross extends Phaser.GameObjects.Sprite {
     }
 
     explode(){
-        this.scene.killingObjects.add(this);
+        this.scene.physics.add.overlap(this.scene.player, this, () => {
+            
+            this.scene.respawn()
+        });
         if(this.vertical){
             this.body.setSize(1000,10);
         }
         else{
             this.body.setSize(10,1000);
         }
+        this.scene.time.addEvent({
+            delay: 1000, 
+            callback: this.remove,
+            callbackScope: this,
+            loop: false
+          });
         
 
+    }
+    remove(){
+        this.destroy();
     }
 
 
