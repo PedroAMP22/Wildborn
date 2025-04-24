@@ -3,6 +3,8 @@ import Player from '../player.js';
 import { DruidState } from '../PlayerStateMachine/druidState.js';
 import { Rune } from '../rune.js';
 import { Sign } from '../sign.js';
+import Boss from '../boss/boss.js';
+
 
 
 
@@ -126,6 +128,10 @@ export default class ScreenBase extends Phaser.Scene {
                 else if(name === "rune"){
                     this.rune = new Rune(this,x,y);
                 }
+                else if(name === "boss"){
+                    this.boss = new Boss(this,x,y);
+    
+                }
                 else if(name === "infoStone"){
                     this.infoRock = new Sign(this,x,y); 
                 }
@@ -217,13 +223,16 @@ export default class ScreenBase extends Phaser.Scene {
 
     respawn(){
         if(this.player.canMove){
-        this.player.body.setVelocity(0,0);
+            this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
         this.player.canMove = false;
         this.player.stop();
         this.deathSE.play()
         this.player.body.setAllowGravity(false);
         this.player.anims.play("druidDeath", true);
+        if(this.boss){
+            this.boss.respawn();
+        }
         this.time.delayedCall(800, () => { 
             this.player.stateMachine.transform(this.player.stateMachine.state.toString());
             this.player.body.setAllowGravity(true);

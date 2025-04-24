@@ -19,7 +19,7 @@ export class Proyectile extends Phaser.GameObjects.Sprite {
         this.body.setImmovable(true);
         this.body.setAllowGravity(false);        
         this.setVisible(false);
-        this.body.setSize(5,5);
+        this.body.setSize(10,10);
         this.body.setOffset(0,0);
         const angle = Phaser.Math.Angle.Between(x1, y1, x2, y2);
         const velocityX = Math.cos(angle) * speed;
@@ -37,8 +37,6 @@ export class Proyectile extends Phaser.GameObjects.Sprite {
             this.y < 0 || this.y > this.scene.physics.world.bounds.height) {
             this.destroy();
         }
-
-       
     }
 
 }

@@ -37,10 +37,10 @@ export class Cross extends Phaser.GameObjects.Sprite {
             this.scene.respawn()
         });
         if(this.vertical){
-            this.body.setSize(1000,10);
+            this.body.setSize(100000,10);
         }
         else{
-            this.body.setSize(10,1000);
+            this.body.setSize(10,100000);
         }
         this.scene.time.addEvent({
             delay: 1000, 
