@@ -27,6 +27,7 @@ import Screen2_7 from './levels/screen2_7.js';
 import Screen3_0 from './levels/screen3_0.js';
 import Screen3_1 from './levels/screen3_1.js';
 import Screen3_2 from './levels/screen3_2.js';
+import Screen3_3 from './levels/screen3_3.js';
 import Screen3_5 from './levels/screen3_5.js';
 import UnlockScreen from './levels/unlockScreen.js'
 /**
@@ -71,6 +72,7 @@ let config = {
         Screen3_0,
         Screen3_1,
         Screen3_2,
+        Screen3_3,
         Screen3_5,
         UnlockScreen
         ],
