@@ -40,8 +40,8 @@ export default class Screen3_1 extends ScreenBase {
         });
 
 
-        this.statueA = new Statue(this, 5, this.posA1, this.posA2, 48, 32, true, "icyBlock3x2", this.posA1); // movible
-        this.statueB = new Statue(this, 5, this.posB2, this.posB2, 48, 32, false, "icyBlock3x2", this.posB2, true); // ya colocada
+        this.statueA = new Statue(this, 5, this.posA1, this.posA2, null, 48, 32, true, "icyBlock3x2", this.posA1);
+        this.statueB = new Statue(this, 5, this.posB2, this.posB2, null, 48, 32, false, "icyBlock3x2", this.posB2, true);
 
         this.physics.add.collider(this.player, this.statueA, this.player.collisionWithMovingBlock);
         this.physics.add.overlap(this.airGroup, this.statueA, this.statueA.collisionWithAir.bind(this.statueA));
