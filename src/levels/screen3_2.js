@@ -84,9 +84,9 @@ export default class Screen3_2 extends ScreenBase {
 
 
 
-        this.movingBlockA = new MovingBlock(this, 5, this.pointA1, this.pointA2, 32, 16, false, "mossyBlock2x1")
-        this.movingBlockB = new MovingBlock(this, 4, this.pointB1, this.pointB2, 32, 16, false, "mossyBlock2x1")
-        this.movingBlockC = new MovingBlock(this, 6, this.pointC1, this.pointC2, 32, 16, false, "mossyBlock2x1")
+        this.movingBlockA = new MovingBlock(this, 2.9, this.pointA1, this.pointA2, 32, 16, false, "mossyBlock2x1")
+        this.movingBlockB = new MovingBlock(this, 3, this.pointB1, this.pointB2, 32, 16, false, "mossyBlock2x1")
+        this.movingBlockC = new MovingBlock(this, 3, this.pointC1, this.pointC2, 32, 16, false, "mossyBlock2x1")
 
 
         this.physics.add.collider(this.player, this.movingBlockA, this.player.collisionWithMovingBlock);
