@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 import ScreenBase from './screenBase.js';
 import { MoveableBlock } from '../moveableBlock.js';
+import { MovingBlock } from './../movingBlock';
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -32,21 +33,67 @@ export default class Screen3_2 extends ScreenBase {
         this.objectsLayer.objects.forEach(({ name, x, y }) => {
             if (name === "posA1") {
                 this.posA1 = { x, y };
-            } else if (name === "posA2") {
+            } else if (name === "posB1") {
+                this.posB1 = { x, y };
+            } else if (name === "posC1") {
+                this.posC1 = { x, y };
+            } else if (name === "posA2"){
                 this.posA2 = { x, y };
-            } else if (name === "posB2") {
+            } else if (name === "posB2"){
                 this.posB2 = { x, y };
-            } else if(name === "posA2"){
-                this.posA2
+            } else if (name === "posC2"){
+                this.posC2 = { x, y };
+            } else if (name === "pointA1"){
+                this.pointA1 = { x, y };
+            } else if (name === "pointA2"){
+                this.pointA2 = { x, y };
+            } else if (name === "pointB1"){
+                this.pointB1 = { x, y };
+            } else if (name === "pointB2"){
+                this.pointB2 = { x, y };
+            } else if (name === "pointC1"){
+                this.pointC1 = { x, y };
+            } else if (name === "pointC2"){
+                this.pointC2 = { x, y };
             }
+
+
 
         });
 
-        this.moveableBlock1 = new MoveableBlock(this, 5, this.posA1, null, null, 48, 32, true, "icyBlock3x2", this.posA1)
+        this.moveableBlockA = new MoveableBlock(this, 5, this.posA1, this.posA2, null, 32, 32, true, "mossyBlock1x4", this.posA1)
+        this.moveableBlockB = new MoveableBlock(this, 5, this.posB1, this.posB2, null, 32, 32, true, "icyBlock3x2", this.posB1)
+        this.moveableBlockC = new MoveableBlock(this, 5, this.posC1, this.posC2, null, 32, 32, true, "icyBlock3x2", this.posC1)
 
-        this.physics.add.collider(this.player, this.moveableBlock1, this.player.collisionWithMovingBlock);
-        this.physics.add.overlap(this.airGroup, this.moveableBlock1, this.moveableBlock1.collisionWithAir.bind(this.moveableBlock1));
-        this.physics.add.collider(this.statueA, this.platformLayer);   
+
+        this.physics.add.collider(this.player, this.moveableBlockA, this.player.collisionWithMovingBlock);
+        this.physics.add.overlap(this.airGroup, this.moveableBlockA, this.moveableBlockA.collisionWithAir.bind(this.moveableBlockA));
+        this.physics.add.collider(this.moveableBlockA, this.platformLayer);
+        
+        this.physics.add.collider(this.player, this.moveableBlockB, this.player.collisionWithMovingBlock);
+        this.physics.add.overlap(this.airGroup, this.moveableBlockB, this.moveableBlockA.collisionWithAir.bind(this.moveableBlockB));
+        this.physics.add.collider(this.moveableBlockB, this.platformLayer);
+
+        this.physics.add.collider(this.player, this.moveableBlockC, this.player.collisionWithMovingBlock);
+        this.physics.add.overlap(this.airGroup, this.moveableBlockC, this.moveableBlockA.collisionWithAir.bind(this.moveableBlockC));
+        this.physics.add.collider(this.moveableBlockC, this.platformLayer);
+
+        this.physics.add.collider(this.moveableBlockA, this.moveableBlockB, () => {this.moveableBlockA.body.setAllowGravity(false); this.moveableBlockB.body.setAllowGravity(false) });
+        this.physics.add.collider(this.moveableBlockB, this.moveableBlockC, () => {this.moveableBlockB.body.setAllowGravity(false); this.moveableBlockC.body.setAllowGravity(false) });
+        this.physics.add.collider(this.moveableBlockA, this.moveableBlockC, () => {this.moveableBlockA.body.setAllowGravity(false); this.moveableBlockC.body.setAllowGravity(false) });
+
+
+
+        this.movingBlockA = new MovingBlock(this, 5, this.pointA1, this.pointA2, 32, 16, false, "mossyBlock2x1")
+        this.movingBlockB = new MovingBlock(this, 4, this.pointB1, this.pointB2, 32, 16, false, "mossyBlock2x1")
+        this.movingBlockC = new MovingBlock(this, 6, this.pointC1, this.pointC2, 32, 16, false, "mossyBlock2x1")
+
+
+        this.physics.add.collider(this.player, this.movingBlockA, this.player.collisionWithMovingBlock);
+        this.physics.add.collider(this.player, this.movingBlockB, this.player.collisionWithMovingBlock);
+        this.physics.add.collider(this.player, this.movingBlockC, this.player.collisionWithMovingBlock);
+
+
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);

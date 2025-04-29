@@ -95,7 +95,7 @@ import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 import icyBlock3x2 from '../assets/sprites/blocks/icyBlock3x2.png'
 import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
 import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
-
+import mossyBlock2x1 from '../assets/sprites/blocks/mossyBlock2x1.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.png'
@@ -332,6 +332,10 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 48,
       frameHeight : 32
     });
+    this.load.spritesheet('mossyBlock2x1', mossyBlock2x1, {
+      frameWidth : 32,
+      frameHeight : 16
+    });
     this.load.spritesheet('mossyBlock1x4', mossyBlock1x4, {
       frameWidth : 16,
       frameHeight : 64
@@ -367,7 +371,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screen3_3',{unlockedTranformations:[true,true,true,true,true]});
+    this.scene.start('screen3_2',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }
