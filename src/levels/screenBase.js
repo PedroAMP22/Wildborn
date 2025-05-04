@@ -85,6 +85,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.spawnZoneA = this.physics.add.staticGroup();
         this.spawnZoneB = this.physics.add.staticGroup();
         this.spawnZoneC = this.physics.add.staticGroup();
+        this.crosPointList = [];
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpointA") { // spawnPoint
                     this.spawnPointA = { x, y };  
@@ -130,11 +131,16 @@ export default class ScreenBase extends Phaser.Scene {
                 }
                 else if(name === "boss"){
                     this.boss = new Boss(this,x,y);
-    
+                    this.bossDead = false;
                 }
                 else if(name === "infoStone"){
                     this.infoRock = new Sign(this,x,y); 
                 }
+                else if(name.startsWith("crosPoint")){
+                    var crosPoint = {x,y};
+                    this.crosPointList.push(crosPoint);
+                }
+
         });
 
         
@@ -230,7 +236,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.deathSE.play()
         this.player.body.setAllowGravity(false);
         this.player.anims.play("druidDeath", true);
-        if(this.boss){
+        if(this.boss || this.bossDead){
             this.boss.respawn();
         }
         this.time.delayedCall(800, () => { 
@@ -265,6 +271,11 @@ export default class ScreenBase extends Phaser.Scene {
     createCScreen(){
         
     }
+
+    killBoss(){
+        this.boss.killBoss();
+    }
+
 
     getSurfaceType(key) {
         if (key.startsWith("screen1_")) return "dirt";

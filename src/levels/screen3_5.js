@@ -1,5 +1,8 @@
+import CameraDummy from '../cameraDummy.js';
 import { MovingBlock } from '../movingBlock.js';
 import ScreenBase from './screenBase.js';
+import Statue from '../statue.js';
+
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
  * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
@@ -23,34 +26,43 @@ export default class Screen3_5 extends ScreenBase {
 
         super.create()
 
-        
-        this.cameras.main.startFollow(this.boss,true, 0.1, 0.25);
-        this.time.delayedCall(1000, () => { 
-            this.cameras.main.startFollow(this.player,true, 0.1, 0.25);
-        });  
-
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
             if(name === "pointA1"){
                 this.pointA1 = {x,y};
 
             } else if(name === "pointA2")
                 this.pointA2 = {x,y};
+            else if(name === "posA1"){
+                    this.posA1 = {x,y};
+    
+            } else if(name === "posA2")
+                    this.posA2 = {x,y};
+               
            
     });
         this.movingBlock = new MovingBlock(this,7,this.pointA1,this.pointA2,48,32,false, "mossyBlock3x2"); 
+        this.statueA = new Statue(this, 5, this.posA1, this.posA2, null, 48, 32, true, "icyBlock3x2", this.posA1);
+
+        this.physics.add.collider(this.player, this.statueA, this.player.collisionWithMovingBlock);
+        this.physics.add.overlap(this.airGroup, this.statueA, this.statueA.collisionWithAir.bind(this.statueA));
+        this.physics.add.collider(this.statueA, this.platformLayer);
         this.physics.add.collider(this.player, this.movingBlock, this.player.collisionWithMovingBlock);
 
+        new CameraDummy(this, this.boss.x,this.boss.y, this.player);
         //background image
         this.backgroundImage = this.add.image(0, 0, "ForestBG2").setOrigin(0, 0);
         this.backgroundImage.setDepth(-10);
         this.backgroundImage.setScrollFactor(0);
              
     }
-    
-    createAScreen(){
-        this.scene.start('screen1_1',{point:"A",transformation:this.player.stateMachine.state.toString()});
+
+    respawn(){
+        super.respawn()
+        this.statueA.respawn()
     }
+    
     createBScreen(){
-        this.scene.start('screen2_4',{point:"A",transformation:this.player.stateMachine.state.toString()});
+        if(this.bossDead)
+            this.scene.start('screen3_6',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
 }

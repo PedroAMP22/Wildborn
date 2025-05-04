@@ -31,10 +31,7 @@ export class SquirrelState extends State {
         this.player.setFlipY(false);
 
         this.hasGlided = false;
-        this.isGliding = false;
         this.onBlock = false;
-
-        this.wasGoingUp = false;
     }
 
     transform(){
@@ -79,47 +76,51 @@ export class SquirrelState extends State {
         }
 
         
-        const isGoingUp = this.player.body.velocity.y < 0;
+
         
-        if (this.wasGoingUp && !isGoingUp && !this.isGliding && !this.hasGlided) {
+        if(!this.player.body.onFloor() && this.justJumped && !this.isGliding && !this.hasGlided){
             this.isGliding = true;
             this.hasGlided = true;
-
-            if (this.player.keys.left.isDown)
+            if(this.player.keys.left.isDown)
                 this.glideDirection = -1;
-            else if (this.player.keys.right.isDown)
+            else if(this.player.keys.right.isDown)
                 this.glideDirection = 1;
-            else {
-                this.glideDirection = this.player.flipX ? -1 : 1;
+            else{
+                if(!this.player.flipX)
+                    this.glideDirection = 1;
+                else
+                    this.glideDirection = -1;
             }
-
             this.player.anims.play("squirrelFly", true);
         }
 
-        this.wasGoingUp = isGoingUp;
+        
 
-        // Está planeando
-        if (this.isGliding) {
+        //Está planeando
+        if(this.isGliding){
             this.player.body.setAllowGravity(false);
             this.player.body.setVelocityY(50);
-
-            if (this.glideDirection === -1) {
+           
+            if(this.glideDirection === -1){
                 this.player.setFlipX(true);
-            } else {
+            }
+            else{
                 this.player.setFlipX(false);
             }
-
             this.player.body.setVelocityX(this.glideDirection * this.topSpeed);
-            if (this.justJumped || this.player.body.onFloor()) {
+            if(!this.player.cursors.space.isDown || this.player.body.onFloor()){
                 this.isGliding = false;
                 this.player.body.setAllowGravity(true);
             }
-        } else {
+        }
+        else{
             this.player.fall(this.topFallingSpeed);
             this.player.moveHorizontal(this.initialSpeed, this.topSpeed, this.walkAcceleration, t, dt);
             this.wasGrounded = this.player.body.onFloor();
         }
-
+        
+        
+        
         this.onBlock = false;
     }
     onCollision(block){

@@ -62,8 +62,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
     }
 
     cross(){
-        new Cross(this.scene,this.x,this.y,true)
-        new Cross(this.scene,this.x,this.y,false)
+        this.scene.crosPointList.forEach(crosPoint => {
+            new Cross(this.scene,crosPoint.x,crosPoint.y,true)
+            new Cross(this.scene,crosPoint.x,crosPoint.y,false)
+        });
+        
     }
 
     change(){
@@ -78,6 +81,8 @@ export default class Boss extends Phaser.GameObjects.Sprite {
     }
    
     respawn(){
+        this.setVisible(true);
+
         this.shootEvent.remove()
         this.crossEvent.remove()
         this.mechChange.remove()
@@ -104,5 +109,16 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.proyectileList.forEach(proy => {
             proy.destroy();
         });
+    }
+
+    killBoss(){
+        this.shootEvent.remove()
+        this.crossEvent.remove()
+        this.mechChange.remove()
+        this.proyectileList.forEach(proy => {
+            proy.destroy();
+        });
+        this.scene.bossDead = true;
+        this.setVisible(false);
     }
 }

@@ -32,6 +32,7 @@ export default class Statue extends MoveableBlock {
         this.play('statue_placed', true);
         this.setDepth(0); 
         this.body.enable = false;
+        this.scene.killBoss();
     }
 
     collisionWithAir(statue, air) {
