@@ -61,5 +61,6 @@ El objetivo es superar las pruebas del bosque, adquiriendo poderes y habilidades
 
 ¡Embárcate en tu aventura y demuestra tu valía como druida en el mágico mundo del bosque!
 
-[Trailer](https://youtu.be/eN2waxP5t7Q)
-[WildBorn][https://pedroamp22.github.io/Wildborn/]
+## Enlaces
+- [Trailer](https://youtu.be/eN2waxP5t7Q)
+- [WildBorn](https://pedroamp22.github.io/Wildborn/)
