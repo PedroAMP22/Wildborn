@@ -58,6 +58,13 @@ export default class ScreenBase extends Phaser.Scene {
             trackKey = 'bosque_musica';
         } else if (this.key.startsWith('screen2')) {
             trackKey = 'montania_musica';
+        } else if (this.key.startsWith('screen3')){
+            const match = this.key.match(/^screen3_(\d+)/);
+            if (match && parseInt(match[1]) <= 4) {
+                trackKey = 'templo_musica';
+            } else {
+                trackKey = 'boss_musica';
+            }
         }
         else if(this.key.startsWith("screenMenu")){
             trackKey = 'menuMusic';
@@ -70,7 +77,7 @@ export default class ScreenBase extends Phaser.Scene {
                 if (this.game.music) {
                     this.game.music.stop();
                 }
-                this.game.music = this.sound.add(trackKey, { loop: true, volume: 1 });
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
                 this.game.music.play();
                 this.game.currentTrack = trackKey;
             }

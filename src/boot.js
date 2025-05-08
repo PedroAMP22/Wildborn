@@ -107,6 +107,8 @@ import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
 import montaniaMusica from '../assets/music/montania.mp3';
+import temploMusica from '../assets/music/templo.mp3';
+import bossMusica from '../assets/music/boss.mp3';
 
 import grassFootsteps from '../assets/sfx/grass_footsteps.wav'
 import snowFootsteps from '../assets/sfx/snow_footsteps.wav'
@@ -345,6 +347,8 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('menuMusic', menuMusic)
     this.load.audio('bosque_musica', bosqueMusica);
     this.load.audio('montania_musica', montaniaMusica);
+    this.load.audio('templo_musica', temploMusica);
+    this.load.audio('boss_musica', bossMusica);
     this.load.audio('menuMusic', menuMusic)
 
 
