@@ -48,7 +48,6 @@ Superar los niveles del bosque adquiriendo habilidades, explorando secretos y en
 - **Transformarse** para superar obstáculos específicos
 - **Explorar** en busca de secretos y coleccionables
 - **Resolver puzzles** usando las habilidades adquiridas
-- **Derrotar enemigos** o evitarlos estratégicamente
 
 ## Interfaz
 
