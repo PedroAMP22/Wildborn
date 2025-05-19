@@ -14,14 +14,13 @@ Un bosque encantado lleno de magia ancestral y y ruinas naturales. El mundo se d
 ### Gameplay
 - Plataformas 2D con físicas personalizadas
 - Transformaciones dinámicas
-- Exploración con secretos y caminos alternativos
 - Resolución de puzzles ambientales
 
 ### Transformaciones
 - **Ardilla voladora**: Planea durante un corto tiempo. Salta muy poco.
-- **Caracol**: Se adhiere a paredes, pero no puede moverse mientras está pegado.
+- **Caracol**: Se adhiere a paredes, pero no puede moverse.
 - **Pez Globo**: Se infla y flota en el agua. Muere si permanece mucho tiempo fuera de ella. (eliminado en la 1.0)
-- **Topo**: Puede excavar en la tierra y salir propulsado. Pierde visibilidad de la pantalla.
+- **Topo**: Puede excavar en la tierra y salir propulsado.
 - **Gallina**: Controles invertidos. Puede mover piedras u objetos con las alas.
 
 ## Gameplay
@@ -36,8 +35,7 @@ Un bosque encantado lleno de magia ancestral y y ruinas naturales. El mundo se d
 
 ### Mecánicas
 - **Transformaciones** en tiempo real
-- **Exploración** con zonas secretas y caminos alternativos
-- **Interacción** con objetos del entorno (puertas, piedras, mecanismos)
+- **Interacción** con objetos del entorno (piedras, estatuas)
 - **Sistema de muerte/reinicio** por peligros como agua, fuego o caída
 
 ### Objetivo
@@ -46,14 +44,14 @@ Superar los niveles del bosque adquiriendo habilidades, explorando secretos y en
 ### Core Loops
 - **Saltar** y moverse por plataformas
 - **Transformarse** para superar obstáculos específicos
-- **Explorar** en busca de secretos y coleccionables
+- **Explorar** en busca de coleccionables
 - **Resolver puzzles** usando las habilidades adquiridas
 
 ## Interfaz
 
 ### Cámara
 - Cámara lateral que sigue al jugador con suavidad
-- Ajustes especiales al transformarse (zoom o desplazamientos)
+- Ajustes especiales caer o saltar
 
 ### HUD
 - Indicadores de coleccionables recogidos
