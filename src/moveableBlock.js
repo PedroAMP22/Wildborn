@@ -20,6 +20,7 @@ export class MoveableBlock extends Phaser.GameObjects.Sprite {
         this.scene.physics.world.enable(this);
         this.scene.add.existing(this);
         this.body.setImmovable(true);
+        this.body.pushable = false;
         this.body.setAllowGravity(falling);
         this.falling = falling;
         this.body.setSize(x - 1,y);

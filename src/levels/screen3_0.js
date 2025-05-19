@@ -1,6 +1,7 @@
 
 import Phaser from 'phaser';
 import ScreenBase from './screenBase.js';
+import { SnailState } from '../PlayerStateMachine/snailState.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -10,13 +11,13 @@ import ScreenBase from './screenBase.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Screen0_0 extends ScreenBase {
+export default class Screen3_0 extends ScreenBase {
     /**
      * Constructor de la escena
      */
     constructor() {
         
-        super('screen0_0',"screen0_0" );
+        super('screen3_0',"screen3_0" );
     }
 
     /**
@@ -29,16 +30,6 @@ export default class Screen0_0 extends ScreenBase {
         //spawnpoint and killing zones
         this.objectsLayer = this.map.getObjectLayer("objects");
 
-        this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
-            if(name === "triggerZone"){
-                let triggerZone = this.physics.add.staticSprite(x + width / 2, y + height / 2, null);
-                triggerZone.setSize(width, height);
-                triggerZone.setOrigin(0.5);
-                triggerZone.setAlpha(0);  //to make it invisible
-                this.triggerZone = triggerZone;
-            }
-           
-        });
 
         //background image
         this.backgroundImage = this.add.image(0, 0, "MountainBG").setOrigin(0, 0);
@@ -47,12 +38,13 @@ export default class Screen0_0 extends ScreenBase {
 
         this.textures.get("MountainBG").setFilter(Phaser.Textures.FilterMode.NEAREST);
 
-        this.overlapEvent = this.physics.add.collider(this.player, this.triggerZone, this.triggerFunction, null, this)
-        this.decoBackLayer.setTint(0x999999);
-    }
+    }    
 
+    createAScreen(){
+        this.scene.start('screen2_7',{point:"B",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
+    }
     createBScreen(){
-        this.scene.start('screen0_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
+        this.scene.start('screen3_1',{point:"A",transformation:this.player.stateMachine.state.toString(),unlockedTranformations:this.unlockedTranformations});
     }
     
    

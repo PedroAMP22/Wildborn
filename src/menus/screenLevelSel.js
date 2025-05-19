@@ -5,8 +5,8 @@ import level1 from "../../assets/tilemaps/menuImages/Level1.png"
 import level2 from "../../assets/tilemaps/menuImages/Level2.png"
 import level3 from "../../assets/tilemaps/menuImages/playButton.png"
 import levelSelectorLabel from "../../assets/tilemaps/menuImages/levelSelectorLabel.png"
-import { DruidState } from "../StateMachine/druidState";
-import { SnailState } from '../StateMachine/snailState';
+import { DruidState } from "../PlayerStateMachine/druidState";
+import { SnailState } from '../PlayerStateMachine/snailState';
 
 
 export default class ScreenLevelSel extends ScreenBase {

@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
-import {StateMachine} from './StateMachine/stateMachine'
-import { SnailState } from './StateMachine/snailState';
-import { MoleState } from './StateMachine/moleState';
-import { SquirrelState } from './StateMachine/squirrelState';
-import { PufferFishState } from './StateMachine/pufferFishState';
-import { ChickenState } from './StateMachine/chickenState';
+import {StateMachine} from './PlayerStateMachine/stateMachine'
+import { SnailState } from './PlayerStateMachine/snailState';
+import { MoleState } from './PlayerStateMachine/moleState';
+import { SquirrelState } from './PlayerStateMachine/squirrelState';
+import { PufferFishState } from './PlayerStateMachine/pufferFishState';
+import { ChickenState } from './PlayerStateMachine/chickenState';
 import {Air} from './air';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
@@ -286,7 +286,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
             if(this.rune){
                 const distance = Phaser.Math.Distance.Between(this.x, this.y, this.rune.x, this.rune.y);
                 if(distance < 20){
-                    this.scene.eKeyText.setPosition(this.infoRock.x, this.infoRock.y - 20);
+                    this.scene.eKeyText.setPosition(this.rune.x, this.rune.y - 20);
                     this.scene.eKeyText.setVisible(true);
                     this.scene.eKeyText.anims.play('eKeyBlink',true);
                 }
@@ -297,6 +297,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 this.justPressed = Phaser.Input.Keyboard.JustDown(this.keys.e);
                 if (distance < 20 && this.justPressed ) {
                     this.rune.interact();
+
+                    this.scene.addCollectibles()
                 }
             }
     

@@ -1,8 +1,10 @@
 import Phaser from 'phaser';
 import Player from '../player.js';
-import { DruidState } from '../StateMachine/druidState.js';
+import { DruidState } from '../PlayerStateMachine/druidState.js';
 import { Rune } from '../rune.js';
 import { Sign } from '../sign.js';
+import Boss from '../boss/boss.js';
+
 
 
 
@@ -29,7 +31,10 @@ export default class ScreenBase extends Phaser.Scene {
         else{
             this.transformation = DruidState.NAME;
         }
-        
+        if(data.collectibles)
+            this.collectibles = data.collectibles;
+        else
+            this.collectibles = 0;
     }
 
     create(){
@@ -53,6 +58,13 @@ export default class ScreenBase extends Phaser.Scene {
             trackKey = 'bosque_musica';
         } else if (this.key.startsWith('screen2')) {
             trackKey = 'montania_musica';
+        } else if (this.key.startsWith('screen3')){
+            const match = this.key.match(/^screen3_(\d+)/);
+            if (match && parseInt(match[1]) <= 4) {
+                trackKey = 'templo_musica';
+            } else {
+                trackKey = 'boss_musica';
+            }
         }
         else if(this.key.startsWith("screenMenu")){
             trackKey = 'menuMusic';
@@ -65,7 +77,7 @@ export default class ScreenBase extends Phaser.Scene {
                 if (this.game.music) {
                     this.game.music.stop();
                 }
-                this.game.music = this.sound.add(trackKey, { loop: true, volume: 1 });
+                this.game.music = this.sound.add(trackKey, { loop: true, volume: 0.8 });
                 this.game.music.play();
                 this.game.currentTrack = trackKey;
             }
@@ -80,6 +92,7 @@ export default class ScreenBase extends Phaser.Scene {
         this.spawnZoneA = this.physics.add.staticGroup();
         this.spawnZoneB = this.physics.add.staticGroup();
         this.spawnZoneC = this.physics.add.staticGroup();
+        this.crosPointList = [];
         this.objectsLayer.objects.forEach(({ name, x, y, width, height }) => {
                 if (name === "spawnpointA") { // spawnPoint
                     this.spawnPointA = { x, y };  
@@ -121,11 +134,20 @@ export default class ScreenBase extends Phaser.Scene {
                     this.killingObjects.add(killZone);
                 }
                 else if(name === "rune"){
-                    //this.rune = new Rune(this,x,y); 
+                    this.rune = new Rune(this,x,y);
+                }
+                else if(name === "boss"){
+                    this.boss = new Boss(this,x,y);
+                    this.bossDead = false;
                 }
                 else if(name === "infoStone"){
                     this.infoRock = new Sign(this,x,y); 
                 }
+                else if(name.startsWith("crosPoint")){
+                    var crosPoint = {x,y};
+                    this.crosPointList.push(crosPoint);
+                }
+
         });
 
         
@@ -145,6 +167,8 @@ export default class ScreenBase extends Phaser.Scene {
         else{
             this.player = new Player(this, this.spawnPointA.x, this.spawnPointA.y,this.unlockedTranformations);
         }
+
+        
 
         // For sfx sounds
         this.player.currentSurface = this.surfaceType
@@ -212,13 +236,16 @@ export default class ScreenBase extends Phaser.Scene {
 
     respawn(){
         if(this.player.canMove){
-        this.player.body.setVelocity(0,0);
+            this.player.body.setVelocity(0,0);
         this.player.momentum = 0;
         this.player.canMove = false;
         this.player.stop();
         this.deathSE.play()
         this.player.body.setAllowGravity(false);
         this.player.anims.play("druidDeath", true);
+        if(this.boss || this.bossDead){
+            this.boss.respawn();
+        }
         this.time.delayedCall(800, () => { 
             this.player.stateMachine.transform(this.player.stateMachine.state.toString());
             this.player.body.setAllowGravity(true);
@@ -252,11 +279,60 @@ export default class ScreenBase extends Phaser.Scene {
         
     }
 
+    killBoss(){
+        this.boss.killBoss();
+    }
+
+
     getSurfaceType(key) {
         if (key.startsWith("screen1_")) return "dirt";
         if (key.startsWith("screen2_") && key > "screen2_4") return "snow";
         if (key.startsWith("screen3_")) return "stone";
         return "stone";
     }
+
+    getCollectibles(){
+        return this.collectibles;
+    }
+
+    addCollectibles(){
+        this.oldValue = this.collectibles;
+        this.newValue = this.collectibles + 1;
+
+        this.popup = this.add.text(-20, 20, ` x ${this.oldValue}`, {
+            fontSize: '1.2rem',
+            fill: '#FFFFFF',
+            fontFamily: 'ArcadeClassic'
+        }).setOrigin(0.5).setScrollFactor(0);
+
+        this.popup.setDepth(100);
+
+        this.tweens.add({
+            targets: this.popup,
+            x: 20,
+            y: 20,
+            duration: 1000,
+        });
+        
+        
+        this.time.delayedCall(1500, () => {
+            this.popup.setText(` x ${this.newValue}`);
+        }, [], this);
+        
+        this.tweens.add({
+            targets: this.popup,
+            x: -20,
+            y: 20,
+            alpha: 0,
+            duration: 1000,
+            delay: 3000,
+        });
+
+        this.time.delayedCall(5000, () => {
+            this.popup.destroy();
+        }, [], this);
+        
+    }
+
     
 }

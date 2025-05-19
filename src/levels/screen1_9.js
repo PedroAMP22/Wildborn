@@ -1,5 +1,4 @@
-import { MovingBlock } from '../movingBlock.js';
-import { MoleState } from '../StateMachine/moleState.js';
+import { MoleState } from '../PlayerStateMachine/moleState.js';
 import ScreenBase from './screenBase.js';
 
 /**

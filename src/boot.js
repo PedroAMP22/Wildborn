@@ -68,7 +68,11 @@ import screen2_4_Broken from '../assets/tilemaps/levels/level_2/screen2_4_Broken
 import screen2_5 from '../assets/tilemaps/levels/level_2/screen2_5.json'
 import screen2_6 from '../assets/tilemaps/levels/level_2/screen2_6.json'
 import screen2_7 from '../assets/tilemaps/levels/level_2/screen2_7.json'
+import screen3_0 from '../assets/tilemaps/levels/level_3/screen3_0.json'
 import screen3_1 from '../assets/tilemaps/levels/level_3/screen3_1.json'
+import screen3_2 from '../assets/tilemaps/levels/level_3/screen3_2.json'
+import screen3_3 from '../assets/tilemaps/levels/level_3/screen3_3.json'
+import screen3_5 from '../assets/tilemaps/levels/level_3/screen3_5.json'
 
 
 
@@ -91,7 +95,7 @@ import mossyBlock1x4 from '../assets/sprites/blocks/mossyBlock1x4.png'
 import icyBlock3x2 from '../assets/sprites/blocks/icyBlock3x2.png'
 import spikedBlock2x2 from '../assets/sprites/blocks/spikedBlock2x2.png'
 import caveBlock3x2 from '../assets/sprites/blocks/caveBlock3x2.png'
-
+import mossyBlock2x1 from '../assets/sprites/blocks/mossyBlock2x1.png'
 
 
 import snailInfo from '../assets/imagesMain/SnailInfo.png'
@@ -103,6 +107,8 @@ import SquirrelInfo from '../assets/imagesMain/SquirrelInfo.png'
 import menuMusic from '../assets/music/menuMusic.mp3'
 import bosqueMusica from '../assets/music/bosque.mp3';
 import montaniaMusica from '../assets/music/montania.mp3';
+import temploMusica from '../assets/music/templo.mp3';
+import bossMusica from '../assets/music/boss.mp3';
 
 import grassFootsteps from '../assets/sfx/grass_footsteps.wav'
 import snowFootsteps from '../assets/sfx/snow_footsteps.wav'
@@ -298,7 +304,11 @@ export default class Boot extends Phaser.Scene {
     this.load.tilemapTiledJSON('screen2_5',screen2_5);
     this.load.tilemapTiledJSON('screen2_6',screen2_6);
     this.load.tilemapTiledJSON('screen2_7',screen2_7);
+    this.load.tilemapTiledJSON('screen3_0',screen3_0);
     this.load.tilemapTiledJSON('screen3_1',screen3_1);
+    this.load.tilemapTiledJSON('screen3_2',screen3_2);
+    this.load.tilemapTiledJSON('screen3_3',screen3_3);
+    this.load.tilemapTiledJSON('screen3_5',screen3_5);
     this.load.tilemapTiledJSON('unlockScreen',unlockScreen);
     this.load.image("tileSet1", tileSet1);
     this.load.image("tileSet2", tileSet2);
@@ -324,6 +334,10 @@ export default class Boot extends Phaser.Scene {
       frameWidth : 48,
       frameHeight : 32
     });
+    this.load.spritesheet('mossyBlock2x1', mossyBlock2x1, {
+      frameWidth : 32,
+      frameHeight : 16
+    });
     this.load.spritesheet('mossyBlock1x4', mossyBlock1x4, {
       frameWidth : 16,
       frameHeight : 64
@@ -333,6 +347,8 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('menuMusic', menuMusic)
     this.load.audio('bosque_musica', bosqueMusica);
     this.load.audio('montania_musica', montaniaMusica);
+    this.load.audio('templo_musica', temploMusica);
+    this.load.audio('boss_musica', bossMusica);
     this.load.audio('menuMusic', menuMusic)
 
 
@@ -359,7 +375,7 @@ export default class Boot extends Phaser.Scene {
 
   create() {
 
-    this.scene.start('screenMenu',{unlockedTranformations:[false,false,false,false,false]});
+    this.scene.start('screen3_3',{unlockedTranformations:[true,true,true,true,true]});
 
   }
 }

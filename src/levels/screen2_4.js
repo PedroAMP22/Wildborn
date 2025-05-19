@@ -1,5 +1,5 @@
 import { MovingBlock } from '../movingBlock.js';
-import { ChickenState } from '../StateMachine/chickenState.js';
+import { ChickenState } from '../PlayerStateMachine/chickenState.js';
 import ScreenBase from './screenBase.js';
 
 /**
