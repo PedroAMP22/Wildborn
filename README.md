@@ -62,13 +62,13 @@ Superar los niveles del bosque adquiriendo habilidades, explorando secretos y en
 - **Menú principal** donde puedes seleccionar el mundo que quieres jugar
 
 ## Épicas
-- Mundo 0
-- Mundo 1
-- Mundo 2
-- Mundo 3
-- Jefe Final
-- Mecánidas Básicas (Druida y cada transformación)
-- Cada mundo tiene bso propia, sprites únicos y diseños de nievels propios
+- Mundo 0 ✅
+- Mundo 1 ✅
+- Mundo 2 ✅
+- Mundo 3 (Work In Progress)
+- Jefe Final ✅
+- Mecánidas Básicas (Druida y cada transformación) ✅
+- *Cada mundo tiene bso propia, sprites únicos y diseños de nievels propios
 
 ## Mundo de Juego
 
@@ -84,11 +84,12 @@ Superar los niveles del bosque adquiriendo habilidades, explorando secretos y en
 - **Druida**: Protagonista principal. Un joven que busca superar las pruebas del bosque para convertirse en maestro del mismo.
 
 ## Jefes
-- **Boss Templo**: Prueba final que combina todos los desafíos anteriores. Se debe usar todas las transformaciones para superarlo.
+- **Boss Templo**: Prueba final que combina todos los desafíos anteriores. Se debe usar todas las transformaciones para superarlo. (consta de dos ataques, uno en cruz y disparos que van a la posición del jugador)
 
 ## Recursos
 
 - [Trailer oficial](https://youtu.be/eN2waxP5t7Q)
 - [WildBorn - Versión web](https://pedroamp22.github.io/Wildborn/)
+- [Gameplay PreMundo 3](https://youtu.be/8-qKWgo8lrM)
 
 ¡Embárcate en tu aventura y demuestra tu valía como druida en el mágico mundo del bosque!
