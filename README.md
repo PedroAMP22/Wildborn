@@ -1,3 +1,5 @@
+🇪🇸 Este archivo está en español. [English Version](README.en.md)
+
 # WildBorn - Game Design Document (GDD)
 
 ## Descripción
